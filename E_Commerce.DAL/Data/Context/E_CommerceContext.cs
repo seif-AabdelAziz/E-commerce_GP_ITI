@@ -17,7 +17,7 @@ public class E_CommerceContext :DbContext
     public DbSet<CustomerReview> CustomersReviews => Set<CustomerReview>();
     //Product Tables
     public DbSet<Product> Products => Set<Product>();
-    public DbSet<Product_Color_Size_Quantity> ProductsInfo => Set<Product_Color_Size_Quantity>();
+    public DbSet<ProductColorSizeQuantity> ProductsInfo => Set<ProductColorSizeQuantity>();
     public DbSet<Product_IMG> ProductImages => Set<Product_IMG>();
 
     //Cart
