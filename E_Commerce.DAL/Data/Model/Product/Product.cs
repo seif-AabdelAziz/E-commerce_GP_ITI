@@ -9,7 +9,7 @@ public class Product
     public decimal Discount { get; set; } = 0;
     public decimal Rate { get; set; } = 0;
     public List<Product_IMG> ProductImages { get; set; } = new List<Product_IMG>();
-    public List<Product_Color_Size_Quantity> Product_Color_Size_Quantity { get; set; } = new List<Product_Color_Size_Quantity>();
+    public List<ProductColorSizeQuantity> Product_Color_Size_Quantity { get; set; } = new List<ProductColorSizeQuantity>();
     public List<CustomerReview>? Reviews { get; set; }
 
     public List<CartProduct>? Carts { get; set; }
