@@ -12,10 +12,14 @@
     },
     "PaymentCardInfo": {
       "CardNumber": "1234567890123456",
-      "ExpiryDate": "12/24",
+      "ExpiryDate": "12/24"
     },
     "WishList": {},
-    "Phones": [],
+    "Phones": [
+      {
+        "PhoneNumber": "123-456-7890"
+      }
+    ],
     "Reviews": []
   },
   {
@@ -31,10 +35,14 @@
     },
     "PaymentCardInfo": {
       "CardNumber": "9876543210987654",
-      "ExpiryDate": "06/23",
+      "ExpiryDate": "06/23"
     },
     "WishList": {},
-    "Phones": [],
+    "Phones": [
+      {
+        "PhoneNumber": "111-222-3333"
+      }
+    ],
     "Reviews": []
   },
   {
@@ -50,10 +58,14 @@
     },
     "PaymentCardInfo": {
       "CardNumber": "5432167890123456",
-      "ExpiryDate": "09/25",
+      "ExpiryDate": "09/25"
     },
     "WishList": {},
-    "Phones": [],
+    "Phones": [
+      {
+        "PhoneNumber": "777-888-9999"
+      }
+    ],
     "Reviews": []
   }
 ]

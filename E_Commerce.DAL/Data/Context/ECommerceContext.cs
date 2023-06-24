@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DAL;
 
-public class E_CommerceContext :DbContext
+public class ECommerceContext :DbContext
 {
     public DbSet<Admin> Admins => Set<Admin>();
     //Customer Tables
@@ -36,7 +36,7 @@ public class E_CommerceContext :DbContext
 
     public DbSet<Category> Categories => Set<Category>();
 
-    public E_CommerceContext(DbContextOptions options):base(options)
+    public ECommerceContext(DbContextOptions options):base(options)
     {
         
     }

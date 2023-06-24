@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.DAL.Migrations
 {
-    [DbContext(typeof(E_CommerceContext))]
-    partial class E_CommerceContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ECommerceContext))]
+    partial class ECommerceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -179,10 +179,10 @@ namespace E_Commerce.DAL.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PhoneNumer")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CustomerId", "PhoneNumer");
+                    b.HasKey("CustomerId", "PhoneNumber");
 
                     b.ToTable("CustomerPhones");
                 });

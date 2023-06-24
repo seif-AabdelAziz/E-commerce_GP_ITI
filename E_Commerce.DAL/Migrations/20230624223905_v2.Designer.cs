@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.DAL.Migrations
 {
-    [DbContext(typeof(E_CommerceContext))]
-    [Migration("20230624135545_v2")]
+    [DbContext(typeof(ECommerceContext))]
+    [Migration("20230624223905_v2")]
     partial class v2
     {
         /// <inheritdoc />
@@ -182,10 +182,10 @@ namespace E_Commerce.DAL.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PhoneNumer")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CustomerId", "PhoneNumer");
+                    b.HasKey("CustomerId", "PhoneNumber");
 
                     b.ToTable("CustomerPhones");
                 });

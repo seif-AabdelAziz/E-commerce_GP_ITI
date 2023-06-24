@@ -12,7 +12,7 @@ namespace E_Commerce.DAL.Data.Configration.Customer
     {
         public void Configure(EntityTypeBuilder<CustomerPhones> builder)
         {
-            builder.HasKey("CustomerId", "PhoneNumer");
+            builder.HasKey("CustomerId", "PhoneNumber");
         }
     }
 }

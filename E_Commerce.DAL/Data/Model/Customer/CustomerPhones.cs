@@ -4,5 +4,5 @@ public class CustomerPhones
 {
     public Guid CustomerId { get; set; }
     public Customer Customer { get; set; }
-    public string PhoneNumer { get; set; }
+    public string? PhoneNumber { get; set; }
 }

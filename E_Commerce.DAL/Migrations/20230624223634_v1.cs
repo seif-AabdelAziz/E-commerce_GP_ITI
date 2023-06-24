@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace E_Commerce.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,11 +94,11 @@ namespace E_Commerce.DAL.Migrations
                 columns: table => new
                 {
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PhoneNumer = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerPhones", x => new { x.CustomerId, x.PhoneNumer });
+                    table.PrimaryKey("PK_CustomerPhones", x => new { x.CustomerId, x.PhoneNumber });
                     table.ForeignKey(
                         name: "FK_CustomerPhones_Customers_CustomerId",
                         column: x => x.CustomerId,
