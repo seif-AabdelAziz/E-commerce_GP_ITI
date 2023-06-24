@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "Shirts",
+    "Description": "Description #1",
+    "Image": "Shirts.jpg"
+  },
+  {
+    "Name": "Clothing",
+    "Description": "Category for clothing items",
+    "Image": "clothing.jpg"
+  }
+]
