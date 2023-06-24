@@ -1,0 +1,30 @@
+[
+  {
+    "OrderData": "2023-06-19T10:30:00",
+    "PaymentStatus": "Paid",
+    "Address": {
+      "Street": "123 Main St",
+      "City": "New York",
+      "Country": "USA"
+    },
+    "PaymentMethod": "CreditCard",
+    "OrderStatus": "Processing",
+    "Discount": 0.1,
+    "ArrivalDate": "2023-06-26T10:30:00",
+    "CustomerId": 1
+  },
+  {
+    "OrderData": "2023-06-14T09:45:00",
+    "PaymentStatus": "Pending",
+    "Address": {
+      "Street": "456 Elm St",
+      "City": "Los Angeles",
+      "Country": "USA"
+    },
+    "PaymentMethod": "PayPal",
+    "OrderStatus": "Shipped",
+    "Discount": 0.2,
+    "ArrivalDate": "2023-06-21T09:45:00",
+    "CustomerId": 2
+  }
+]

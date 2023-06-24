@@ -5,7 +5,7 @@ namespace E_Commerce.DAL;
 public class Order
 {
     public int Id { get; set; }
-    public DateTime OrderData { get; set; }
+    public DateTime OrderDate { get; set; }
     public PaymentStatus PaymentStatus { get; set; }
     public Address? Address { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
