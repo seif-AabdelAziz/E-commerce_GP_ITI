@@ -5,7 +5,7 @@ public class User
 {
     public Guid Id { get; set; }
 
-    public FullName FullName { get; set; }
+    public FullName FullName { get; set; } = null!;
 
     [Required(ErrorMessage = "Email is required")]
     [EmailAddress(ErrorMessage = "Invalid email address")]
