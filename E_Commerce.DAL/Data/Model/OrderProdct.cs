@@ -4,8 +4,8 @@ namespace E_Commerce.DAL;
 
 public class OrderProdct
 {
-    public int ProductId { get; set; }
-    public int OrderId { get; set; }
+    public Guid ProductId { get; set; }
+    public Guid OrderId { get; set; }
     [MinLength(1)]
     public int ProductCount { get; set; }
 

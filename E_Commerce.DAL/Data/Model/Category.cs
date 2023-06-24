@@ -2,7 +2,7 @@
 
 public class Category
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
@@ -11,7 +11,7 @@ public class Category
     public string Image { get; set; } = string.Empty;
 
     //Self_Relation
-    public int? ParentCategoryId { get; set; }
+    public Guid? ParentCategoryId { get; set; }
 
     public Category? ParentCategory { get; set; }
 

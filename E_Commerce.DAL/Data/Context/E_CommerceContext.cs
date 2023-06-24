@@ -47,7 +47,9 @@ public class E_CommerceContext :DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-
+        //modelBuilder.Entity<Order>()
+        //.Property(o => o.Id)
+        //.HasDefaultValueSql("newsequentialid()");
 
 
 

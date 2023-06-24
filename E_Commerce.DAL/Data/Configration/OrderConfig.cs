@@ -14,8 +14,8 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> builder)
     {
 
-        builder.HasKey(o => o.Id);
-        builder.Property(o => o.Id).UseIdentityColumn();
+        //builder.HasKey(o => o.Id);
+        //builder.Property(o => o.Id).UseIdentityColumn();
 
         builder.Property(o => o.OrderData).IsRequired();
 
