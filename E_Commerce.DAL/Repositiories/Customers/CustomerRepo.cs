@@ -18,13 +18,12 @@ namespace E_Commerce.DAL
 
         public Customer? GetOrdersByCustomerId(Guid Id)
         {
-            return _context.Set<Customer>()
-                    .Include(c=>c.Orders)
+            return _context.Set<Customer>().Include(c=>c.Orders).ThenInclude(c=>c.OrderProducts)
                     .FirstOrDefault(c=>new Guid (c.Id)==Id);
         }
         public Customer? GetCustomerCartByCustomerId(Guid Id)
         {
-            return _context.Set<Customer>().Include(c => c.Cart)
+            return _context.Set<Customer>().Include(c => c.Cart).ThenInclude(c=>c.Products)
                 .FirstOrDefault(c => new Guid(c.Id) == Id);
         }
 

@@ -8,6 +8,6 @@ namespace E_Commerce.DAL
 {
     public interface ICartRepo : IGenericRepo<Cart>
     {
-        IEnumerable<Cart> GetCartProductByCustomerId(Guid CustomerId);
+       List<Cart> GetCartProductByCustomerId(Guid CustomerId);
     }
 }
