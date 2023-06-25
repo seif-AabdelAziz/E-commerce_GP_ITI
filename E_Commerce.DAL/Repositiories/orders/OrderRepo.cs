@@ -20,14 +20,16 @@ namespace E_Commerce.DAL
             return _context.Set<Order>().Where(o => o.Id == id).Select(o => o.Customer).FirstOrDefault();
         }
 
-        public List<OrderProduct> GetOrderDetails(Guid id)
+        public Order? GetOrderDetails(Guid id)  
         {
-            return _context.Set<OrderProduct>().Include(op => op.Product).Where(op => op.OrderId == id).ToList();
+            return _context.Set<Order>().Include(o => o.OrderProducts).ThenInclude(o => o.Product)
+                                        .FirstOrDefault(o => o.Id == id);
         }
 
-        public List<OrderProduct> GetOrderProducts(Guid id)
+        public Order? GetOrderProducts(Guid id)
         {
-            return _context.Set<OrderProduct>().Where(op => op.OrderId == id).ToList();
+            return _context.Set<Order>().Include(o=>o.OrderProducts).ThenInclude(o => o.Product)
+                                        .FirstOrDefault(o => o.Id == id);
         }
 
         public Order? GetOrderProductsAndCustomer(Guid id)
