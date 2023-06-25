@@ -12,12 +12,10 @@ public class UsersRepo : GenericRepo<User>, IUsersRepo
 
     }
 
-    public List<User>? GetAllUsersByRole(UserRole role)
+    public IEnumerable<User>? GetAllUsersByRole(UserRole role)
     {
-
-        return _context.Set<User>().Where(x => x.Role == role).ToList;
+        return _context.Set<User>().Where(x => x.Role == role);
             
-
     }
 
 }

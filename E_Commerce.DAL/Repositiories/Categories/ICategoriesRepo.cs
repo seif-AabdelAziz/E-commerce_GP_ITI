@@ -10,9 +10,9 @@ public interface ICategoriesRepo:IGenericRepo<Category>
 {
 
 
-    List<Product> GetProductsForCategory (int id);
-
-
+    IEnumerable<Product> GetProductsForCategory (Guid productId);
+    IEnumerable<Category> GetSubCategories (Guid SubCategoriesId);
+    IEnumerable<Category> GetParentCategories(Guid ParentCategories);
 
 
 
