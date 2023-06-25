@@ -16,7 +16,7 @@ namespace E_Commerce.DAL
             _context = context;
         }
    
-        public IEnumerable<Cart> GetCartProductByCustomerId(Guid CustomerId)
+        public List<Cart> GetCartProductByCustomerId(Guid CustomerId)
         {
             //Guid id = new Guid(CustomerId);
 
