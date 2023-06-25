@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_Commerce.DAL
 {
@@ -11,19 +6,19 @@ namespace E_Commerce.DAL
     {
         private readonly E_CommerceContext _context;
 
-        public CustomerRepo(E_CommerceContext context):base(context)
+        public CustomerRepo(E_CommerceContext context) : base(context)
         {
             _context = context;
         }
 
         public Customer? GetOrdersByCustomerId(Guid Id)
         {
-            return _context.Set<Customer>().Include(c=>c.Orders).ThenInclude(c=>c.OrderProducts)
-                    .FirstOrDefault(c=>new Guid (c.Id)==Id);
+            return _context.Set<Customer>().Include(c => c.Orders).ThenInclude(c => c.OrderProducts)
+                    .FirstOrDefault(c => new Guid(c.Id) == Id);
         }
         public Customer? GetCustomerCartByCustomerId(Guid Id)
         {
-            return _context.Set<Customer>().Include(c => c.Cart).ThenInclude(c=>c.Products)
+            return _context.Set<Customer>().Include(c => c.Cart).ThenInclude(c => c.Products)
                 .FirstOrDefault(c => new Guid(c.Id) == Id);
         }
 

@@ -1,4 +1,6 @@
-﻿namespace E_Commerce.DAL;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace E_Commerce.DAL;
 
 public class Category
 {

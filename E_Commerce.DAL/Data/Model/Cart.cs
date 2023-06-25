@@ -14,5 +14,5 @@ public class Cart
     public Guid CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
 
-    public List<Product> Products { get; set; } = null!;
+    public List<CartProduct> Products { get; set; } = null!;
 }
