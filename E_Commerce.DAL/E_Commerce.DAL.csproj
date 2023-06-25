@@ -22,11 +22,9 @@
 
   <ItemGroup>
     <Folder Include="Repositiories\Customers\" />
-    <Folder Include="Repositiories\Categeries\" />
     <Folder Include="Repositiories\CustomerReview\" />
     <Folder Include="Repositiories\Carts\" />
     <Folder Include="Repositiories\WishList\" />
-    <Folder Include="Repositiories\Users\" />
     <Folder Include="Repositiories\Orders\" />
     <Folder Include="Repositiories\Products\" />
   </ItemGroup>
