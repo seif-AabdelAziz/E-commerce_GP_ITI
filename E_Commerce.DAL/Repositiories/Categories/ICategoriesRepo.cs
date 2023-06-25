@@ -9,11 +9,9 @@ namespace E_Commerce.DAL;
 public interface ICategoriesRepo:IGenericRepo<Category>
 {
 
-
-    IEnumerable<Product> GetProductsForCategory (Guid productId);
-    IEnumerable<Category> GetSubCategories (Guid SubCategoriesId);
-    IEnumerable<Category> GetParentCategories(Guid ParentCategories);
-
+    Category? GetParentCategory(Guid subCategoryId);
+    List<Category>? GetSubCategories (Guid parentCategoryId);
+    Category? GetProductsForCategory (Guid productId);
 
 
 }
