@@ -1,12 +1,39 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.DAL.Repositiories.Customers
+namespace E_Commerce.DAL
 {
-    internal class CustomerRepo
+    public class CustomerRepo : GenericRepo<Customer>, ICustomerRepo
     {
+        private readonly E_CommerceContext _context;
+
+        public CustomerRepo(E_CommerceContext context):base(context)
+        {
+            _context = context;
+        }
+
+        public Customer? GetOrdersByCustomerId(Guid Id)
+        {
+            return _context.Set<Customer>()
+                    .Include(c=>c.Orders)
+                    .FirstOrDefault(c=>new Guid (c.Id)==Id);
+        }
+        public Customer? GetCustomerCartByCustomerId(Guid Id)
+        {
+            return _context.Set<Customer>().Include(c => c.Cart)
+                .FirstOrDefault(c => new Guid(c.Id) == Id);
+        }
+
+
+        public Customer? GetWishListByCustomerId(Guid Id)
+        {
+            return _context.Set<Customer>().Include(w => w.WishList)
+                .ThenInclude(p => p.Products)
+                .FirstOrDefault(c => new Guid(c.Id) == Id);
+        }
     }
 }

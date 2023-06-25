@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.DAL.Repositiories.Customers
+namespace E_Commerce.DAL
 {
-    internal interface ICustomerRepo
+    public interface ICustomerRepo:IGenericRepo<Customer>
     {
+        Customer? GetOrdersByCustomerId(Guid Id);
+        Customer? GetCustomerCartByCustomerId(Guid Id);
+        Customer? GetWishListByCustomerId(Guid Id);
+
+
     }
 }
