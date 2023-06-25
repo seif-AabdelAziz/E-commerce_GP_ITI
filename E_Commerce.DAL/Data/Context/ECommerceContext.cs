@@ -1,19 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_Commerce.DAL;
 
-public class E_CommerceContext :DbContext
+public class E_CommerceContext : IdentityDbContext
 {
-    public DbSet<Admin> Admins => Set<Admin>();
+    public E_CommerceContext(DbContextOptions options) : base(options)
+    {
+
+    }
     //Customer Tables
     public DbSet<Customer> Customers => Set<Customer>();
-    public DbSet<CustomerPhones> CustomerPhones => Set<CustomerPhones>();
     public DbSet<CustomerReview> CustomersReviews => Set<CustomerReview>();
     //Product Tables
     public DbSet<Product> Products => Set<Product>();
@@ -22,12 +21,11 @@ public class E_CommerceContext :DbContext
 
     //Cart
     public DbSet<Cart> Carts => Set<Cart>();
-    public DbSet<CartProduct> CartProducts => Set<CartProduct>();
 
 
     //Order
     public DbSet<Order> Orders => Set<Order>();
-    public DbSet<OrderProdct> OrderProducts => Set<OrderProdct>();
+    public DbSet<OrderProduct> OrderProducts => Set<OrderProduct>();
 
     //WishList
     public DbSet<WishList> WishLists => Set<WishList>();
@@ -36,22 +34,13 @@ public class E_CommerceContext :DbContext
 
     public DbSet<Category> Categories => Set<Category>();
 
-    public E_CommerceContext(DbContextOptions options):base(options)
-    {
-        
-    }
 
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         base.OnModelCreating(modelBuilder);
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-        //modelBuilder.Entity<Order>()
-        //.Property(o => o.Id)
-        //.HasDefaultValueSql("newsequentialid()");
-
-
 
 
     }

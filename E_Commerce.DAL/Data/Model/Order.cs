@@ -16,6 +16,7 @@ public class Order
     public string City { get; set; } = string.Empty;
     public Countries Country { get; set; }
 
-    public Guid CustomerId { get; set; }
-    public Customer? Customer { get; set; }
+    public string CustomerId { get; set; } = null!;
+    public Customer Customer { get; set; } = null!;
+    public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 }
