@@ -31,8 +31,8 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     public Category? GetProductsForCategory(Guid categorytId)
     {
         return _context.Set<Category>()
-     .Include(i => i.Products)
-     .FirstOrDefault(i => i.Id == categorytId);
+         .Include(i => i.Products)
+         .FirstOrDefault(i => i.Id == categorytId);
     }
 
 
