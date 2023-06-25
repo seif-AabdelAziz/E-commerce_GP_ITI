@@ -9,7 +9,7 @@ public class ECommerceContextSeed
         if (!context.Products.Any())
         {
 
-            var ProductsData = File.ReadAllText("../E_Commerce.DAL/Data/SeedData/Products.json");
+            var ProductsData = File.ReadAllText("../Data/SeedData/Products.json");
             var Products = JsonSerializer.Deserialize<List<Product>>(ProductsData);
             context.Products.AddRange(Products!);
         }
@@ -17,7 +17,7 @@ public class ECommerceContextSeed
         if (!context.Categories.Any())
         {
 
-            var CategoriesData = File.ReadAllText("../E_Commerce.DAL/Data/SeedData/Categories.json");
+            var CategoriesData = File.ReadAllText("../Data/SeedData/Categories.json");
             var Categories = JsonSerializer.Deserialize<List<Category>>(CategoriesData);
             context.Categories.AddRange(Categories!);
         }
@@ -25,7 +25,7 @@ public class ECommerceContextSeed
         if (!context.Orders.Any())
         {
 
-            var OrdersData = File.ReadAllText("../E_Commerce.DAL/Data/SeedData/Orders.json");
+            var OrdersData = File.ReadAllText("../Data/SeedData/Orders.json");
             var Orders = JsonSerializer.Deserialize<List<Order>>(OrdersData);
             context.Orders.AddRange(Orders!);
         }
@@ -33,7 +33,7 @@ public class ECommerceContextSeed
         if (!context.Customers.Any())
         {
 
-            var CustomersData = File.ReadAllText("../E_Commerce.DAL/Data/SeedData/Customers.json");
+            var CustomersData = File.ReadAllText("../Data/SeedData/Customers.json");
             var Customers = JsonSerializer.Deserialize<List<Customer>>(CustomersData);
             context.Customers.AddRange(Customers!);
         }
