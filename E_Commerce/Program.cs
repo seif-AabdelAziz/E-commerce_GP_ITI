@@ -20,6 +20,18 @@ builder.Services.AddDbContext<E_CommerceContext>(option =>
 
 #endregion
 
+#region InjectionForRepo
+builder.Services.AddScoped<ICartRepo, CartRepo>();
+builder.Services.AddScoped<ICategoriesRepo, CategoriesRepo>();
+builder.Services.AddScoped<ICustomerReviewRepo, CustomerReviewRepo>();
+builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
+builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+builder.Services.AddScoped<IProductsRepo, ProductsRepo>();
+builder.Services.AddScoped<IUsersRepo, UsersRepo>();
+builder.Services.AddScoped<IWishListRepo,WishListRepo>();
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
