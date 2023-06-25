@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositiories\Categeries\**" />
+    <EmbeddedResource Remove="Repositiories\Categeries\**" />
+    <None Remove="Repositiories\Categeries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
@@ -23,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Repositiories\Customers\" />
-    <Folder Include="Repositiories\Categeries\" />
     <Folder Include="Repositiories\CustomerReview\" />
     <Folder Include="Repositiories\WishList\" />
     <Folder Include="Repositiories\Users\" />
