@@ -16,13 +16,13 @@ namespace E_Commerce.DAL
             _context = context;
         }
    
-        public Cart GetCartProductByCustomerId(Guid CustomerId)
+        public Cart? GetCartProductByCustomerId(string CustomerId)
         {
-            //Guid id = new Guid(CustomerId);
+            Guid id = new Guid(CustomerId);
 
             return _context.Carts
             .Include(c => c.Products)
-            .First(c => c.CustomerId == CustomerId);
+            .FirstOrDefault(c => c.CustomerId == id);
             
         }
     }
