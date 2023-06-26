@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Repositiories\Customers\" />
     <Folder Include="Repositiories\CustomerReview\" />
     <Folder Include="Repositiories\WishList\" />
