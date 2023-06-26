@@ -42,11 +42,7 @@ builder.Services.AddScoped<IProductManager, ProductManager>();
 #endregion
 
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 #region Identity
 
 //Mainly specify the context and the type of the user that the UserManger will use
