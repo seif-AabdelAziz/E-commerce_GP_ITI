@@ -30,21 +30,17 @@ builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<IProductsRepo, ProductsRepo>();
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
-builder.Services.AddScoped<IWishListRepo,WishListRepo>();
+builder.Services.AddScoped<IWishListRepo, WishListRepo>();
 builder.Services.AddScoped<ICartProductRepo, CartsProductRepo>();
-builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 #endregion
 
 #region InjectionForMangers
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+builder.Services.AddScoped<IProductManager, ProductManager>();
 
 #endregion
 
-
-#region InjectForMangers
-builder.Services.AddScoped<ICustomerManager, CustomerManager>();
-
-#endregion
 
 #region Identity
 
@@ -58,7 +54,7 @@ builder.Services.AddIdentity<Customer, IdentityRole>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 3;
     options.User.RequireUniqueEmail = false;
-    
+
 }).AddEntityFrameworkStores<E_CommerceContext>();
 
 

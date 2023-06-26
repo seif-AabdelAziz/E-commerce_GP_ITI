@@ -1,6 +1,6 @@
 ﻿namespace E_Commerce.BL;
 
-public class ProductAddImageDto
+public class ProductImageDto
 {
     public string ImageURL { get; set; } = null!;
 }

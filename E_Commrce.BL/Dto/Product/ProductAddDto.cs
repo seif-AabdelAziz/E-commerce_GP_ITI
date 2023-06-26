@@ -15,6 +15,7 @@ public class ProductAddDto
     public decimal Discount { get; set; } = 0;
     [Range(0, 5)]
     public decimal Rate { get; set; } = 0;
-    public List<ProductAddImageDto> ProductImages { get; set; } = null!;
-    public List<ProductAdd_InfoDto> ProductInfo { get; set; } = null!;
+    public List<ProductImageDto> ProductImages { get; set; } = null!;
+    public List<ProductInfoDto> ProductInfo { get; set; } = null!;
+    public List<ProductAddCategoryDto> ProductCategories { get; set; } = null!;
 }

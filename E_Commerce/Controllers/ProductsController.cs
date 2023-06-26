@@ -34,5 +34,30 @@ namespace E_Commerce.API.Controllers
             }
             return Ok("Product Added Sucessfully");
         }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public ActionResult Delete(Guid id)
+        {
+            bool request = productManager.Delete(id);
+            if (!request)
+            {
+                return BadRequest();
+            }
+            return Ok("Product Deleted");
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public ActionResult<ProductDetailsReadDto> Details(Guid id)
+        {
+            ProductDetailsReadDto? productDetails = productManager.ProductDetails(id);
+            if (productDetails is null)
+            {
+                return BadRequest();
+            }
+
+            return productDetails;
+        }
     }
 }

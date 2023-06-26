@@ -2,7 +2,7 @@
 
 namespace E_Commerce;
 
-public class ProductAdd_InfoDto
+public class ProductInfoDto
 {
     public Color Color { get; set; }
     public Size Size { get; set; }
