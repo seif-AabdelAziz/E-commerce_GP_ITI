@@ -36,6 +36,22 @@ namespace E_Commerce.DAL
             return _context.Set<Order>().Include(o => o.OrderProducts).ThenInclude(op => op.Product)
                                         .Include(o => o.Customer).Where(o => o.Id == id)
                                         .FirstOrDefault();
-        }   
+        }
+        public void DeleteRangeOfOrderProduct(List<OrderProduct> orderProductsToDelete)
+        {
+            _context.OrderProducts.RemoveRange(orderProductsToDelete);
+        }
+
+        public void AddOrderProductsRange(List<OrderProduct> orderProductsToAdd)
+        {
+            _context.OrderProducts.AddRange(orderProductsToAdd);
+        }
+
+        public void DeleteFromOrderProductsByProductId(Guid id)
+        {
+            _context.OrderProducts
+                 .Where(ip => ip.ProductId == id)
+                 .ExecuteDelete();
+        }
     }
 }

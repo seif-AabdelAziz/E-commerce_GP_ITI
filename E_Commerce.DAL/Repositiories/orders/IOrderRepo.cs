@@ -8,5 +8,9 @@ namespace E_Commerce.DAL
         Order? GetOrderProducts(Guid id);
         Order? GetOrderProductsAndCustomer(Guid id);
         Order? GetOrderDetails(Guid id);
+        void AddOrderProductsRange(List<OrderProduct> orderProductsToAdd);
+        void DeleteRangeOfOrderProduct(List<OrderProduct> orderProductsToDelete);
+        void DeleteFromOrderProductsByProductId(Guid id);
+
     }
 }
