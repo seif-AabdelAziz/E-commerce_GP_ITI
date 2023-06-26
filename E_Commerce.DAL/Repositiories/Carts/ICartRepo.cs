@@ -2,6 +2,7 @@
 {
     public interface ICartRepo : IGenericRepo<Cart>
     {
+  
         Cart? GetCartProductByCustomerId(string CustomerId);
     }
 }

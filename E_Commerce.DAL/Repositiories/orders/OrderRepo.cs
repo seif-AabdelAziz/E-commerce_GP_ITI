@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace E_Commerce.DAL
 {
     public class OrderRepo : GenericRepo<Order>, IOrderRepo

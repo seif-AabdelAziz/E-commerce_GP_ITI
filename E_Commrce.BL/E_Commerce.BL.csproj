@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\Cart\" />
     <Folder Include="Dto\Category\" />
     <Folder Include="Dto\CustomerReview\" />
     <Folder Include="Dto\Customer\" />
@@ -19,7 +18,6 @@
     <Folder Include="Dto\Product\" />
     <Folder Include="Dto\User\" />
     <Folder Include="Dto\WishList\" />
-    <Folder Include="Managers\Cart\" />
     <Folder Include="Managers\Category\" />
     <Folder Include="Managers\CustomerReview\" />
     <Folder Include="Managers\Customer\" />
