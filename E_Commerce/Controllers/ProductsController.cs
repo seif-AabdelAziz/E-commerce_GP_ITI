@@ -1,6 +1,7 @@
 ﻿using E_Commerce.BL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace E_Commerce.API.Controllers
 {
@@ -58,6 +59,18 @@ namespace E_Commerce.API.Controllers
             }
 
             return productDetails;
+        }
+
+        [HttpGet]
+        [Route("Reviews/{id}")]
+        public ActionResult<List<ProductReviewsDto>> Reviews(Guid id)
+        {
+            List<ProductReviewsDto>? reviews = productManager.ProductReviews(id);
+            if (reviews.IsNullOrEmpty())
+            {
+                return NoContent();
+            }
+            return reviews;
         }
     }
 }

@@ -88,25 +88,16 @@ public class ProductManager : IProductManager
             }
         }
         //Add Category
-        List<Category> categoriesFromDB = unitOfWork.CategoriesRepo.GetAll();
-
-        int matchedCategories = 0;
-        for (int i = 0; i < categoriesFromDB.Count; i++)
+        for (int i = 0; i < productAdd.ProductCategories.Count; i++)
         {
-            for (int y = 0; y < productAdd.ProductCategories.Count; y++)
+            var cat = unitOfWork.CategoriesRepo.GetById(productAdd.ProductCategories[i].Id);
+            if(cat == null)
             {
-                if (categoriesFromDB[i].Id == productAdd.ProductCategories[y].Id)
-                {
-                    newProduct.Categories.Add(categoriesFromDB[i]);
-                    matchedCategories++;
-                }
+                return false;
             }
+            newProduct.Categories.Add(cat);
         }
 
-        if (matchedCategories == 0)
-        {
-            return false;
-        }
 
         unitOfWork.ProductsRepo.Add(newProduct);
 
@@ -152,5 +143,22 @@ public class ProductManager : IProductManager
                 Quantity = inf.Quantity,
             }).ToList()
         };
+    }
+
+    public List<ProductReviewsDto>? ProductReviews(Guid productId)
+    {
+        Product? productFromDB = unitOfWork.ProductsRepo.GetProductReviews(productId);
+        if (productFromDB == null)
+        {
+            return null;
+        }
+
+        return productFromDB.Reviews!.Select(r => new ProductReviewsDto
+        {
+            CustomerName = r.Customer.FirstName + " " + r.Customer.LastName,
+            Description = r.Description,
+            Rate = r.Rate,
+            CreatedTime = r.CreatedTime,
+        }).ToList();
     }
 }

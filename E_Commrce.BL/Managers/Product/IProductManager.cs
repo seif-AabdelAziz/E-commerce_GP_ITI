@@ -6,4 +6,5 @@ public interface IProductManager
     bool Add(ProductAddDto productAdd);
     bool Delete(Guid productId);
     ProductDetailsReadDto? ProductDetails(Guid productId);
+    List<ProductReviewsDto>? ProductReviews(Guid productId);
 }
