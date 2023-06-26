@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dto\Cart\**" />
+    <EmbeddedResource Remove="Dto\Cart\**" />
+    <None Remove="Dto\Cart\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\E_Commerce.DAL\E_Commerce.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\Cart\" />
     <Folder Include="Dto\CustomerReview\" />
     <Folder Include="Dto\Order\" />
     <Folder Include="Dto\Product\" />
