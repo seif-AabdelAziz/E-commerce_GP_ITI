@@ -1,4 +1,5 @@
 using E_Commerce.DAL;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -47,4 +48,18 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using var scope = app.Services.CreateScope();
+var Services = scope.ServiceProvider;
+var context = Services.GetRequiredService<E_CommerceContext>();
+var Logger = Services.GetRequiredService<ILogger<Program>>();
+
+try
+{
+    await context.Database.MigrateAsync();
+    await ECommerceContextSeed.SeedAsync(context);
+}
+catch (Exception ex)
+{
+    Logger.LogError(ex, "Error occured while migrating process");
+}
 app.Run();
