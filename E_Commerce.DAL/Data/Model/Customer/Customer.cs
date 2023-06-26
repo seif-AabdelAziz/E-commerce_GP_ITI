@@ -16,7 +16,7 @@ public class Customer : User
     public Guid? CartID { get; set; }
     public Cart? Cart { get; set; }
     public string? NameOnCard { get; set; } = string.Empty;
-    public int? CardNumber { get; set; }
+    public decimal? CardNumber { get; set; }
     public DateTime? ExpireDate { get; set; }
 
     public List<CustomerReview>? Reviews { get; set; }
