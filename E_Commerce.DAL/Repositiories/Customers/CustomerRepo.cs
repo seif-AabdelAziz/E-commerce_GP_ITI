@@ -29,5 +29,10 @@ namespace E_Commerce.DAL
                 .ThenInclude(p => p.Products)
                 .FirstOrDefault(c => new Guid(c.Id) == Id);
         }
+
+        public Customer? GetById(string Id)
+        {
+            return _context.Set<Customer>().Find(Id);
+        }
     }
 }

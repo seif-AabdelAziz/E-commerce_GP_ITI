@@ -53,7 +53,7 @@ namespace E_Commerce.BL
         public CustomerListDataDto? GetCustomerById(Guid Id)
         {
 
-            Customer? customer = _unitOfWork.CustomerRepo.GetById(Id);
+            Customer? customer = _unitOfWork.CustomerRepo.GetById(Id.ToString());
             if (customer == null)
             {
                 return null;

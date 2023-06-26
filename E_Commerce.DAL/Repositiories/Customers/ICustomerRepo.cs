@@ -5,6 +5,7 @@
         Customer? GetOrdersByCustomerId(Guid Id);
         Customer? GetCustomerCartByCustomerId(Guid Id);
         Customer? GetWishListByCustomerId(Guid Id);
+        Customer? GetById(string id);
 
 
     }
