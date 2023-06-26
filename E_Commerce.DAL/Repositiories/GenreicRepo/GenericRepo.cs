@@ -17,7 +17,7 @@ namespace E_Commerce.DAL
 
         public T? GetById(Guid id)
         {
-            return _context.Set<T>().Find(id);
+            return _context.Set<T>().Find(id.ToString());
         }
         public void Add(T item)
         {
