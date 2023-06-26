@@ -115,7 +115,7 @@ namespace E_Commerce.BL
 
          bool ICustomerManager.UpadateCustomerPassword(CustomerUpdatePassDto customer)
         {
-            var CurrentwithOldPass = _unitOfWork.CustomerRepo.GetById(customer.Id);
+            var CurrentwithOldPass = _unitOfWork.CustomerRepo.GetById(customer.Id.ToString());
 
             var check = checkHashPassWord(CurrentwithOldPass!, customer.CurrentPassword);
             IdentityResult res = IdentityResult.Failed();
@@ -133,7 +133,7 @@ namespace E_Commerce.BL
 
         public bool UpdateCustomerData(CustomerUpdateDto customerUpdate)
         {
-           Customer? customeroldData = _unitOfWork.CustomerRepo.GetById(customerUpdate.Id); 
+           Customer? customeroldData = _unitOfWork.CustomerRepo.GetById(customerUpdate.Id.ToString()); 
             if(customeroldData == null)
             {
                 return false;
@@ -161,7 +161,7 @@ namespace E_Commerce.BL
 
         public bool DeleteCustomerById(CustomerDeleteDto customerdel)
         {
-            Customer? customer = _unitOfWork.CustomerRepo.GetById(customerdel.Id);
+            Customer? customer = _unitOfWork.CustomerRepo.GetById(customerdel.Id.ToString());
             if(customer == null)
             {
                 return false;
