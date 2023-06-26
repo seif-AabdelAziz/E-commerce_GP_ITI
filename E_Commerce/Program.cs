@@ -1,3 +1,4 @@
+using E_Commerce.BL;
 using E_Commerce.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,37 @@ builder.Services.AddScoped<ICartProductRepo, CartsProductRepo>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 #endregion
 
+#region InjectionForMangers
+builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+
+#endregion
+
+
+#region InjectForMangers
+builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+
+#endregion
+
+#region Identity
+
+//Mainly specify the context and the type of the user that the UserManger will use
+builder.Services.AddIdentity<Customer, IdentityRole>(options =>
+{
+    options.Password.RequiredUniqueChars = 3;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 3;
+    options.User.RequireUniqueEmail = false;
+    
+}).AddEntityFrameworkStores<E_CommerceContext>();
+
+
+
+#endregion
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,18 +81,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using var scope = app.Services.CreateScope();
-var Services = scope.ServiceProvider;
-var context = Services.GetRequiredService<E_CommerceContext>();
-var Logger = Services.GetRequiredService<ILogger<Program>>();
-
-try
-{
-    await context.Database.MigrateAsync();
-    await ECommerceContextSeed.SeedAsync(context);
-}
-catch (Exception ex)
-{
-    Logger.LogError(ex, "Error occured while migrating process");
-}
 app.Run();
