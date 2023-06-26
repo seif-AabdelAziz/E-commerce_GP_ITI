@@ -44,12 +44,35 @@ namespace E_Commerce.BL
                 Street = c.Street,
                 City = c.City,
                 Country = c.Country,
+                PhoneNumber=c.PhoneNumber
             }).ToList();
 
             return CustomerList;
         }
 
+        public CustomerListDataDto? GetCustomerById(Guid Id)
+        {
 
+            Customer? customer = _unitOfWork.CustomerRepo.GetById(Id);
+            if (customer == null)
+            {
+                return null;
+            }
+            var customerDetalis = new CustomerListDataDto
+            {
+                Id = new Guid(customer.Id),
+                FirstName = customer.FirstName,
+                MidName = customer.MidName,
+                LastName = customer.LastName,
+                PhoneNumber = customer.PhoneNumber,
+                Street = customer.Street,
+                City = customer.City,
+                Country = customer.Country,
+                Email = customer.Email,
+
+            };
+            return customerDetalis;
+        }
         public void AddCustomer(CustomerAddDto customer)
         {
 
@@ -85,24 +108,7 @@ namespace E_Commerce.BL
             _unitOfWork.SaveChange();
         }
 
-        public CustomerListDataDto? GetCustomerById(Guid Id)
-        {
-            Customer? customer = _unitOfWork.CustomerRepo.GetById(Id);
-            var customerDetalis = new CustomerListDataDto
-            {
-                Id = new Guid(customer.Id),
-                FirstName = customer.FirstName,
-                MidName = customer.MidName,
-                LastName = customer.LastName,
-                PhoneNumber = customer.PhoneNumber,
-                Street = customer.Street,
-                City = customer.City,
-                Country = customer.Country,
-                Email = customer.Email,
-
-            };
-            return customerDetalis;
-        }
+        
 
 
 
@@ -125,6 +131,44 @@ namespace E_Commerce.BL
             return false;
         }
 
+        public bool UpdateCustomerData(CustomerUpdateDto customerUpdate)
+        {
+           Customer? customeroldData = _unitOfWork.CustomerRepo.GetById(customerUpdate.Id); 
+            if(customeroldData == null)
+            {
+                return false;
+            }
+            var checkPass = _customerManager.CheckPasswordAsync(customeroldData, customerUpdate.Password).Result;
+            if (!checkPass)
+            {
+                return false;
+            }
 
+            customeroldData.Email = customerUpdate.Email;
+            customeroldData.FirstName = customerUpdate.FirstName;
+            customeroldData.LastName = customerUpdate.LastName;
+            customeroldData.MidName = customerUpdate.MidName;
+            customeroldData.Street = customerUpdate.Street;
+            customeroldData.City = customerUpdate.City;
+            customeroldData.Country = customerUpdate.Country;
+            customeroldData.PhoneNumber = customerUpdate.PhoneNumber;
+
+            _unitOfWork.SaveChange();
+
+            return true;
+           
+        }
+
+        public bool DeleteCustomerById(CustomerDeleteDto customerdel)
+        {
+            Customer? customer = _unitOfWork.CustomerRepo.GetById(customerdel.Id);
+            if(customer == null)
+            {
+                return false;
+            }
+
+            _unitOfWork.CustomerRepo.Delete(customer);
+            return _unitOfWork.SaveChange()>0;
+        }
     }
 }

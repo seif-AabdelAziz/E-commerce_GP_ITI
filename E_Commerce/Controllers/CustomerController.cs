@@ -28,6 +28,10 @@ namespace E_Commerce.API.Controllers
         public ActionResult<CustomerListDataDto> GetCustomerBy(Guid Id)
         {
             CustomerListDataDto? customer = _customerManger.GetCustomerById(Id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
             return customer;
         }
 
@@ -49,6 +53,29 @@ namespace E_Commerce.API.Controllers
                 return StatusCode(StatusCodes.Status201Created, "Edit Successfully");
             }
             return StatusCode(StatusCodes.Status304NotModified, "Reset Faild");
+        }
+
+        [HttpPatch]
+        public ActionResult UpdateCustomerData(CustomerUpdateDto updateCustomer)
+        {
+            var check = _customerManger.UpdateCustomerData(updateCustomer);
+            if (check)
+            {
+                return StatusCode(StatusCodes.Status201Created, "Updated Successfully");
+            }
+            return StatusCode(StatusCodes.Status304NotModified, "Updated Faild");
+        }
+
+
+        [HttpDelete]
+        public ActionResult DeleteCustomer(CustomerDeleteDto customer)
+        {
+            var check = _customerManger.DeleteCustomerById(customer);
+            if (check)
+            {
+                return StatusCode(StatusCodes.Status201Created, "Deleted Successfully");
+            }
+            return StatusCode(StatusCodes.Status304NotModified, "Deleted Faild");
         }
 
 
