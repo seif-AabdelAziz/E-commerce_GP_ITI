@@ -8,7 +8,7 @@ public class User : IdentityUser
     [MaxLength(30)]
     public string FirstName { get; set; } = string.Empty;
 
-    [MinLength(3)]
+    [MinLength(1)]
     [MaxLength(30)]
     public string MidName { get; set; } = string.Empty;
     [MinLength(3)]
