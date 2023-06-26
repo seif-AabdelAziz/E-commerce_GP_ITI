@@ -21,7 +21,6 @@
     <Folder Include="Dto\Order\" />
     <Folder Include="Dto\Product\" />
     <Folder Include="Dto\WishList\" />
-    <Folder Include="Managers\Cart\" />
     <Folder Include="Managers\CustomerReview\" />
     <Folder Include="Managers\WishList\" />
     <Folder Include="Managers\Product\" />
