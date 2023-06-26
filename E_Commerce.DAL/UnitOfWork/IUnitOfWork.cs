@@ -13,6 +13,8 @@ namespace E_Commerce.DAL
         public IProductsRepo ProductsRepo { get;  }
         public IUsersRepo UsersRepo { get;  }
         public IWishListRepo WishListRepo { get; }
+        public ICartProductRepo CartProductRepo { get; }
+
         int SaveChange();
     }
 }

@@ -13,11 +13,12 @@ namespace E_Commerce.DAL
         public IProductsRepo ProductsRepo { get; }
         public IUsersRepo UsersRepo { get; }
         public IWishListRepo WishListRepo { get; }
+        public ICartProductRepo CartProductRepo { get; }
 
         public UnitOfWork(E_CommerceContext context , ICartRepo cartRepo,ICategoriesRepo categoriesRepo
                             ,ICustomerReviewRepo customerReviewRepo , ICustomerRepo customerRepo
                             ,IOrderRepo orderRepo ,IProductsRepo productsRepo , IUsersRepo usersRepo
-                            ,IWishListRepo wishListRepo)
+                            ,IWishListRepo wishListRepo , ICartProductRepo cartProductRepo)
         {
             _context = context;
             CartRepo = cartRepo;
@@ -28,6 +29,7 @@ namespace E_Commerce.DAL
             ProductsRepo = productsRepo;
             UsersRepo = usersRepo;
             WishListRepo = wishListRepo;
+            CartProductRepo = cartProductRepo;
         }
 
         

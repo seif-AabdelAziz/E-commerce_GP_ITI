@@ -30,6 +30,7 @@ builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<IProductsRepo, ProductsRepo>();
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IWishListRepo,WishListRepo>();
+builder.Services.AddScoped<ICartProductRepo, CartsProductRepo>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 #endregion
 

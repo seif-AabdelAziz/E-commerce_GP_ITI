@@ -53,87 +53,87 @@ namespace E_Commerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            CartId = new Guid("08c139d4-c4c6-47ed-a26a-a6c1444d5c45"),
+                            CartId = new Guid("908ddc5a-8bc7-4341-b173-f3840a9e9872"),
                             CustomerId = new Guid("c7d3e80a-7a4a-4c54-91a6-89c0df051c94")
                         },
                         new
                         {
-                            CartId = new Guid("8521a8b2-06c6-4084-93b7-8d06ddf1c701"),
+                            CartId = new Guid("113804ec-14b8-4965-8ccd-ef61668b81f6"),
                             CustomerId = new Guid("74f5b2b3-3d10-4a85-93b5-8c6d0c992bb7")
                         },
                         new
                         {
-                            CartId = new Guid("e0e01361-538e-4d9f-862b-575f9d0d978e"),
+                            CartId = new Guid("04e8fabe-e52d-47a8-bbe9-a87fdd30c8a1"),
                             CustomerId = new Guid("74f5b2b3-3d10-4a85-93b5-8c6d0c992bb8")
                         },
                         new
                         {
-                            CartId = new Guid("9fd9925c-9d3e-4843-ac0b-d7b768e99a8e"),
+                            CartId = new Guid("27a86bac-b806-434e-b31f-4e79a42f1de3"),
                             CustomerId = new Guid("e23edc32-bd6a-4b6b-a28e-ccf60b5c32dc")
                         },
                         new
                         {
-                            CartId = new Guid("eb702766-dd54-45f4-ab27-785f74b94fdd"),
+                            CartId = new Guid("817d4e27-8009-4ed0-b6a5-11960f5b8cdf"),
                             CustomerId = new Guid("f0e7f09e-c7ad-4cb0-8f19-6540b4c7c49f")
                         },
                         new
                         {
-                            CartId = new Guid("d493bf27-b432-4e8d-b4b5-93de4b486864"),
+                            CartId = new Guid("42cde45f-cb4f-4350-ad30-9adb2149af6b"),
                             CustomerId = new Guid("22ac8dc9-4385-48ae-90a3-7d8c898c6d5d")
                         },
                         new
                         {
-                            CartId = new Guid("2577a20e-adb9-49e3-993b-603bec966a18"),
+                            CartId = new Guid("413b27b1-7133-4dcd-b80c-a98a4582ecc1"),
                             CustomerId = new Guid("b6a76b15-33e5-4d26-98b9-c948c7823b84")
                         },
                         new
                         {
-                            CartId = new Guid("400b06a5-93c2-40b9-8f9d-41e421c91151"),
+                            CartId = new Guid("1409ceb2-2670-4cb9-a362-4502e0d1aa47"),
                             CustomerId = new Guid("0e67a2e5-df53-4a92-9854-8e1ad46a4e61")
                         },
                         new
                         {
-                            CartId = new Guid("ce036e14-a1ae-464d-b187-f09b9f224432"),
+                            CartId = new Guid("d85c99a0-d6ce-4744-bea7-fd02f4a6faa1"),
                             CustomerId = new Guid("74f5b2b3-3d10-4a85-93b5-8c6d0c992b58")
                         },
                         new
                         {
-                            CartId = new Guid("acd8bec4-9435-420d-b56d-6a3556919ea1"),
+                            CartId = new Guid("a9413b40-c7db-40dd-bfd8-6fa391e95757"),
                             CustomerId = new Guid("724587e6-9314-4fe6-9c3e-6fd612f50234")
                         },
                         new
                         {
-                            CartId = new Guid("d6f10021-39f0-47f7-b4f6-89fa266481f8"),
+                            CartId = new Guid("b8caee42-ff47-4241-b791-42d690054a2a"),
                             CustomerId = new Guid("234cdf89-12a3-45b6-789c-0123456789de")
                         },
                         new
                         {
-                            CartId = new Guid("a4354553-817c-419e-818c-7e37cc85ee52"),
+                            CartId = new Guid("e308807b-711e-47bb-9c63-0adff881ce88"),
                             CustomerId = new Guid("6789abcd-ef01-2345-6789-abcd01234567")
                         },
                         new
                         {
-                            CartId = new Guid("7e510317-3cf8-465e-aeaa-a873c89e5d73"),
+                            CartId = new Guid("f68fe18b-686f-49f9-b77b-2da4edc510a9"),
                             CustomerId = new Guid("bcdef012-3456-789a-bcde-f01234567890")
                         },
                         new
                         {
-                            CartId = new Guid("9e4b7852-f663-4779-9d96-bf68957d1532"),
+                            CartId = new Guid("8757ceb3-a047-47a4-b793-069f1c9beb8c"),
                             CustomerId = new Guid("2345cdef-0123-4567-89ab-cdef01234567")
                         },
                         new
                         {
-                            CartId = new Guid("5f36fa5c-41a2-4dab-a7f3-11b493635932"),
+                            CartId = new Guid("1ade369e-fafa-4805-ad89-183d5d227c9a"),
                             CustomerId = new Guid("8901def0-1234-5678-9abc-def012345678")
                         },
                         new
                         {
-                            CartId = new Guid("a0aa7b28-db53-4eec-858d-ba5aaa598f0c"),
+                            CartId = new Guid("8479bfd5-492d-4a16-aa05-291d2eab75fb"),
                             CustomerId = new Guid("23456789-01ab-cdef-0123-456789abcdef")
                         },
                         new
                         {
-                            CartId = new Guid("3c8da74f-f37c-4a51-a6aa-76bbcd3d3dc4"),
+                            CartId = new Guid("d4f89557-aab5-4b1f-a379-12bdbeec7309"),
                             CustomerId = new Guid("def01234-5678-9abc-def0-123456789abc")
                         });
                 });
@@ -707,7 +707,7 @@ namespace E_Commerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e4e20f23-ec2e-4259-b550-91bde9c2b42d"),
+                            Id = new Guid("5a6ac397-590b-4dce-be66-ceafb2ce8e11"),
                             Description = "Comfortable cotton t-shirt for men",
                             Discount = 0m,
                             Name = "Men's T-Shirt",
@@ -716,7 +716,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c2d79b90-fb63-49f5-89d9-cfc033df6fe6"),
+                            Id = new Guid("4a729476-28c6-45d0-9592-3f2f5fb5a9c1"),
                             Description = "Elegant dress for women",
                             Discount = 0.1m,
                             Name = "Women's Dress",
@@ -725,7 +725,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("21998760-fe38-4b3f-81f8-931ba21c8da4"),
+                            Id = new Guid("f9e7b255-aecd-4736-9ac0-ce61c00adc41"),
                             Description = "Colorful shoes for kids",
                             Discount = 0.15m,
                             Name = "Kids' Shoes",
@@ -734,7 +734,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f627d1d9-64b1-4822-94c6-7e03e2fe44e3"),
+                            Id = new Guid("f5a29746-618d-4cba-b57c-d5269fb84d88"),
                             Description = "Warm hoodie for men",
                             Discount = 0.05m,
                             Name = "Men's Hoodie",
@@ -743,7 +743,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("972fd402-8b31-429a-b780-2f605c4c4c96"),
+                            Id = new Guid("4c8034f8-d061-40b2-b008-30a290e7e17d"),
                             Description = "Comfortable cotton t-shirt for men",
                             Discount = 0m,
                             Name = "Men's T-Shirt",
@@ -752,7 +752,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a852b98-204a-4137-8455-11c713533750"),
+                            Id = new Guid("9319ae20-55fb-4641-8a81-944a1d1c1e32"),
                             Description = "Elegant dress for women",
                             Discount = 0.1m,
                             Name = "Women's Dress",
@@ -761,7 +761,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("427e0019-8009-4578-b34c-7ea52fd311ba"),
+                            Id = new Guid("fd7f584c-2774-4e32-bf36-658d1903ad4e"),
                             Description = "Colorful shoes for kids",
                             Discount = 0.15m,
                             Name = "Kids' Shoes",
@@ -770,7 +770,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1fead0fa-6811-4596-a93e-69d931219c77"),
+                            Id = new Guid("2963420c-6f6c-4611-b3a6-1a686b55b9f1"),
                             Description = "Classic denim jeans for men",
                             Discount = 0.05m,
                             Name = "Men's Jeans",
@@ -779,7 +779,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8b08778f-9d8c-4228-9f94-408ec300fb79"),
+                            Id = new Guid("f24974b3-4ab9-45ba-92ae-f6e3cb23ebe4"),
                             Description = "Stylish blouse for women",
                             Discount = 0m,
                             Name = "Women's Blouse",
@@ -788,7 +788,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a0808f81-a925-4a05-b5c3-fdf8d0a85366"),
+                            Id = new Guid("ebaffcd3-24cb-4054-a22d-56d74a14d69c"),
                             Description = "Spacious backpack for kids",
                             Discount = 0m,
                             Name = "Kids' Backpack",
@@ -797,7 +797,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("18834b0d-3e2b-4378-b1df-25341ce732f4"),
+                            Id = new Guid("88efca35-fa0f-4cd4-a05e-54831ff1acf0"),
                             Description = "Casual shorts for men",
                             Discount = 0.1m,
                             Name = "Men's Shorts",
@@ -806,7 +806,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("36f892f3-4487-4b75-a88f-0c90e0ee3f45"),
+                            Id = new Guid("f8f12f9e-7b03-46dc-bb3f-d3d0316af55d"),
                             Description = "Comfortable sandals for women",
                             Discount = 0.2m,
                             Name = "Women's Sandals",
@@ -815,7 +815,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab1e26e4-508f-45a2-8497-0ef448f1ef2a"),
+                            Id = new Guid("f8ae976d-687e-4ce8-950a-c4f69d4f3bd5"),
                             Description = "Adorable t-shirt for kids",
                             Discount = 0m,
                             Name = "Kids' T-Shirt",
@@ -824,7 +824,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("847ff397-c982-4fee-97a4-c375025b9486"),
+                            Id = new Guid("66b830d6-ab49-4e71-93a2-1b040c19761c"),
                             Description = "Stylish sneakers for men",
                             Discount = 0.15m,
                             Name = "Men's Sneakers",
@@ -833,7 +833,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e16340c-5ab1-4dc9-8bcc-ff9641e6b537"),
+                            Id = new Guid("1cbe47e7-abda-4cd4-8e17-51d4e8b5e544"),
                             Description = "Fashionable skirt for women",
                             Discount = 0m,
                             Name = "Women's Skirt",
@@ -842,7 +842,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d0cc568d-f2f5-4db4-b431-9a60a51c43e3"),
+                            Id = new Guid("caa0275e-f571-485c-9c86-c4fd3a574700"),
                             Description = "Warm jacket for kids",
                             Discount = 0.1m,
                             Name = "Kids' Jacket",
@@ -851,7 +851,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f09a3bb6-2af5-4421-b707-1d833b18471d"),
+                            Id = new Guid("a696b763-2862-4dce-a349-65f6d7b01469"),
                             Description = "Classic polo shirt for men",
                             Discount = 0m,
                             Name = "Men's Polo Shirt",
@@ -860,7 +860,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e315499c-8bbb-4bf9-a92f-46bdbb6167a5"),
+                            Id = new Guid("e56c3c02-a5eb-4e6f-b513-36712b79b422"),
                             Description = "Stylish denim jeans for women",
                             Discount = 0.05m,
                             Name = "Women's Jeans",
@@ -869,7 +869,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6630af75-cefa-4d71-92ef-9eb910f63321"),
+                            Id = new Guid("3625d381-0877-498a-8421-96805b9f0f10"),
                             Description = "Cute dress for kids",
                             Discount = 0m,
                             Name = "Kids' Dress",
@@ -878,7 +878,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5d8a015b-01e3-46f9-8497-d99a02d2ab07"),
+                            Id = new Guid("6e6cf4b1-ca63-4356-87b3-9c27d63d0c09"),
                             Description = "Warm jacket for men",
                             Discount = 0.2m,
                             Name = "Men's Jacket",
@@ -887,7 +887,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aa8dbe6b-6aeb-4b7b-ab93-4c6d53242e6b"),
+                            Id = new Guid("9871815c-db84-4a50-ba65-5f9da6cc33f6"),
                             Description = "Sporty sneakers for women",
                             Discount = 0m,
                             Name = "Women's Sneakers",
@@ -896,7 +896,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("95c44ed4-7f69-4358-a0b9-5097df631a3d"),
+                            Id = new Guid("b4a44768-feaf-491e-8f27-a479ec265e1c"),
                             Description = "Casual trousers for kids",
                             Discount = 0.1m,
                             Name = "Kids' Trousers",
@@ -905,7 +905,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2c99c878-415d-4106-aedf-d631283dae2a"),
+                            Id = new Guid("16736f58-71f7-417a-a20b-315bbbd1c5c4"),
                             Description = "Formal shirt for men",
                             Discount = 0.15m,
                             Name = "Men's Shirt",
@@ -914,7 +914,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("04c9017f-54c8-4b7a-9005-891935fa118a"),
+                            Id = new Guid("aeaed94b-ffa3-454c-8bf7-f36ef0f3f013"),
                             Description = "Stylish jacket for women",
                             Discount = 0m,
                             Name = "Women's Jacket",
@@ -923,7 +923,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("23733e49-a32c-48bc-9211-b48feca50263"),
+                            Id = new Guid("10ba07a4-32ab-41a0-b52f-5cce82d3e727"),
                             Description = "Cozy hoodie for kids",
                             Discount = 0m,
                             Name = "Kids' Hoodie",
@@ -932,7 +932,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dd4fe700-2d01-4010-8149-9fdfec5fef77"),
+                            Id = new Guid("cb8c9277-0f5a-4425-a5ae-bb1bfa55e1bf"),
                             Description = "Warm sweater for men",
                             Discount = 0.1m,
                             Name = "Men's Sweater",
@@ -941,7 +941,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("516a9a73-df2e-45eb-8d5c-ac53645d6574"),
+                            Id = new Guid("9c1a3c3f-ff9e-4ec9-bfed-28f8c4ea385e"),
                             Description = "Elegant blazer for women",
                             Discount = 0.2m,
                             Name = "Women's Blazer",
@@ -950,7 +950,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1933a740-9827-4a34-ae50-73c542ecdaf6"),
+                            Id = new Guid("d91c88f7-97ff-474a-9506-a4036f7a6d26"),
                             Description = "Casual shorts for kids",
                             Discount = 0m,
                             Name = "Kids' Shorts",
@@ -959,7 +959,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1383d648-8cb3-4289-830d-088ee8749682"),
+                            Id = new Guid("a33d0377-6763-4b8d-b040-50b24899c3ff"),
                             Description = "Classic pants for men",
                             Discount = 0.1m,
                             Name = "Men's Pants",
@@ -968,7 +968,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("63903add-86c3-4d2f-8021-27a86a7bcf59"),
+                            Id = new Guid("14dd0df1-eafc-4e0f-ba5b-3bad6cc446ff"),
                             Description = "Cozy sweater for women",
                             Discount = 0m,
                             Name = "Women's Sweater",
@@ -977,7 +977,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d1822590-4e78-45e2-b601-e4ec78ecdbee"),
+                            Id = new Guid("861ecdd8-a540-4c2f-b98f-c3740e70b71b"),
                             Description = "Adorable shirt for kids",
                             Discount = 0.15m,
                             Name = "Kids' Shirt",
@@ -986,7 +986,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9d4493b1-b23c-4f3f-a6a3-b33162bfb9fd"),
+                            Id = new Guid("c99863c4-c000-40ef-9549-3546d7af2db9"),
                             Description = "Comfortable hoodie for men",
                             Discount = 0m,
                             Name = "Men's Hoodie",
@@ -995,7 +995,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c517ab5c-311d-4a0e-a73f-a0946eb0ee25"),
+                            Id = new Guid("a6f73565-6999-40bf-848f-46bb02f0e322"),
                             Description = "Stylish pants for women",
                             Discount = 0.05m,
                             Name = "Women's Pants",
@@ -1004,7 +1004,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0665fdca-a4f6-4e59-8bdf-aa89e27589bc"),
+                            Id = new Guid("7356625f-77a6-40ca-81ba-239b88648714"),
                             Description = "Warm sweater for kids",
                             Discount = 0m,
                             Name = "Kids' Sweater",
@@ -1013,7 +1013,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d66f6447-b1b7-4ca1-af2e-5c3581a85e0d"),
+                            Id = new Guid("ea77ac5d-ec6a-48c8-9557-7c1fdf918566"),
                             Description = "Sporty sneakers for men",
                             Discount = 0.1m,
                             Name = "Men's Sneakers",
@@ -1022,7 +1022,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0615666c-51ae-43da-baf6-af4fe1d644fd"),
+                            Id = new Guid("d334beaa-43f2-4abe-aea0-0f74ecd0f043"),
                             Description = "Casual t-shirt for women",
                             Discount = 0.2m,
                             Name = "Women's T-Shirt",
@@ -1031,7 +1031,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("94f029b8-d502-493e-9e41-83c16fa6d05d"),
+                            Id = new Guid("0c4dae2d-6bef-42cc-9d6a-1f6a6c8c12e7"),
                             Description = "Stylish jacket for kids",
                             Discount = 0m,
                             Name = "Kids' Jacket",
@@ -1040,7 +1040,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("08d7fefa-56ff-47e9-8abc-6b48bd025949"),
+                            Id = new Guid("93159ce3-ebdc-49a2-8857-39d54e5775b0"),
                             Description = "Comfortable shorts for men",
                             Discount = 0m,
                             Name = "Men's Shorts",
@@ -1049,7 +1049,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d9b6e6f6-f3ec-4374-a40d-aa543f9f94fe"),
+                            Id = new Guid("19076289-52c9-4146-90c2-547d49c2c3a4"),
                             Description = "Fashionable sandals for women",
                             Discount = 0.1m,
                             Name = "Women's Sandals",
@@ -1058,7 +1058,7 @@ namespace E_Commerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3ead5485-b8a7-4377-be09-53054bd002e8"),
+                            Id = new Guid("e9b3f2d5-7c99-4c5f-b23e-0147f5810ef6"),
                             Description = "Stylish trousers for kids",
                             Discount = 0.05m,
                             Name = "Kids' Trousers",
@@ -1396,13 +1396,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "07d96ed8-155d-49c7-a77a-615f109d77c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "901f16f7-d759-48fd-abff-998636fb5470",
+                            ConcurrencyStamp = "bde24429-c80d-4754-963b-4ddd087c57a5",
                             Email = "johndoe@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123-456-7890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ae33ba4b-d8c5-4522-bdfc-f551d8b9303f",
+                            SecurityStamp = "0c568d18-eb32-46a6-a116-3f1770657cd2",
                             TwoFactorEnabled = false,
                             CardNumber = 1234567890123456m,
                             City = "New York",
@@ -1419,13 +1419,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "c7d3e80a-7a4a-4c54-91a6-89c0df051c94",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d69dfcca-fb57-4fef-bddd-6bcd959f3528",
+                            ConcurrencyStamp = "b4de0b80-8f74-4ee0-9169-17c479bc6a97",
                             Email = "janesmith@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-888-9999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7ebbaff5-9f01-4a3c-8827-e44e611ac3e5",
+                            SecurityStamp = "0c6c571b-e1b2-4f8a-bec7-5b0e02d5131e",
                             TwoFactorEnabled = false,
                             CardNumber = 9876543210987654m,
                             City = "Los Angeles",
@@ -1442,13 +1442,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "74f5b2b3-3d10-4a85-93b5-8c6d0c992bb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a53fa270-5002-4e58-8920-f34ca391bd97",
+                            ConcurrencyStamp = "e35b885d-f43b-49fd-b302-8517d22f70e2",
                             Email = "emilyanderson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d97a82c9-303a-4673-b2b6-6b2d56f18b57",
+                            SecurityStamp = "1fc25b89-ed49-4012-a071-01ea430f79d4",
                             TwoFactorEnabled = false,
                             CardNumber = 9876543210123456m,
                             City = "San Francisco",
@@ -1465,13 +1465,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "74f5b2b3-3d10-4a85-93b5-8c6d0c992bb8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08d75039-21d2-4353-8cb8-8b0211a7e7bf",
+                            ConcurrencyStamp = "606d67c0-5f48-470d-a6ba-a1c95a1051d4",
                             Email = "michaelwilson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "444-555-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31f5811d-3b18-4bea-980d-0af7f5fefa36",
+                            SecurityStamp = "ef4c41ef-2010-4bc2-bdb8-86405e27ed70",
                             TwoFactorEnabled = false,
                             CardNumber = 1234987654321098m,
                             City = "London",
@@ -1488,13 +1488,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "e23edc32-bd6a-4b6b-a28e-ccf60b5c32dc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "220bb7b5-1efc-41f7-bf92-a3425e93d627",
+                            ConcurrencyStamp = "b76581d0-e870-41ad-9c86-385ed48cda2a",
                             Email = "sarahthompson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-777-8888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2dd96a38-4b70-4789-a1ce-1471782ec9a7",
+                            SecurityStamp = "fbdcda23-ad4b-4aa9-85f1-80ccea4c72ef",
                             TwoFactorEnabled = false,
                             CardNumber = 9876012345678901m,
                             City = "Sydney",
@@ -1511,13 +1511,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "f0e7f09e-c7ad-4cb0-8f19-6540b4c7c49f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a5af1728-00ad-433d-a37d-48388f4c228f",
+                            ConcurrencyStamp = "3a182a46-c799-45a5-a7df-26d4035d1f35",
                             Email = "davidmiller@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "999-888-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb3f8e0b-b2fc-4d72-b886-2828de973469",
+                            SecurityStamp = "babe8a2a-5475-435c-86ce-8254ba62b2f8",
                             TwoFactorEnabled = false,
                             CardNumber = 5432109876543210m,
                             City = "Toronto",
@@ -1534,13 +1534,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "22ac8dc9-4385-48ae-90a3-7d8c898c6d5d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7687822e-2a8e-4900-854b-360f3a01dd4b",
+                            ConcurrencyStamp = "3425c234-d972-4817-b24d-5389ded28fb4",
                             Email = "sophialee@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "222-333-4444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b4a64c76-e5d5-4e16-bc6b-a7b70d1c9192",
+                            SecurityStamp = "b984363d-da5f-42f4-9963-e3c2533bbfe8",
                             TwoFactorEnabled = false,
                             CardNumber = 1234554321098765m,
                             City = "Seoul",
@@ -1557,13 +1557,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "b6a76b15-33e5-4d26-98b9-c948c7823b84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eae79606-91ba-4d87-aead-793c382dc487",
+                            ConcurrencyStamp = "8c85a9a6-c4c9-4d6f-b3b8-73bdc9657e4d",
                             Email = "danielmartinez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "555-666-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ee5170c9-d1c5-418f-ba1d-306ab8198140",
+                            SecurityStamp = "db3c30b8-cd7f-44b3-a304-476fee34548a",
                             TwoFactorEnabled = false,
                             CardNumber = 9876543210012345m,
                             City = "Madrid",
@@ -1580,13 +1580,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "0e67a2e5-df53-4a92-9854-8e1ad46a4e61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70d3d26f-5a5e-4c65-bced-d98020d8d3a1",
+                            ConcurrencyStamp = "80416f17-58e7-4a73-a1ab-4b03ad7b7cb6",
                             Email = "oliviabrown@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "888-777-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7a8af891-0532-4f86-8892-e48a7d2dda9e",
+                            SecurityStamp = "64a6114a-e433-4014-99d7-b9cc32b04c00",
                             TwoFactorEnabled = false,
                             CardNumber = 5432101234567890m,
                             City = "Paris",
@@ -1603,13 +1603,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "74f5b2b3-3d10-4a85-93b5-8c6d0c992b58",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8097a45-4bda-4c4c-ab7c-7ee6fd58dbe3",
+                            ConcurrencyStamp = "8e7c0e6b-48a4-41f8-9350-b4239392a75a",
                             Email = "alexjohnson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-888-666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cfbfff43-234e-4ece-a766-c5b2bcb60cc1",
+                            SecurityStamp = "bab98a56-0597-4558-a438-bc72484161f9",
                             TwoFactorEnabled = false,
                             CardNumber = 5432167890123456m,
                             City = "Chicago",
@@ -1626,13 +1626,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "724587e6-9314-4fe6-9c3e-6fd612f50234",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "653c5e6a-b64b-43d5-a6c0-b9f9b390ccca",
+                            ConcurrencyStamp = "0a10da4f-72ca-436d-b6e8-7cc63a0147f1",
                             Email = "williamtaylor@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf804a3c-fa95-4e61-b31f-739ee8cb9276",
+                            SecurityStamp = "3b063bb1-43da-4cfa-9454-330cf60f3efc",
                             TwoFactorEnabled = false,
                             CardNumber = 1234567812345678m,
                             City = "London",
@@ -1649,13 +1649,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "234cdf89-12a3-45b6-789c-0123456789de",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8657d3dc-aa8f-4011-8820-a696fc57dbeb",
+                            ConcurrencyStamp = "eddf0702-cceb-4262-b68b-716c05572d03",
                             Email = "emmajdavis@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "444-555-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "67ca2f08-89e0-4b7b-85fa-40906014e88b",
+                            SecurityStamp = "88ea24b4-9800-4fc8-8d84-2c3addd516e9",
                             TwoFactorEnabled = false,
                             CardNumber = 9876543298765432m,
                             City = "New York",
@@ -1672,13 +1672,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "6789abcd-ef01-2345-6789-abcd01234567",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a37ea4d-ad0a-4c72-b2ba-8b9fda608529",
+                            ConcurrencyStamp = "661f54d7-7f0d-46a8-b572-f3a8a7640b9f",
                             Email = "liammwilson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-888-9999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "43716fb9-1348-4047-87c3-8c26ef7acd16",
+                            SecurityStamp = "81a3fd57-a5d3-436e-9096-0bcb50ae4ab0",
                             TwoFactorEnabled = false,
                             CardNumber = 1234987654321098m,
                             City = "Los Angeles",
@@ -1695,13 +1695,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "bcdef012-3456-789a-bcde-f01234567890",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3822bb6a-ac1e-4e0d-b196-f2de89129435",
+                            ConcurrencyStamp = "ead1e0a2-f235-4750-b9d5-aedec2a01c56",
                             Email = "olivialthompson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-777-8888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f847093-3730-4b61-a67d-a88c7745f13f",
+                            SecurityStamp = "b2d0c92e-98b7-4c16-a4a8-4d8bf2bfc1dc",
                             TwoFactorEnabled = false,
                             CardNumber = 9876012345678901m,
                             City = "Sydney",
@@ -1718,13 +1718,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "2345cdef-0123-4567-89ab-cdef01234567",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "95be0e83-7841-40e9-9196-1354a9be4dc3",
+                            ConcurrencyStamp = "3bf5dce9-c1e5-48c3-8d38-0d922047a613",
                             Email = "noahajohnson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "222-333-4444",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "76b60d48-f3c1-40d2-bf09-ec4f71724287",
+                            SecurityStamp = "a270cf92-2095-436f-9a2f-282c9eae49e7",
                             TwoFactorEnabled = false,
                             CardNumber = 1234554321098765m,
                             City = "Seattle",
@@ -1741,13 +1741,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "8901def0-1234-5678-9abc-def012345678",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb2da114-e802-4ae9-81c3-4f1621030f35",
+                            ConcurrencyStamp = "d1806cab-5464-41ef-b7f0-efabc6356689",
                             Email = "avaklee@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "555-666-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "32f18dc3-aa90-4bdf-acfd-c9355d5f6b33",
+                            SecurityStamp = "1e2cedba-289c-4e7b-b071-da89d502334d",
                             TwoFactorEnabled = false,
                             CardNumber = 9876543298765432m,
                             City = "San Francisco",
@@ -1764,13 +1764,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "23456789-01ab-cdef-0123-456789abcdef",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed62e57e-28a0-4a1e-b5af-e1cd960e8541",
+                            ConcurrencyStamp = "446f059a-0867-4ce9-b6ee-870f926adec0",
                             Email = "isabellatmartinez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "888-777-6666",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2acae11b-ab6c-47cc-9cc4-a7ccce5884a2",
+                            SecurityStamp = "ea39d21f-cad5-4397-8030-a0053ed4dd52",
                             TwoFactorEnabled = false,
                             CardNumber = 5432109876543210m,
                             City = "Madrid",
@@ -1787,13 +1787,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "def01234-5678-9abc-def0-123456789abc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "abf1096f-7f11-498b-ba99-c11799dbe4eb",
+                            ConcurrencyStamp = "f7f96804-414a-437f-b7a1-0e359bab5e0f",
                             Email = "sophianbrown@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "999-888-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0171db6b-1012-4a2e-8d16-bbeca8b7c366",
+                            SecurityStamp = "f0e432dd-ba54-4cc5-8a8c-bbaf89b20981",
                             TwoFactorEnabled = false,
                             CardNumber = 1234567812345678m,
                             City = "Paris",
@@ -1810,13 +1810,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "456789ab-cdef-0123-4567-89abcdef0123",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ae1fce0-9170-43f1-a248-4140c7eb0c2e",
+                            ConcurrencyStamp = "8907a059-fb87-4211-af30-83cfd7d850c1",
                             Email = "miasjohnson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "777-888-9999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d1e34b4e-4c72-4da1-9a11-3866b9a69f64",
+                            SecurityStamp = "85b96dda-3c37-4981-b118-4b42e3f5a945",
                             TwoFactorEnabled = false,
                             CardNumber = 5432167890123456m,
                             City = "Rome",
@@ -1833,13 +1833,13 @@ namespace E_Commerce.DAL.Migrations
                         {
                             Id = "56789abc-def0-1234-5678-9abcdef01234",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "563ffe1c-42bc-4698-b745-c283abdc13d9",
+                            ConcurrencyStamp = "52b6378e-e45b-41c9-a003-00f847fcc987",
                             Email = "logantmartinez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "555-666-7777",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f50d9b2-8308-4e66-b7a5-94604a177670",
+                            SecurityStamp = "a5e1f690-4984-44f5-9293-05e6adce5dc1",
                             TwoFactorEnabled = false,
                             CardNumber = 1234987654321098m,
                             City = "Tokyo",
