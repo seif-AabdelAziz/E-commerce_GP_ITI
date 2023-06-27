@@ -17,14 +17,14 @@ namespace E_Commerce.DAL
 
         public T? GetById(Guid id)
         {
-            return _context.Set<T>().Find(id.ToString());
+            return _context.Set<T>().Find(id);
         }
         public void Add(T item)
         {
-             _context.Set<T>().Add(item);
+            _context.Set<T>().Add(item);
         }
 
-       
+
         public void Update(T item)
         {
             //Empty

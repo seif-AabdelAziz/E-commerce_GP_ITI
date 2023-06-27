@@ -1,9 +1,4 @@
 ﻿using E_Commerce.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_Commerce.BL;
 
@@ -20,16 +15,17 @@ public class OrderManager : IOrderManager
     {
         List<Order> orders = _unitOfWork.OrderRepo.GetAll();
         if (orders is null) { return null!; }
-        return orders.Select(o => new OrderReadDto{
-            OrderData=o.OrderData,
-            PaymentStatus=o.PaymentStatus,
-            PaymentMethod=o.PaymentMethod,
-            OrderStatus=o.OrderStatus,
-            Discount=o.Discount,
-            ArrivalDate=o.ArrivalDate,
-            Street=o.Street,
-            City=o.City,
-            Country=o.Country,
+        return orders.Select(o => new OrderReadDto
+        {
+            OrderData = o.OrderData,
+            PaymentStatus = o.PaymentStatus,
+            PaymentMethod = o.PaymentMethod,
+            OrderStatus = o.OrderStatus,
+            Discount = o.Discount,
+            ArrivalDate = o.ArrivalDate,
+            Street = o.Street,
+            City = o.City,
+            Country = o.Country,
         }).ToList();
     }
 
@@ -102,10 +98,10 @@ public class OrderManager : IOrderManager
             Country = order.Country,
 
             CustomerId = order.CustomerId,
-            CustomerFname=order.Customer.FirstName,
-            CustomerMname=order.Customer.MidName,
-            CustomerLname=order.Customer.LastName,
-            
+            CustomerFname = order.Customer.FirstName,
+            CustomerMname = order.Customer.MidName,
+            CustomerLname = order.Customer.LastName,
+
 
             OrderProducts = order.OrderProducts.Select(op => new ProductChildReadDto
             {
@@ -113,7 +109,7 @@ public class OrderManager : IOrderManager
                 Name = op.Product!.Name,
                 Description = op.Product!.Description,
                 Price = op.Product.Price,
-                Discount = op.Product.Discount,
+                Discount = (double)op.Product.Discount,
             }).ToList()
 
         };
@@ -126,23 +122,23 @@ public class OrderManager : IOrderManager
         return new OrderWithProductsReadDto
         {
             Id = order.Id,
-            OrderData=order.OrderData,
-            PaymentStatus=order.PaymentStatus,
-            PaymentMethod=order.PaymentMethod,
-            OrderStatus=order.OrderStatus,
-            Discount=order.Discount,
-            ArrivalDate=order.ArrivalDate,
-            Street=order.Street,
-            City=order.City,
-            Country=order.Country,
+            OrderData = order.OrderData,
+            PaymentStatus = order.PaymentStatus,
+            PaymentMethod = order.PaymentMethod,
+            OrderStatus = order.OrderStatus,
+            Discount = order.Discount,
+            ArrivalDate = order.ArrivalDate,
+            Street = order.Street,
+            City = order.City,
+            Country = order.Country,
 
-            OrderProducts = order.OrderProducts.Select(op=>new ProductChildReadDto 
-            { 
-                Id=op.OrderId,
+            OrderProducts = order.OrderProducts.Select(op => new ProductChildReadDto
+            {
+                Id = op.OrderId,
                 Name = op.Product!.Name,
-                Description=op.Product!.Description,
-                Price=op.Product.Price,
-                Discount=op.Product.Discount,
+                Description = op.Product!.Description,
+                Price = op.Product.Price,
+                Discount = (double)op.Product.Discount,
             }).ToList()
 
         };
@@ -150,8 +146,8 @@ public class OrderManager : IOrderManager
 
     public void DeleteOrderDto(Guid id)
     {
-        Order? order=_unitOfWork.OrderRepo.GetById(id);
-        if (order != null) 
+        Order? order = _unitOfWork.OrderRepo.GetById(id);
+        if (order != null)
         {
             _unitOfWork.OrderRepo.Delete(order);
             _unitOfWork.SaveChange();

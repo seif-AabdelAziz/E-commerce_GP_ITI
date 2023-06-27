@@ -23,7 +23,8 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
     public Product? GetProductReviews(Guid id)
     {
         return _context.Set<Product>()
-            .Include(p => p.Reviews)
+            .Include(p => p.Reviews!)
+            .ThenInclude(c => c.Customer)
             .FirstOrDefault(p => p.Id == id);
     }
     public Product? GetProductCategories(Guid id)
