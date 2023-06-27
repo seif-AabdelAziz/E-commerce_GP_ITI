@@ -38,6 +38,9 @@ public class E_CommerceContext : IdentityDbContext
 
     public DbSet<Category> Categories => Set<Category>();
 
+    public DbSet<CartProduct> CartProduct => Set<CartProduct>();
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
