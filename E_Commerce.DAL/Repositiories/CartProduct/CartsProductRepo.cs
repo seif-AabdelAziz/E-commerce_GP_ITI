@@ -10,5 +10,10 @@ namespace E_Commerce.DAL
             _context = context;
         }
 
+        public CartProduct? GetById(Guid productId, Guid cartId)
+        {
+           return _context.CartProduct.FirstOrDefault(p => p.ProductId == productId && p.CartId == cartId);
+            
+        }
     }
 }

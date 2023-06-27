@@ -10,15 +10,15 @@ namespace E_Commerce.BL
             _unitOfWork = unitOfWork;
         }
 
-        public void AddToCart(AddToCartDto addToCartDto)
+        public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
             if (cart == null)
             {
                 cart = new Cart
                 {
-                    CartId =  Guid.NewGuid(),
-                    CustomerId = new Guid(addToCartDto.CustomerId),
+                    CartId = Guid.NewGuid(),
+                    CustomerId = addToCartDto.CustomerId,
                     Products = new List<CartProduct>()
                 };
 
@@ -44,44 +44,59 @@ namespace E_Commerce.BL
         }
 
 
-        public bool DeleteCart(DeleteCartDto deleteCartDto)
+        public bool DeleteCart(Guid cartId)
         {
-            Cart? cart = _unitOfWork.CartRepo.GetById(deleteCartDto.CartId);
-            if (cart == null )
+            Cart cart = _unitOfWork.CartRepo.GetById(cartId);
+            if (cart == null)
             {
                 return false;
             }
-            cart?.Products.Clear();
+
             _unitOfWork.CartRepo.Delete(cart);
             return _unitOfWork.SaveChange() > 0;
-          
+
         }
 
-        public void DeleteCartProduct(DeleteCardProductDto deleteCardProductDto)
+
+        public bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto)
         {
             Cart? cart = _unitOfWork.CartRepo.GetById(deleteCardProductDto.CartId);
 
-            CartProduct? cartProduct = cart.Products.FirstOrDefault(cp => cp.ProductId == deleteCardProductDto.ProductId);
-
-            if (cartProduct != null)
+            if (cart == null || cart.Products == null)
             {
-                cart.Products.Remove(cartProduct);
-                _unitOfWork.SaveChange();
-            }
 
-            CartProduct? productToDelete = _unitOfWork.CartProductRepo.GetById(deleteCardProductDto.ProductId);
-            if (productToDelete != null)
+                return false;
+            }
+            CartProduct cartProduct = new CartProduct
             {
-                _unitOfWork.CartProductRepo.Delete(productToDelete);
-                _unitOfWork.SaveChange();
-            }
+                ProductId = deleteCardProductDto.ProductId,
+                CartId = deleteCardProductDto.CartId
+            };
 
+            if (cartProduct == null)
+            {
+                return false;
+
+            }
+            _unitOfWork.CartProductRepo.Delete(cartProduct);
+            _unitOfWork.SaveChange();
+
+            return true;
         }
 
         public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
         {
-            Cart? cart = _unitOfWork.CartRepo.GetById(customerId);
+            Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
 
+            if (cart == null)
+            {
+                return new GetCartProductByCustomerIdDto
+                {
+                    CartId = Guid.Empty,
+                    CustomerId = customerId,
+                    Products = new List<ProductDto>()
+                };
+            }
             GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
             {
                 CartId = cart.CartId,
@@ -98,74 +113,18 @@ namespace E_Commerce.BL
             return cartDto;
         }
 
-        public void UpdateCartProduct(UpdateToCartDto updateToCartDto)
+
+        public bool UpdateCartProduct(UpdateToCartDto updateToCartDto)
         {
-            Cart? cart = _unitOfWork.CartRepo.GetById(updateToCartDto.CartId);
+            CartProduct? cart = _unitOfWork.CartProductRepo.GetById(updateToCartDto.ProductId, updateToCartDto.CartId);
 
             if (cart != null)
             {
-                CartProduct? cartProduct = cart.Products.FirstOrDefault(cp => cp.ProductId == updateToCartDto.ProductId);
-
-                if (cartProduct != null)
-                {
-                    cartProduct.ProductCount += updateToCartDto.Quantity;
-                    cartProduct.ProductCount = Math.Max(cartProduct.ProductCount, 0);
-
-                    _unitOfWork.SaveChange();
-                }
+                cart.ProductCount = updateToCartDto.Quantity;
+                _unitOfWork.SaveChange();
+                return true;
             }
-
-        }
-
-        public decimal Checkout(CheckOutDto checkoutDto)
-        {
-            Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(checkoutDto.CustomerId.ToString());
-
-            decimal totalPrice = cart.Products.Sum(cp => cp.Product.Price * cp.ProductCount);
-
-            // Delete sold items from the database
-            foreach (var cartProduct in cart.Products)
-            {
-                Product? product = _unitOfWork.ProductsRepo.GetById(cartProduct.ProductId);
-                if (product != null)
-                {
-                    //product.Quantity -= cartProduct.ProductCount;
-                    //if (product.Quantity <= 0)
-                    //{
-                    //    _unitOfWork.ProductsRepo.Delete(product);
-                    //}
-                    //else
-                    //{
-                    //    _unitOfWork.ProductsRepo.Update(product);
-                    //}
-                    if (product != null)
-                    {
-                        _unitOfWork.ProductsRepo.Delete(product);
-                    }
-                }
-            }
-            Order newOrder = new Order
-            {
-                OrderData = DateTime.Now,
-                PaymentStatus = checkoutDto.PaymentStatus,
-                PaymentMethod = checkoutDto.PaymentMethod,
-                OrderStatus = OrderStatus.Pending,
-                Street = checkoutDto.Street,
-                City = checkoutDto.City,
-                Country = checkoutDto.Country,
-                CustomerId = checkoutDto.CustomerId.ToString(),
-                OrderProducts = cart.Products.Select(cp => new OrderProduct
-                {
-                    ProductId = cp.ProductId,
-                    ProductCount = cp.ProductCount
-                }).ToList()
-            };
-
-            cart.Products.Clear();
-
-            _unitOfWork.SaveChange();
-
-            return totalPrice;
+            return false;
         }
 
     }

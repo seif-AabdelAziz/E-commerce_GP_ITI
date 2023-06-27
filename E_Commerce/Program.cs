@@ -33,11 +33,14 @@ builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IWishListRepo, WishListRepo>();
 builder.Services.AddScoped<ICartProductRepo, CartsProductRepo>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 #endregion
 
 #region InjectionForMangers
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();
 builder.Services.AddScoped<IProductManager, ProductManager>();
+builder.Services.AddScoped<ICartManager, CartManager>();
+
 
 #endregion
 

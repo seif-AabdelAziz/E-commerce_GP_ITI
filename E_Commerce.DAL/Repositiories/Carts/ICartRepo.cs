@@ -1,8 +1,9 @@
-﻿namespace E_Commerce.DAL
+﻿
+namespace E_Commerce.DAL
 {
     public interface ICartRepo : IGenericRepo<Cart>
+
     {
-  
-        Cart? GetCartProductByCustomerId(string CustomerId);
+       Cart? GetCartProductByCustomerId(Guid CustomerId);
     }
 }
