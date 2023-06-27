@@ -1,5 +1,4 @@
-﻿using E_Commerce.DAL;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace E_Commerce.BL;
 
@@ -13,8 +12,6 @@ public class ProductAddDto
     public decimal Price { get; set; }
     [Range(0, 1)]
     public decimal Discount { get; set; } = 0;
-    [Range(0, 5)]
-    public decimal Rate { get; set; } = 0;
     public List<ProductImageDto> ProductImages { get; set; } = null!;
     public List<ProductInfoDto> ProductInfo { get; set; } = null!;
     public List<ProductAddCategoryDto> ProductCategories { get; set; } = null!;

@@ -1,5 +1,4 @@
 ﻿using E_Commerce.BL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -66,11 +65,57 @@ namespace E_Commerce.API.Controllers
         public ActionResult<List<ProductReviewsDto>> Reviews(Guid id)
         {
             List<ProductReviewsDto>? reviews = productManager.ProductReviews(id);
-            if (reviews.IsNullOrEmpty())
+
+            if (reviews is null)
+            {
+                return BadRequest();
+            }
+            else if (reviews.IsNullOrEmpty())
             {
                 return NoContent();
             }
-            return reviews;
+            return reviews!;
+        }
+
+        [HttpGet]
+        [Route("Categories/{id}")]
+        public ActionResult<List<ProductCategories>> Categories(Guid id)
+        {
+            List<ProductCategories>? categories = productManager.ProductCategories(id);
+            if (categories is null)
+            {
+                return BadRequest();
+            }
+            else if (categories.IsNullOrEmpty())
+            {
+                return NoContent();
+            }
+
+            return categories!;
+        }
+
+        [HttpGet]
+        [Route("Update/{id}")]
+        public ActionResult<ProductUpdateDto> ProductToUpdate(Guid id)
+        {
+            ProductUpdateDto? product = productManager.ProductToUpdate(id);
+            if (product is null)
+            {
+                return BadRequest();
+            }
+            return product;
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        public ActionResult Update(ProductUpdateDto productUpdate)
+        {
+            bool request = productManager.Update(productUpdate);
+            if (!request)
+            {
+                return BadRequest();
+            }
+            return Ok("Product Updated Successfully");
         }
     }
 }
