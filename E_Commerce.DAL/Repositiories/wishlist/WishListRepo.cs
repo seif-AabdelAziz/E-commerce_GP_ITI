@@ -11,11 +11,27 @@ public class WishListRepo : GenericRepo<WishList>, IWishListRepo
         this.context = context;
     }
 
-    public WishList? GetWishListProducts(Guid customerId)
+
+    public WishList GetWishListProducts(Guid customerId)
     {
-        return context.Set<WishList>()
+        var wishlist = context.Set<WishList>()
                         .Include(wl => wl.Products)
+                            .ThenInclude(p => p.ProductImages)
                         .Include(wl=>wl.Customer)    
-                        .FirstOrDefault(wl => new Guid(wl.Customer.Id) == customerId);
+                        .FirstOrDefault(wl => wl.Customer.Id == customerId.ToString());
+
+        if(wishlist is null)
+        {
+            wishlist = new WishList
+            {
+                Id = Guid.NewGuid(),
+                Customer = context.Set<Customer>().FirstOrDefault(c => c.Id == customerId.ToString())!,
+                Products = new List<Product>()
+            };
+            context.Set<WishList>().Add(wishlist);
+        }
+        return wishlist;
     }
+
+    
 }

@@ -2,5 +2,5 @@
 
 public interface IWishListRepo:IGenericRepo<WishList>
 {
-    WishList? GetWishListProducts(Guid customerId);
+    WishList GetWishListProducts(Guid customerId);
 }

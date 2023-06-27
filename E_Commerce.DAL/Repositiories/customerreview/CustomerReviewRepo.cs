@@ -14,16 +14,31 @@ public class CustomerReviewRepo : GenericRepo<CustomerReview>, ICustomerReviewRe
     public List<CustomerReview> GetAllReviewsCustomersProducts()
     {
         return context.Set<CustomerReview>()
-                        .Include(cr=>cr.Product)
-                        .Include(cr=>cr.Customer)
+                        .Include(cr => cr.Product)
+                        .Include(cr => cr.Customer)
                         .ToList();
+    }
+
+    public CustomerReview? GetByIds(Guid customerId, Guid productId)
+    {
+        return context.Set<CustomerReview>()
+                        .FirstOrDefault(cr => cr.CustomerId == customerId.ToString() && cr.ProductId == productId);
+    }
+
+
+    public CustomerReview? GetByIdsWithCustomerProduct(Guid customerId, Guid productId)
+    {
+        return context.Set<CustomerReview>()
+                        .Include(cr=>cr.Customer)
+                        .Include(cr=>cr.Product)
+                        .FirstOrDefault(cr => cr.CustomerId == customerId.ToString() && cr.ProductId == productId);
     }
 
     public List<CustomerReview> GetCustomerProductsReviews(Guid customerId)
     {
         return context.Set<CustomerReview>()
                         .Include(cr => cr.Product)
-                        .Where(cr => new Guid(cr.CustomerId) == customerId)
+                        .Where(cr => cr.CustomerId == customerId.ToString())
                         .ToList();
     }
 
