@@ -3,6 +3,7 @@
 public class CategoryDeleteDto
 {
 
+    public Guid CategoryId { get; set; }
 
 
 }

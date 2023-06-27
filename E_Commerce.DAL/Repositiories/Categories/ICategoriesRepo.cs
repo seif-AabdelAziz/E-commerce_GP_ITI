@@ -11,7 +11,7 @@ public interface ICategoriesRepo:IGenericRepo<Category>
 
     Category? GetParentCategory(Guid subCategoryId);
     List<Category>? GetSubCategories (Guid parentCategoryId);
-    Category? GetProductsForCategory (Guid productId);
+    Category? GetProductsForCategory (Guid categorytId);
 
 
 }
