@@ -17,11 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\CustomerReview\" />
     <Folder Include="Dto\Order\" />
-    <Folder Include="Dto\WishList\" />
-    <Folder Include="Managers\CustomerReview\" />
-    <Folder Include="Managers\WishList\" />
     <Folder Include="Managers\Product\" />
     <Folder Include="Managers\Order\" />
   </ItemGroup>

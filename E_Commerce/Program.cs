@@ -41,6 +41,8 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();
 builder.Services.AddScoped<ICategoriesManager, CategoriesManager>();
 
+builder.Services.AddScoped<ICustomerReviewManager, CustomerReviewManager>();
+builder.Services.AddScoped<IWishListManager, WishListManager>();
 #endregion
 
 
