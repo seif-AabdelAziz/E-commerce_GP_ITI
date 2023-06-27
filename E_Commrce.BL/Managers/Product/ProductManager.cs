@@ -1,5 +1,4 @@
 ﻿using E_Commerce.DAL;
-using System.Linq;
 
 namespace E_Commerce.BL;
 
@@ -42,9 +41,6 @@ public class ProductManager : IProductManager
             Description = productAdd.Description,
             Price = productAdd.Price,
             Discount = productAdd.Discount,
-            Rate = productAdd.Rate,
-
-
         };
 
         //Add Images
@@ -91,7 +87,7 @@ public class ProductManager : IProductManager
         for (int i = 0; i < productAdd.ProductCategories.Count; i++)
         {
             var cat = unitOfWork.CategoriesRepo.GetById(productAdd.ProductCategories[i].Id);
-            if(cat == null)
+            if (cat == null)
             {
                 return false;
             }
@@ -161,4 +157,125 @@ public class ProductManager : IProductManager
             CreatedTime = r.CreatedTime,
         }).ToList();
     }
+
+    public List<ProductCategories>? ProductCategories(Guid productId)
+    {
+        Product? productFromDB = unitOfWork.ProductsRepo.GetProductCategories(productId);
+        if (productFromDB == null)
+        {
+            return null;
+        }
+
+        return productFromDB.Categories.Select(c => new ProductCategories
+        {
+            Id = c.Id,
+            Name = c.Name,
+        }).ToList();
+    }
+
+    public ProductUpdateDto? ProductToUpdate(Guid productId)
+    {
+        Product? productFromDB = unitOfWork.ProductsRepo.GetProductToUpdate(productId);
+        if (productFromDB == null)
+        {
+            return null;
+        }
+
+        return new ProductUpdateDto
+        {
+            Id = productFromDB.Id,
+            Name = productFromDB.Name,
+            Description = productFromDB.Description,
+            Rate = productFromDB.Rate,
+            Price = productFromDB.Price,
+            Discount = productFromDB.Discount,
+            ProductCategories = productFromDB.Categories.Select(c => new ProductAddCategoryDto
+            {
+                Id = c.Id,
+            }).ToList(),
+            ProductImages = productFromDB.ProductImages.Select(c => new ProductImageDto
+            {
+                ImageURL = c.ImageURL,
+            }).ToList(),
+            ProductInfo = productFromDB.Product_Color_Size_Quantity.Select(pi => new ProductInfoDto
+            {
+                Size = pi.Size,
+                Color = pi.Color,
+                Quantity = pi.Quantity,
+            }).ToList()
+        };
+    }
+
+    public bool Update(ProductUpdateDto productUpdate)
+    {
+        Product? productFromDB = unitOfWork.ProductsRepo.GetProductToUpdate(productUpdate.Id);
+        if (productFromDB == null)
+        {
+            return false;
+        }
+        productFromDB.Name = productUpdate.Name;
+        productFromDB.Description = productUpdate.Description;
+        productFromDB.Rate = productUpdate.Rate;
+        productFromDB.Price = productUpdate.Price;
+        productFromDB.Discount = productUpdate.Discount;
+
+        //Update Images
+
+        for (int i = 0; i < productUpdate.ProductImages.Count; i++)
+        {
+            for (int j = 1; j < productUpdate.ProductImages.Count; j++)
+            {
+                if (productUpdate.ProductImages[i].ImageURL == productUpdate.ProductImages[j].ImageURL
+                    && i != j)
+                {
+                    return false;
+                }
+            }
+        }
+
+        productFromDB.ProductImages = productUpdate.ProductImages.Select(i => new Product_IMG
+        {
+            ProductID = productFromDB.Id,
+            ImageURL = i.ImageURL,
+        }).ToList();
+
+        //Update Info
+
+        for (int i = 0; i < productUpdate.ProductInfo.Count; i++)
+        {
+            for (int y = 1; y < productUpdate.ProductInfo.Count; y++)
+            {
+                if (productUpdate.ProductInfo[i].Color == productUpdate.ProductInfo[y].Color
+                    && productUpdate.ProductInfo[i].Size == productUpdate.ProductInfo[y].Size
+                    && i != y)
+                {
+                    return false;
+                }
+            }
+        }
+
+        productFromDB.Product_Color_Size_Quantity = productUpdate.ProductInfo.Select(pi => new ProductColorSizeQuantity
+        {
+            Quantity = pi.Quantity,
+            Size = pi.Size,
+            Color = pi.Color,
+        }).ToList();
+
+        //Update Info
+        productFromDB.Categories.Clear();
+
+        for (int i = 0; i < productUpdate.ProductCategories.Count; i++)
+        {
+            var cat = unitOfWork.CategoriesRepo.GetById(productUpdate.ProductCategories[i].Id);
+            if (cat == null)
+            {
+                return false;
+            }
+            productFromDB.Categories.Add(cat);
+        }
+
+        return unitOfWork.SaveChange() > 0;
+    }
+
+
 }

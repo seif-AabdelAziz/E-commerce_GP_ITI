@@ -6,7 +6,6 @@ public class ProductReviewsDto
 {
     public string CustomerName { get; set; } = null!;
     public string Description { get; set; } = null!;
-    [Range(0, 5)]
     public int Rate { get; set; }
     public DateTime CreatedTime { get; set; }
 }

@@ -8,7 +8,6 @@ namespace E_Commerce.DAL;
 public class Cart
 {
     public Guid CartId { get; set; }
-
     public Guid CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
 
