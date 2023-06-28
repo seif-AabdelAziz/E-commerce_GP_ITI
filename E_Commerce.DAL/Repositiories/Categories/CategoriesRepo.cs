@@ -35,9 +35,31 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
          .FirstOrDefault(i => i.Id == categorytId);
     }
 
+    public List<Category>? GetAllCategoriesWithAllPrdoucts()
+    {
+        return _context.Set<Category>()
+            .Include(i => i.Products).ToList();
+
+    }
+
+    public Category? GetCategoryById(string  categorytId)
+    {
+        return _context.Set<Category>().FirstOrDefault(i => i.Id ==Guid.Parse( categorytId));
+    }
 
 
+    public List<Product> GetProductsByCategoryId(Guid categoryId)
+    {
+        Category? category = _context.Set<Category>()
+            .Include(c => c.Products)
+            .FirstOrDefault(c => c.Id == categoryId);
 
+        if (category != null)
+        {
+            return category.Products.ToList();
+        }
 
+        return new List<Product>(); 
+    }
 
 }

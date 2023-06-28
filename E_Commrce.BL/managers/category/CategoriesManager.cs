@@ -1,10 +1,4 @@
-﻿using E_Commerce.BL.Dto.Category;
-using E_Commerce.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using E_Commerce.DAL;
 
 namespace E_Commerce.BL;
 
@@ -18,9 +12,56 @@ public class CategoriesManager : ICategoriesManager
     }
 
 
-    #region Add Category
 
-    public void AddCategory(CategoryAddDto addCategoryDto)
+    #region Get All Categories
+    public List<CategoryReadDto> GetAllCategories()
+    {
+        List<Category>? categoriesFromDb = _unitOfWork.CategoriesRepo.GetAllCategoriesWithAllPrdoucts();
+        if (categoriesFromDb == null)
+        {
+            return null!;
+        }
+
+        List<CategoryReadDto> categoriesDto = categoriesFromDb.Select(c => new CategoryReadDto
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Description = c.Description,
+            ParentCategoryId = c.ParentCategoryId,
+            ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
+            products = GetProductsByCategoryId(c.Id) ?? null!
+        }).ToList();
+
+        return categoriesDto;
+    }
+    #endregion
+
+    #region Get Products For One selected Category
+    private List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
+    {
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+        }).ToList();
+
+        return productsDto;
+    }
+    #endregion
+
+    #region Add Category
+    public bool AddCategory(CategoryAddDto addCategoryDto)
     {
 
         Category? newCategory = new Category
@@ -28,22 +69,22 @@ public class CategoriesManager : ICategoriesManager
             Id = Guid.NewGuid(),
             Name = addCategoryDto.Name,
             Description = addCategoryDto.Description,
-            ParentCategoryId = addCategoryDto.ParentCategoryId,
+            ParentCategoryId = addCategoryDto.ParentCategoryId ?? null,
 
         };
 
         _unitOfWork.CategoriesRepo.Add(newCategory);
-        _unitOfWork.SaveChange();
 
+        return _unitOfWork.SaveChange() > 0;
     }
 
     #endregion
 
     #region Delete Category
 
-    public bool DeleteCategory(CategoryDeleteDto deleteCategoryDto)
+    public bool DeleteCategory(Guid CategoryId)
     {
-        Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetById(deleteCategoryDto.CategoryId);
+        Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetById(CategoryId);
 
         if (categoryFromDb != null)
         {
@@ -55,22 +96,46 @@ public class CategoriesManager : ICategoriesManager
     }
     #endregion
 
-    #region Edit Category
+    #region Get Category To Update
 
-
-    public void EditCategory(CategoryEditDto updateCategoryDto)
+    public CategoryUpdateDto? CategoryToUpdate(Guid CategoryId)
     {
-        Category? category = _unitOfWork.CategoriesRepo.GetById(updateCategoryDto.CategoryId);
-        if (category != null)
+
+        Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetById(CategoryId);
+        if (categoryFromDb != null)
         {
 
-            category.Name = updateCategoryDto.Name;
-            category.Description = updateCategoryDto.Description;
-            category.ParentCategoryId = updateCategoryDto.ParentCategoryId;
+            return null;
+        }
+
+        return new CategoryUpdateDto
+        {
+            CategoryId = categoryFromDb.Id,
+            Name = categoryFromDb.Name,
+            Description = categoryFromDb.Description,
+            ParentCategoryId = categoryFromDb.ParentCategoryId,
+        };
+    }
+
+    #endregion
+
+    #region Update Category
+
+
+    public bool UpdateCategory(CategoryUpdateDto updateCategoryDto)
+    {
+        Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetById(updateCategoryDto.CategoryId);
+        if (categoryFromDb != null)
+        {
+
+            categoryFromDb.Name = updateCategoryDto.Name;
+            categoryFromDb.Description = updateCategoryDto.Description;
+            categoryFromDb.ParentCategoryId = updateCategoryDto.ParentCategoryId;
 
         }
-        _unitOfWork.CategoriesRepo.Update(category);
-        _unitOfWork.SaveChange();
+        _unitOfWork.CategoriesRepo.Update(categoryFromDb);
+
+        return _unitOfWork.SaveChange() > 0;
 
     }
     #endregion
@@ -82,6 +147,8 @@ public class CategoriesManager : ICategoriesManager
 
         Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetById(CategoryId);
 
+        List<ProductReadDto> products = GetProductsByCategoryId(CategoryId);
+
         if (categoryFromDb is null)
         {
             return null;
@@ -92,38 +159,33 @@ public class CategoriesManager : ICategoriesManager
             Name = categoryFromDb.Name,
             Description = categoryFromDb.Description,
             ParentCategoryId = categoryFromDb.ParentCategoryId,
+            ParentCategoryName = categoryFromDb.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(categoryFromDb.ParentCategoryId.ToString())).Name : null,
+            products = products ?? null!
 
         };
-
     }
+
 
 
     #endregion
 
-    #region Get Products for one Category
+    #region Get SubCategories For Parent Category
 
-    public CategoryReadDto? GetProductsForCategory(Guid categorytId)
+    public List<SubCategoryReadDto> GetSubCategories(Guid parentCategoryId)
     {
 
-        Category? categoryFromDb = _unitOfWork.CategoriesRepo.GetProductsForCategory(categorytId);
+        var subCategoreis = _unitOfWork.CategoriesRepo.GetSubCategories(parentCategoryId)
+            .Select(c => new SubCategoryReadDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
 
 
-        if (categoryFromDb is null)
-        {
-            return null;
-        }
-        return new CategoryReadDto
-        {
+            }).ToList();
 
-            products =categoryFromDb.Products.ToList(),
-
-        };
+        return subCategoreis;
     }
-
     #endregion
-
-
-
-
 
 }

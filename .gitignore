@@ -405,3 +405,4 @@ E_Commerce.DAL/Repositiories/Carts/ICartRepo.cs
 E_Commerce.DAL/Repositiories/orders/OrderRepo.cs
 *.cs
 /E_Commrce.BL/dto/user/UserDeleteDto.cs
+E_Commerce/Program.cs

@@ -2,15 +2,20 @@
 
 namespace E_Commerce.BL;
 
-public class CategoryAddDto
+public class CategoryReadDto
 {
+
+    public Guid Id { get; set; }
     [Required(ErrorMessage = "Name is required")]
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Description is required")]
     public string Description { get; set; } = string.Empty;
 
-    [Required(AllowEmptyStrings = true)]
-    public Guid? ParentCategoryId { get; set; } = Guid.Empty;
+    [Required(ErrorMessage = "Parent Category is required")]
+    public Guid? ParentCategoryId { get; set; }
 
+    public string? ParentCategoryName { get; set; }
+
+    public List<ProductReadDto> products { get; set; } = null!;
 }
