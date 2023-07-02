@@ -19,7 +19,5 @@ public class Category
     public List<Product> Products { get; set; } = new List<Product>();
 
 
-
-
 }
 

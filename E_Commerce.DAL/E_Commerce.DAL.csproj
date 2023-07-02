@@ -30,7 +30,6 @@
     <Folder Include="Repositiories\Customers\" />
     <Folder Include="Repositiories\CustomerReview\" />
     <Folder Include="Repositiories\WishList\" />
-    <Folder Include="Repositiories\Users\" />
     <Folder Include="Repositiories\Products\" />
   </ItemGroup>
 

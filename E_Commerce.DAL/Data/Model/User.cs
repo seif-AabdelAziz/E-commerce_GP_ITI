@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace E_Commerce.DAL;
 public class User : IdentityUser
 {
+
+    public string Id { get; set; }
     [MinLength(3)]
     [MaxLength(30)]
     public string FirstName { get; set; } = string.Empty;

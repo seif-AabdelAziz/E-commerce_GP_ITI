@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using E_Commerce.DAL;
 
 namespace E_Commerce.BL;
 
 public interface IUsersManager
 {
 
-    void RegisterUser(UserRegisterDto registerUserDto);
-    void DeleteUser(UserDeleteDto deleteUserDto);
-
-    void EditUser(UserEditDto editUserDto);
-
+    bool DeleteUser(Guid UserId);
+    void UpdateUser(UserUpdateDto editUserDto);
+    List<User> GetAllUsersByRole(UserRole role);
+    List<User> GetAllUsersByCity(string city, UserRole role);
+    User? GetUserByEmail(string email);
+    User? GetUserByPhonNumber(string phonenumber);
 
 
 }

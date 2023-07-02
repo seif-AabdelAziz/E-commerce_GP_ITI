@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E_Commerce.DAL;
 
-public class Customer : User
+public class Customer : User                                                                          
 {
    
     public string Street { get; set; } = string.Empty;

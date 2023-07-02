@@ -16,6 +16,9 @@ public class CategoryUpdateDto
 
     [Required(ErrorMessage = "Parent Category is required")]
     public Guid? ParentCategoryId { get; set; }
+    public string Image { get; set; } = string.Empty;
+
+
 
 
 

@@ -46,5 +46,8 @@ public class UserProfileInfoDto
     [Required(ErrorMessage = "City is required")]
     public DateTime? ExpireDate { get; set; }
 
+    public UserRole Role { get; set; }
+
+
 
 }

@@ -28,8 +28,9 @@ public class CategoriesManager : ICategoriesManager
             Name = c.Name,
             Description = c.Description,
             ParentCategoryId = c.ParentCategoryId,
+            Image= c.Image,
             ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
-            products = GetProductsByCategoryId(c.Id) ?? null!
+            products = GetProductsByCategoryId(c.Id) ?? null!,
         }).ToList();
 
         return categoriesDto;
@@ -70,6 +71,7 @@ public class CategoriesManager : ICategoriesManager
             Name = addCategoryDto.Name,
             Description = addCategoryDto.Description,
             ParentCategoryId = addCategoryDto.ParentCategoryId ?? null,
+            Image = addCategoryDto.Image,
 
         };
 
@@ -114,6 +116,7 @@ public class CategoriesManager : ICategoriesManager
             Name = categoryFromDb.Name,
             Description = categoryFromDb.Description,
             ParentCategoryId = categoryFromDb.ParentCategoryId,
+            Image = categoryFromDb.Image,
         };
     }
 
@@ -131,6 +134,7 @@ public class CategoriesManager : ICategoriesManager
             categoryFromDb.Name = updateCategoryDto.Name;
             categoryFromDb.Description = updateCategoryDto.Description;
             categoryFromDb.ParentCategoryId = updateCategoryDto.ParentCategoryId;
+            categoryFromDb.Image = updateCategoryDto.Image;
 
         }
         _unitOfWork.CategoriesRepo.Update(categoryFromDb);
@@ -160,8 +164,9 @@ public class CategoriesManager : ICategoriesManager
             Description = categoryFromDb.Description,
             ParentCategoryId = categoryFromDb.ParentCategoryId,
             ParentCategoryName = categoryFromDb.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(categoryFromDb.ParentCategoryId.ToString())).Name : null,
-            products = products ?? null!
-
+            products = products ?? null!,
+            Image = categoryFromDb.Image
+            
         };
     }
 
@@ -180,7 +185,7 @@ public class CategoriesManager : ICategoriesManager
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-
+                Image = c.Image,
 
             }).ToList();
 

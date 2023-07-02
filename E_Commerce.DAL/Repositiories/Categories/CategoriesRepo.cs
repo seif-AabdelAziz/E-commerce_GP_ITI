@@ -18,13 +18,17 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     {
         var subCategory = _context.Set<Category>().FirstOrDefault(i => i.Id == subCategoryId);
 
-        return _context.Set<Category>().FirstOrDefault(i => i.Id == subCategory.ParentCategoryId);
+        if (subCategory == null) { return null; }
+        return _context.Set<Category>()
+            .FirstOrDefault(i => i.Id == subCategory.ParentCategoryId);
     }
 
 
     public List<Category>? GetSubCategories(Guid parentCategoryId)
     {
-        return _context.Set<Category>().Where(i => i.ParentCategoryId == parentCategoryId).ToList();
+        return _context.Set<Category>()
+            .Where(i => i.ParentCategoryId == parentCategoryId)
+            .ToList();
 
     }
 
@@ -38,13 +42,14 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     public List<Category>? GetAllCategoriesWithAllPrdoucts()
     {
         return _context.Set<Category>()
-            .Include(i => i.Products).ToList();
-
+            .Include(i => i.Products)
+            .ToList();
     }
 
     public Category? GetCategoryById(string  categorytId)
     {
-        return _context.Set<Category>().FirstOrDefault(i => i.Id ==Guid.Parse( categorytId));
+        return _context.Set<Category>()
+            .FirstOrDefault(i => i.Id ==Guid.Parse( categorytId));
     }
 
 
