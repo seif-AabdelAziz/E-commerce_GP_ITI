@@ -76,7 +76,7 @@ builder.Services.AddIdentity<Customer, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 3;
-    options.User.RequireUniqueEmail = false;
+    options.User.RequireUniqueEmail = true;
 
 }).AddEntityFrameworkStores<E_CommerceContext>();
 
