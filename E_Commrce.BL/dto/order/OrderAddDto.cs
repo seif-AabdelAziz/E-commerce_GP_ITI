@@ -22,5 +22,7 @@ public class OrderAddDto
     public string? City { get; set; }
     public Countries Country { get; set; }
 
-    //public OrderProductsAddDto? OrderProducts { get; set; }
+    public Guid CustomerId { get; set; }
+
+    public List<OrderProducts>? OrderProducts { get; set; }
 }

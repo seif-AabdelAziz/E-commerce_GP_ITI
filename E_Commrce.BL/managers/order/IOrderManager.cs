@@ -8,13 +8,16 @@ namespace E_Commerce.BL;
 
 public interface IOrderManager
 {
-    OrderWithProductsReadDto? OrderWithProductsReadDto(Guid id);
-    OrderWithProductsAndCustomerReadDto? OrderWithProductsAndCustomerReadDto(Guid id);
-    List<OrderReadDto> GetAllOrdersDto();
-    OrderReadDto GetOrderByIdDto(Guid id);
-    void AddOrderDto(OrderAddDto orderAddDto);  //[1]
-    void UpdateOrderDto(OrderUpdateDto orderUpdateDto);  //[2]
-    void DeleteOrderDto(Guid id);
+    OrderWithProductsReadDto? OrderWithProductsRead(Guid id);
+    OrderWithProductsAndCustomerReadDto? OrderWithProductsAndCustomerRead(Guid id);
+    List<OrderReadDto> GetAllOrders();
+    OrderReadDto GetOrderById(Guid id);
+    bool AddOrder(OrderAddDto orderAddDto);  //[1]
+    bool UpdateOrder(OrderUpdateDto orderUpdateDto);  //[2]
+    bool DeleteOrder(Guid id);
+
+    //new
+    bool DeleteProductFromOrder(Guid orderId, Guid productId);
 
     //[1] +add (products)
     //[2] +update count of prouducts in(orderProduct table)
