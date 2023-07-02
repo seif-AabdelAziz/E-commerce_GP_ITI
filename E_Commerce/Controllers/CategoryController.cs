@@ -131,5 +131,18 @@ public class CategoryController : ControllerBase
     }
     #endregion
 
+    #region get Parent Categories
+
+    [HttpGet("ParentCategories")]
+    public ActionResult<List<CategoryReadDto>> AllParentCategories()
+    {
+        List<CategoryReadDto> categories = _categoryManager.GetParentCategory();
+        return categories;
+    }
+
+
+    #endregion
+
+
 
 }

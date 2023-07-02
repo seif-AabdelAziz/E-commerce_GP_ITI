@@ -12,6 +12,7 @@ public interface ICategoriesManager
     CategoryReadDto? GetCategoryById(Guid CategoryId);
 
     List<SubCategoryReadDto>? GetSubCategories(Guid parentCategoryId);
+    List<CategoryReadDto> GetParentCategory ();
 
 
 

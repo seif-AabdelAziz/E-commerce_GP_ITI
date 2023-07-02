@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 namespace E_Commerce.DAL;
 
 public class UsersRepo : GenericRepo<User>, IUsersRepo
@@ -18,9 +19,9 @@ public class UsersRepo : GenericRepo<User>, IUsersRepo
         return _context.Set<User>().Where(c => c.Role == role).ToList();
     }
 
-    public User? GetUserByEmail(string email)
+    public Customer? GetUserByEmail(string email)
     {
-        return _context.Set<User>()
+        return _context.Set<Customer>()
             .FirstOrDefault(user => user.Email == email);
     }
 

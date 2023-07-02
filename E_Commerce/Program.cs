@@ -43,6 +43,7 @@ builder.Services.AddScoped<ICategoriesManager, CategoriesManager>();
 
 builder.Services.AddScoped<ICustomerReviewManager, CustomerReviewManager>();
 builder.Services.AddScoped<IWishListManager, WishListManager>();
+builder.Services.AddScoped<IUsersManagers, UsersManager>();
 #endregion
 
 

@@ -58,7 +58,7 @@ public class UsersManager : IUsersManagers
         {
             return null;
         }
-        List<UserProfileInfoDto> usertsDto = userFromDb.Select(x => new UserProfileInfoDto
+        List<UserProfileInfoDto> usersDto = userFromDb.Select(x => new UserProfileInfoDto
         {
             FirstName = x.FirstName,
             LastName = x.LastName,
@@ -69,30 +69,31 @@ public class UsersManager : IUsersManagers
         }).ToList();
 
 
-        return usertsDto;
+        return usersDto;
     }
 
     #endregion
 
-
     #region Get By Email
 
-    public UserProfileInfoDto? GetUserByEmail(string email)
+    public CustomerListDataDto? GetUserByEmail(string email)
     {
 
         User? userFromDb = _unitOfWork.UsersRepo.GetUserByEmail(email);
 
-        return new UserProfileInfoDto
+        return new CustomerListDataDto
         {
             FirstName = userFromDb.FirstName,
             LastName = userFromDb.LastName,
             MidName = userFromDb.MidName,
-            Role = userFromDb.Role,
             PhoneNumber = userFromDb.PhoneNumber,
 
         };
 
     }
+    #endregion
+
+    #region Get By PhoneNumber
 
     public UserProfileInfoDto GetUserByPhonNumber(string phonenumber)
     {
@@ -108,34 +109,36 @@ public class UsersManager : IUsersManagers
             Email = userFromDb.Email
         };
     }
-
-    public List<User> GetAllUsersByRole(UserRole role)
-    {
-        throw new NotImplementedException();
-    }
-
-    List<User> IUsersManagers.GetAllUsersByCity(string city, UserRole role)
-    {
-        throw new NotImplementedException();
-    }
-
-    User? IUsersManagers.GetUserByEmail(string email)
-    {
-        throw new NotImplementedException();
-    }
-
-    User? IUsersManagers.GetUserByPhonNumber(string phonenumber)
-    {
-        throw new NotImplementedException();
-    }
-
-
-
-
-
-
-
     #endregion
+
+    #region Get Users by Role
+
+    public List<UserProfileInfoDto> GetAllUsersByRole(UserRole role)
+    {
+        List<User>? userFromDb = _unitOfWork.UsersRepo.GetAllUsersByRole(role).ToList();
+
+
+        List<UserProfileInfoDto> usersDto = userFromDb.Select(c => new UserProfileInfoDto
+        {
+            FirstName = c.FirstName,
+            LastName = c.LastName,
+            MidName = c.MidName,
+            Role = c.Role,
+            PhoneNumber = c.PhoneNumber
+
+        }).ToList();
+
+        return usersDto;
+
+    }
+    #endregion
+
+
+
+
+
+
+
 
 
 

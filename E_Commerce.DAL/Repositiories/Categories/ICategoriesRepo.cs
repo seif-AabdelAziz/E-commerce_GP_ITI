@@ -3,7 +3,7 @@
 public interface ICategoriesRepo : IGenericRepo<Category>
 {
 
-    Category? GetParentCategory(Guid subCategoryId);
+    List<Category>? GetParentCategory();
     List<Category>? GetSubCategories(Guid parentCategoryId);
     Category? GetProductsForCategory(Guid categorytId);
     List<Category>? GetAllCategoriesWithAllPrdoucts();

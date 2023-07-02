@@ -3,7 +3,7 @@ public interface IUsersRepo : IGenericRepo<User>
 {
     public List<User>? GetAllUsersByRole(UserRole role);
     public List<User>? GetAllUsersByCity(string city, UserRole role);
-    public User? GetUserByEmail(string email);
+    public Customer? GetUserByEmail(string email);
     public User? GetUserByPhonNumber(string phonenumber);
 
 }

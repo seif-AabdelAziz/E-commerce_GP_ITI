@@ -28,7 +28,7 @@ public class CategoriesManager : ICategoriesManager
             Name = c.Name,
             Description = c.Description,
             ParentCategoryId = c.ParentCategoryId,
-            Image= c.Image,
+            Image = c.Image,
             ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
             products = GetProductsByCategoryId(c.Id) ?? null!,
         }).ToList();
@@ -166,7 +166,7 @@ public class CategoriesManager : ICategoriesManager
             ParentCategoryName = categoryFromDb.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(categoryFromDb.ParentCategoryId.ToString())).Name : null,
             products = products ?? null!,
             Image = categoryFromDb.Image
-            
+
         };
     }
 
@@ -187,10 +187,42 @@ public class CategoriesManager : ICategoriesManager
                 Description = c.Description,
                 Image = c.Image,
 
+
             }).ToList();
 
         return subCategoreis;
     }
     #endregion
+
+    #region get Parent Categories
+
+
+    public List<CategoryReadDto> GetParentCategory()
+    {
+
+        var ParentCategoriesFromDB = _unitOfWork.CategoriesRepo.GetParentCategory();
+
+
+ 
+        var ParentCategoriesDto = ParentCategoriesFromDB.Select(c => new CategoryReadDto
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Description = c.Description,
+            Image = c.Image,
+            ParentCategoryId = c.ParentCategoryId,
+            ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
+            products = GetProductsByCategoryId(c.Id) ?? null!,
+        }).ToList();
+
+        return ParentCategoriesDto;
+
+
+    }
+
+
+
+    #endregion
+
 
 }

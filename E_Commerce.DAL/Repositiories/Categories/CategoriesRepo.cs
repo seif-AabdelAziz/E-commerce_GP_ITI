@@ -14,13 +14,21 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
 
     }
 
-    public Category? GetParentCategory(Guid subCategoryId)
+    public List<Category>? GetParentCategory()
     {
-        var subCategory = _context.Set<Category>().FirstOrDefault(i => i.Id == subCategoryId);
+        var category = _context.Set<Category>().ToList();
 
-        if (subCategory == null) { return null; }
-        return _context.Set<Category>()
-            .FirstOrDefault(i => i.Id == subCategory.ParentCategoryId);
+        List<Category> categories = new List<Category>();   
+        for (int i = 0; i < category.Count; i++)
+        {
+            if(category[i].ParentCategory == null)
+            {
+            categories.Add(category[i]);
+            }
+
+        }
+
+        return categories;
     }
 
 
