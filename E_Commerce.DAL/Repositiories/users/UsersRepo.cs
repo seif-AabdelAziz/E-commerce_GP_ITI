@@ -25,9 +25,9 @@ public class UsersRepo : GenericRepo<User>, IUsersRepo
             .FirstOrDefault(user => user.Email == email);
     }
 
-    public User? GetUserByPhonNumber(string phoneNumber)
+    public Customer? GetUserByPhonNumber(string phoneNumber)
     {
-        return _context.Set<User>()
+        return _context.Set<Customer>()
           .FirstOrDefault(user => user.PhoneNumber == phoneNumber);
     }
 

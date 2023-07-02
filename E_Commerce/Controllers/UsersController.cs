@@ -23,18 +23,18 @@ public class UsersController : ControllerBase
 
     #region Delete Users
 
-    [HttpDelete("Delete/{id}")]
-    public ActionResult DeleteUser(Guid id)
-    {
+    //[HttpDelete("Delete/{id}")]
+    //public ActionResult DeleteUser(Guid id)
+    //{
 
-        bool request = _usersManager.DeleteUser(id);
-        if (request == false)
-        {
-            return BadRequest();
-        }
-        return Ok("Category Deleted Successfully");
+    //    bool request = _usersManager.DeleteUser(id);
+    //    if (request == false)
+    //    {
+    //        return BadRequest();
+    //    }
+    //    return Ok("Category Deleted Successfully");
 
-    }
+    //}
 
 
     #endregion
@@ -42,21 +42,36 @@ public class UsersController : ControllerBase
 
     #region GetByEmail
 
-    //[HttpGet]
-    //[Route("Details/{email}")]
-    //public ActionResult<CustomerListDataDto> UserDetail(string email)
-    //{
+    [HttpGet("Details/email")]
+    public ActionResult<CustomerListDataDto> UserDetailbyEmail(string email)
+    {
 
-    //    CustomerListDataDto? userDetails = _usersManager.GetUserByEmail(email);
-    //    if (userDetails == null)
-    //    {
-    //        return BadRequest();
-    //    }
+        CustomerListDataDto? userDetails = _usersManager.GetUserByEmail(email);
+        if (userDetails == null)
+        {
+            return BadRequest();
+        }
 
-    //    return userDetails;
-    //}
+        return userDetails;
+    }
     #endregion
 
+
+    #region get By phoneNumber
+
+    [HttpGet("Details/phoneNumber")]
+    public ActionResult<CustomerListDataDto> UserDetailbyphoneNumberl(string email)
+    {
+
+        CustomerListDataDto? userDetails = _usersManager.GetUserByPhonNumber(email);
+        if (userDetails == null)
+        {
+            return BadRequest();
+        }
+
+        return userDetails;
+    }
+    #endregion
 
 
 

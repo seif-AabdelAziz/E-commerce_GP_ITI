@@ -10,7 +10,7 @@ public interface IUsersManagers
     public List<UserProfileInfoDto> GetAllUsersByRole(UserRole role);
     public  List<UserProfileInfoDto> GetAllUsersByCity(string city, UserRole role);
     public CustomerListDataDto? GetUserByEmail(string email);
-    public UserProfileInfoDto? GetUserByPhonNumber(string phonenumber);
+    public CustomerListDataDto? GetUserByPhonNumber(string phonenumber);
 
 
 }

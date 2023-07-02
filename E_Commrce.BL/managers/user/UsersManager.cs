@@ -79,7 +79,7 @@ public class UsersManager : IUsersManagers
     public CustomerListDataDto? GetUserByEmail(string email)
     {
 
-        User? userFromDb = _unitOfWork.UsersRepo.GetUserByEmail(email);
+        Customer? userFromDb = _unitOfWork.UsersRepo.GetUserByEmail(email);
 
         return new CustomerListDataDto
         {
@@ -87,6 +87,10 @@ public class UsersManager : IUsersManagers
             LastName = userFromDb.LastName,
             MidName = userFromDb.MidName,
             PhoneNumber = userFromDb.PhoneNumber,
+            Street=userFromDb.Street,
+            City=userFromDb.City,
+            Country=userFromDb.Country,
+            Email= userFromDb.Email
 
         };
 
@@ -95,17 +99,19 @@ public class UsersManager : IUsersManagers
 
     #region Get By PhoneNumber
 
-    public UserProfileInfoDto GetUserByPhonNumber(string phonenumber)
+    public CustomerListDataDto GetUserByPhonNumber(string phonenumber)
     {
-        User? userFromDb = _unitOfWork.UsersRepo.GetUserByPhonNumber(phonenumber);
+        Customer? userFromDb = _unitOfWork.UsersRepo.GetUserByPhonNumber(phonenumber);
 
-        return new UserProfileInfoDto
+        return new CustomerListDataDto
         {
             FirstName = userFromDb.FirstName,
             LastName = userFromDb.LastName,
             MidName = userFromDb.MidName,
-            Role = userFromDb.Role,
             PhoneNumber = userFromDb.PhoneNumber,
+            Street = userFromDb.Street,
+            City = userFromDb.City,
+            Country = userFromDb.Country,
             Email = userFromDb.Email
         };
     }
@@ -125,6 +131,7 @@ public class UsersManager : IUsersManagers
             MidName = c.MidName,
             Role = c.Role,
             PhoneNumber = c.PhoneNumber
+            
 
         }).ToList();
 
