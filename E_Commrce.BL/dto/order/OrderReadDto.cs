@@ -12,13 +12,13 @@ public class OrderReadDto
 {
     //public Guid Id { get; set; }
     public DateTime OrderData { get; set; }
-    public PaymentStatus PaymentStatus { get; set; }
-    public PaymentMethod PaymentMethod { get; set; }
-    public OrderStatus OrderStatus { get; set; }
+    public string? PaymentStatus { get; set; }
+    public string? PaymentMethod { get; set; }
+    public string? OrderStatus { get; set; }
     [Range(0, 1)]
     public double Discount { get; set; }
     public DateTime ArrivalDate { get; set; }
     public string? Street { get; set; } 
     public string? City { get; set; } 
-    public Countries Country { get; set; }
+    public string? Country { get; set; }
 }

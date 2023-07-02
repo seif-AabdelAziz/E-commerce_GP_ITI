@@ -15,6 +15,20 @@ builder.Services.AddSwaggerGen();
 
 #endregion
 
+#region CORS
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORSpolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
+#endregion
+
 #region DataBase
 
 builder.Services.AddDbContext<E_CommerceContext>(option =>
@@ -30,11 +44,11 @@ builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<IProductsRepo, ProductsRepo>();
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
-builder.Services.AddScoped<IWishListRepo,WishListRepo>();
+builder.Services.AddScoped<IWishListRepo, WishListRepo>();
 builder.Services.AddScoped<ICartProductRepo, CartsProductRepo>();
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<ICategoriesRepo, CategoriesRepo>();
-builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 #endregion
 
 #region InjectionForMangers
@@ -43,7 +57,8 @@ builder.Services.AddScoped<ICategoriesManager, CategoriesManager>();
 
 builder.Services.AddScoped<ICustomerReviewManager, CustomerReviewManager>();
 builder.Services.AddScoped<IWishListManager, WishListManager>();
-builder.Services.AddScoped<IUsersManagers, UsersManager>();
+
+builder.Services.AddScoped<IOrderManager, OrderManager>();
 #endregion
 
 
@@ -63,8 +78,8 @@ builder.Services.AddIdentity<Customer, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 3;
-    options.User.RequireUniqueEmail = false;
-    
+    options.User.RequireUniqueEmail = true;
+
 }).AddEntityFrameworkStores<E_CommerceContext>();
 
 
@@ -82,6 +97,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CORSpolicy");
 
 app.UseAuthorization();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 namespace E_Commerce.BL;
 
 //NotComplete
-public class OrderProductsAddDto
+public class OrderProducts
 {
-    public Guid Id { get; set; }
-    public List<Guid>? ProductsIds { get; set; }
+    public int ProductCount { get; set; }
+    public Guid ProductId { get; set; }
 }

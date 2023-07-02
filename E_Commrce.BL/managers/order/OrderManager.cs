@@ -1,4 +1,5 @@
 ﻿using E_Commerce.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.BL;
 
@@ -11,76 +12,87 @@ public class OrderManager : IOrderManager
         _unitOfWork = unitOfWork;
     }
 
-    public List<OrderReadDto> GetAllOrdersDto()
+    public List<OrderReadDto> GetAllOrders()
     {
         List<Order> orders = _unitOfWork.OrderRepo.GetAll();
         if (orders is null) { return null!; }
         return orders.Select(o => new OrderReadDto
         {
             OrderData = o.OrderData,
-            PaymentStatus = o.PaymentStatus,
-            PaymentMethod = o.PaymentMethod,
-            OrderStatus = o.OrderStatus,
+            PaymentStatus = o.PaymentStatus.ToString(),
+            PaymentMethod = o.PaymentMethod.ToString(),
+            OrderStatus = o.OrderStatus.ToString(),
             Discount = o.Discount,
             ArrivalDate = o.ArrivalDate,
             Street = o.Street,
             City = o.City,
-            Country = o.Country,
+            Country = o.Country.ToString(),
         }).ToList();
     }
 
-    public OrderReadDto GetOrderByIdDto(Guid id)
+    public OrderReadDto GetOrderById(Guid id)
     {
         Order? order = _unitOfWork.OrderRepo.GetById(id);
         if (order is null) { return null!; }
         return new OrderReadDto
         {
             OrderData = order.OrderData,
-            PaymentStatus = order.PaymentStatus,
-            PaymentMethod = order.PaymentMethod,
-            OrderStatus = order.OrderStatus,
+            PaymentStatus = order.PaymentStatus.ToString(),
+            PaymentMethod = order.PaymentMethod.ToString(),
+            OrderStatus = order.OrderStatus.ToString(),
             Discount = order.Discount,
             ArrivalDate = order.ArrivalDate,
             Street = order.Street,
             City = order.City,
-            Country = order.Country,
+            Country = order.Country.ToString(),
         };
     }
-    public void AddOrderDto(OrderAddDto orderAddDto)
+    public bool AddOrder(OrderAddDto orderAdd)
     {
-        _unitOfWork.OrderRepo.Add(new Order
+        Order order = new()
         {
             Id = Guid.NewGuid(),
-            OrderData = orderAddDto.OrderData,
-            PaymentStatus = orderAddDto.PaymentStatus,
-            PaymentMethod = orderAddDto.PaymentMethod,
-            OrderStatus = orderAddDto.OrderStatus,
-            Discount = orderAddDto.Discount,
-            ArrivalDate = orderAddDto.ArrivalDate,
-            Street = orderAddDto.Street!,
-            City = orderAddDto.City!,
-            Country = orderAddDto.Country,
-        });
-        _unitOfWork.SaveChange();
+            OrderData = orderAdd.OrderData,
+            PaymentStatus = orderAdd.PaymentStatus,
+            PaymentMethod = orderAdd.PaymentMethod,
+            OrderStatus = orderAdd.OrderStatus,
+            Discount = orderAdd.Discount,
+            ArrivalDate = orderAdd.ArrivalDate,
+            Street = orderAdd.Street!,
+            City = orderAdd.City!,
+            Country = orderAdd.Country,
+            CustomerId =orderAdd.CustomerId.ToString(),
+        };
+        order.OrderProducts = orderAdd.OrderProducts!.Select(op => new OrderProduct
+        {
+            OrderId = order.Id,
+            ProductId = op.ProductId,
+            ProductCount = op.ProductCount,
+
+        }).ToList();
+
+        _unitOfWork.OrderRepo.Add(order);
+        return _unitOfWork.SaveChange() > 0;
     }
-    public void UpdateOrderDto(OrderUpdateDto orderUpdateDto)
+    public bool UpdateOrder(OrderUpdateDto orderUpdate)
     {
-        Order? order = _unitOfWork.OrderRepo.GetById(orderUpdateDto.Id);
-        if (order is null) return;
+        Order? order = _unitOfWork.OrderRepo.GetById(orderUpdate.Id);
+        if (order is null) return false;
 
-        order.PaymentStatus = orderUpdateDto.PaymentStatus;
-        order.PaymentMethod = orderUpdateDto.PaymentMethod;
-        order.OrderStatus = orderUpdateDto.OrderStatus;
-        order.Discount = orderUpdateDto.Discount;
-        order.ArrivalDate = orderUpdateDto.ArrivalDate;
-        order.Street = orderUpdateDto.Street!;
-        order.City = orderUpdateDto.City!;
-        order.Country = orderUpdateDto.Country;
+        order.PaymentStatus = orderUpdate.PaymentStatus;
+        order.PaymentMethod = orderUpdate.PaymentMethod;
+        order.OrderStatus = orderUpdate.OrderStatus;
+        order.Discount = orderUpdate.Discount;
+        order.ArrivalDate = orderUpdate.ArrivalDate;
+        order.Street = orderUpdate.Street!;
+        order.City = orderUpdate.City!;
+        order.Country = orderUpdate.Country;
+        
 
-        _unitOfWork.OrderRepo.Update(order);
-        _unitOfWork.SaveChange();
+        _unitOfWork.OrderRepo.Update(order); //add
+        return _unitOfWork.SaveChange() > 0;
     }
-    public OrderWithProductsAndCustomerReadDto? OrderWithProductsAndCustomerReadDto(Guid id)
+    public OrderWithProductsAndCustomerReadDto? OrderWithProductsAndCustomerRead(Guid id)
     {
         Order? order = _unitOfWork.OrderRepo.GetOrderProductsAndCustomer(id);
         if (order is null) { return null; }
@@ -115,7 +127,7 @@ public class OrderManager : IOrderManager
         };
     }
 
-    public OrderWithProductsReadDto? OrderWithProductsReadDto(Guid id)
+    public OrderWithProductsReadDto? OrderWithProductsRead(Guid id)
     {
         Order? order = _unitOfWork.OrderRepo.GetOrderProducts(id);
         if (order is null) { return null; }
@@ -144,13 +156,33 @@ public class OrderManager : IOrderManager
         };
     }
 
-    public void DeleteOrderDto(Guid id)
+    public bool DeleteOrder(Guid id)
     {
         Order? order = _unitOfWork.OrderRepo.GetById(id);
         if (order != null)
         {
             _unitOfWork.OrderRepo.Delete(order);
-            _unitOfWork.SaveChange();
+            return _unitOfWork.SaveChange() > 0;
         }
+        return false;
+    }
+
+    public bool DeleteProductFromOrder(Guid orderId, Guid productId)
+    {
+        Order? order = _unitOfWork.OrderRepo.GetById(orderId);
+        if (order == null)
+        {
+            return false;
+        }
+        OrderProduct? orderProduct = order.OrderProducts.FirstOrDefault(op => op.ProductId == productId);
+
+        if (orderProduct == null)
+        {
+            return false;
+        }
+        _unitOfWork.OrderRepo.DeleteFromOrderProductsByProductId(orderProduct.OrderId);
+        //order.OrderProducts.Remove(orderProduct);
+
+        return _unitOfWork.SaveChange() > 0; 
     }
 }
