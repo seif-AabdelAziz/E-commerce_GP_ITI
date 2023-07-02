@@ -61,6 +61,8 @@ builder.Services.AddScoped<IWishListManager, WishListManager>();
 builder.Services.AddScoped<IOrderManager, OrderManager>();
 
 builder.Services.AddScoped<IUsersManagers, UsersManager>();
+builder.Services.AddScoped<ICartManager, CartManager>();
+
 #endregion
 
 
