@@ -2,7 +2,7 @@
 
 namespace E_Commerce.BL;
 
-public class UsersManager : IUsersManager
+public class UsersManager : IUsersManagers
 {
 
     private readonly IUnitOfWork _unitOfWork;
@@ -108,6 +108,33 @@ public class UsersManager : IUsersManager
             Email = userFromDb.Email
         };
     }
+
+    public List<User> GetAllUsersByRole(UserRole role)
+    {
+        throw new NotImplementedException();
+    }
+
+    List<User> IUsersManagers.GetAllUsersByCity(string city, UserRole role)
+    {
+        throw new NotImplementedException();
+    }
+
+    User? IUsersManagers.GetUserByEmail(string email)
+    {
+        throw new NotImplementedException();
+    }
+
+    User? IUsersManagers.GetUserByPhonNumber(string phonenumber)
+    {
+        throw new NotImplementedException();
+    }
+
+
+
+
+
+
+
     #endregion
 
 
