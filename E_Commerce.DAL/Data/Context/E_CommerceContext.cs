@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Diagnostics.Metrics;
-using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -1370,7 +1365,7 @@ public class E_CommerceContext : IdentityDbContext
 
         modelBuilder.Entity<Category>().HasData(
 
-    //Paren Categories
+       //Paren Categories
 
        new Category
        {
@@ -1397,7 +1392,7 @@ public class E_CommerceContext : IdentityDbContext
            ParentCategoryId = null
        },
 
-    //shirts
+       //shirts
 
        new Category
        {
@@ -1423,7 +1418,7 @@ public class E_CommerceContext : IdentityDbContext
            Image = "Kids shirts.jpg",
            ParentCategoryId = Guid.Parse("52d40b0a-7039-4bc6-899d-0c36adff6b8f")
        },
-   //pants
+       //pants
 
        new Category
        {
@@ -1450,7 +1445,7 @@ public class E_CommerceContext : IdentityDbContext
            ParentCategoryId = Guid.Parse("52d40b0a-7039-4bc6-899d-0c36adff6b8f")
        },
 
-     //Shoes
+       //Shoes
 
        new Category
        {
@@ -1477,7 +1472,7 @@ public class E_CommerceContext : IdentityDbContext
            ParentCategoryId = Guid.Parse("52d40b0a-7039-4bc6-899d-0c36adff6b8f")
        },
 
-     //Jackets
+       //Jackets
 
        new Category
        {
@@ -1504,7 +1499,7 @@ public class E_CommerceContext : IdentityDbContext
            ParentCategoryId = Guid.Parse("52d40b0a-7039-4bc6-899d-0c36adff6b8f")
        },
 
-     //Hoodies
+        //Hoodies
 
         new Category
         {
@@ -1930,11 +1925,11 @@ public class E_CommerceContext : IdentityDbContext
         new Cart{CartId = Guid.NewGuid(),CustomerId = Guid.Parse(customers[17].Id)},
 
          };
-   
 
 
 
-         modelBuilder.Entity<Cart>().HasData(carts);
+
+        modelBuilder.Entity<Cart>().HasData(carts);
 
         #endregion
 

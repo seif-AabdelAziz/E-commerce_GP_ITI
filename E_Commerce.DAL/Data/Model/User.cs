@@ -16,7 +16,7 @@ public class User : IdentityUser
     [MaxLength(30)]
     public string LastName { get; set; } = string.Empty;
 
-    public UserRole Role { get; set; }
+    public UserRole Role { get; set; } = UserRole.User;
 
 }
 

@@ -61,30 +61,26 @@ builder.Services.AddScoped<IWishListManager, WishListManager>();
 builder.Services.AddScoped<IOrderManager, OrderManager>();
 
 builder.Services.AddScoped<IUsersManagers, UsersManager>();
+builder.Services.AddScoped<ICartManager, CartManager>();
+builder.Services.AddScoped<IProductManager, ProductManager>();
+builder.Services.AddScoped<ISecurityManager, SecurityManager>();
 #endregion
 
-
-#region InjectForMangers
-builder.Services.AddScoped<ICustomerManager, CustomerManager>();
-
-#endregion
 
 #region Identity
 
-//Mainly specify the context and the type of the user that the UserManger will use
 builder.Services.AddIdentity<Customer, IdentityRole>(options =>
 {
-    options.Password.RequiredUniqueChars = 3;
+    options.Password.RequiredUniqueChars = 0;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 3;
+
     options.User.RequireUniqueEmail = true;
 
 }).AddEntityFrameworkStores<E_CommerceContext>();
-
-
 
 #endregion
 

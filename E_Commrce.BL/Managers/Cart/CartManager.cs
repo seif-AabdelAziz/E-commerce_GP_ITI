@@ -13,6 +13,11 @@ namespace E_Commerce.BL
         public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
+            var cartProducts = cart.Products.ToList();
+            cartProducts.Add(new CartProduct{
+                ProductId= addToCartDto.ProductId,
+                CartId= cart.CartId,
+            });
             if (cart == null)
             {
                 cart = new Cart
@@ -118,7 +123,7 @@ namespace E_Commerce.BL
         {
             CartProduct? cart = _unitOfWork.CartProductRepo.GetById(updateToCartDto.ProductId, updateToCartDto.CartId);
 
-            if (cart != null)
+            if (cart != null) 
             {
                 cart.ProductCount = updateToCartDto.Quantity;
                 _unitOfWork.SaveChange();
