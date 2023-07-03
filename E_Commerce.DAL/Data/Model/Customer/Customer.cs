@@ -1,12 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿namespace E_Commerce.DAL;
 
-namespace E_Commerce.DAL;
-
-public class Customer : User                                                                          
+public class Customer : User
 {
-   
+
     public string Street { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public Countries Country { get; set; }

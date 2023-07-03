@@ -1,6 +1,4 @@
 ﻿using E_Commerce.BL;
-using E_Commerce.DAL;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.Controllers
@@ -15,7 +13,9 @@ namespace E_Commerce.API.Controllers
         {
             securityManager = _securityManager;
         }
+
         [HttpPost]
+        [Route("Register")]
         public ActionResult Register(RegisterDto register)
         {
             var request = securityManager.Register(register);
@@ -25,6 +25,19 @@ namespace E_Commerce.API.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public ActionResult<TokenDto> Login(LoginDto login)
+        {
+            var request = securityManager.Login(login);
+            if (request is null)
+            {
+                return BadRequest();
+            }
+
+            return request;
         }
     }
 }
