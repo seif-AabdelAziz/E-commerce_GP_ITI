@@ -16,14 +16,21 @@ namespace E_Commerce.DAL
             _context = context;
         }
 
+        //public Cart? GetCartProductByCustomerId(Guid CustomerId)
+        //{
+        //    //Guid id = new Guid(CustomerId);
+
+        //    return _context.Carts
+        //    .Include(c => c.Products)
+        //    .FirstOrDefault(c => c.CustomerId == CustomerId);
+
+        //}
         public Cart? GetCartProductByCustomerId(Guid CustomerId)
         {
-            //Guid id = new Guid(CustomerId);
-
             return _context.Carts
-            .Include(c => c.Products)
-            .FirstOrDefault(c => c.CustomerId == CustomerId);
-
+                .Include(c => c.Products)
+                .ThenInclude(cp => cp.Product)
+                .FirstOrDefault(c => c.CustomerId == CustomerId);
         }
 
     }
