@@ -35,19 +35,17 @@ namespace E_Commerce.API.Controllers
         }
 
 
-
-
         [HttpGet]
         [Route("{customerId}")]
         public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId(Guid customerId)
         {
             GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
-            if (cartDto == null)
+            if (cartDto.Products.Count == 0)
             {
                 return NotFound();
             }
 
-            return cartDto; 
+            return cartDto;
         }
 
 
