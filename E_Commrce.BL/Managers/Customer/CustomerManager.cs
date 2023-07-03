@@ -44,7 +44,7 @@ namespace E_Commerce.BL
                 Street = c.Street,
                 City = c.City,
                 Country = c.Country,
-                PhoneNumber=c.PhoneNumber
+                PhoneNumber = c.PhoneNumber
             }).ToList();
 
             return CustomerList;

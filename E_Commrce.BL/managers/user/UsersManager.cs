@@ -105,6 +105,7 @@ public class UsersManager : IUsersManagers
 
         return new CustomerListDataDto
         {
+            Id= Guid.Parse( userFromDb.Id),
             FirstName = userFromDb.FirstName,
             LastName = userFromDb.LastName,
             MidName = userFromDb.MidName,

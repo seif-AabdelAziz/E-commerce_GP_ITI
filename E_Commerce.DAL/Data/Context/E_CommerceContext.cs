@@ -6,6 +6,7 @@ using System.Diagnostics.Metrics;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace E_Commerce.DAL;
 
@@ -389,6 +390,378 @@ public class E_CommerceContext : IdentityDbContext
 
 
         #endregion Carts
+
+        #region Products Seeding
+
+        var Productss = new List<Product>
+        {
+
+        new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's T-Shirt",
+                Description = "Comfortable cotton t-shirt for men",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Warm hoodie for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's T-Shirt",
+                Description = "Comfortable cotton t-shirt for men",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Jeans",
+                Description = "Classic denim jeans for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Blouse",
+                Description = "Stylish blouse for women",
+                Price = 24.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Backpack",
+                Description = "Spacious backpack for kids",
+                Price = 19.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Shorts",
+                Description = "Casual shorts for men",
+                Price = 17.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Sandals",
+                Description = "Comfortable sandals for women",
+                Price = 34.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' T-Shirt",
+                Description = "Adorable t-shirt for kids",
+                Price = 12.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Sneakers",
+                Description = "Stylish sneakers for men",
+                Price = 59.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Skirt",
+                Description = "Fashionable skirt for women",
+                Price = 27.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Jacket",
+                Description = "Warm jacket for kids",
+                Price = 39.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Polo Shirt",
+                Description = "Classic polo shirt for men",
+                Price = 22.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Jeans",
+                Description = "Stylish denim jeans for women",
+                Price = 44.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Dress",
+                Description = "Cute dress for kids",
+                Price = 32.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Jacket",
+                Description = "Warm jacket for men",
+                Price = 59.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Sneakers",
+                Description = "Sporty sneakers for women",
+                Price = 49.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Trousers",
+                Description = "Casual trousers for kids",
+                Price = 21.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Shirt",
+                Description = "Formal shirt for men",
+                Price = 34.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Jacket",
+                Description = "Stylish jacket for women",
+                Price = 54.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Hoodie",
+                Description = "Cozy hoodie for kids",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Sweater",
+                Description = "Warm sweater for men",
+                Price = 39.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Blazer",
+                Description = "Elegant blazer for women",
+                Price = 59.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shorts",
+                Description = "Casual shorts for kids",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Pants",
+                Description = "Classic pants for men",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Sweater",
+                Description = "Cozy sweater for women",
+                Price = 39.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shirt",
+                Description = "Adorable shirt for kids",
+                Price = 17.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Comfortable hoodie for men",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Pants",
+                Description = "Stylish pants for women",
+                Price = 44.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Sweater",
+                Description = "Warm sweater for kids",
+                Price = 34.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Sneakers",
+                Description = "Sporty sneakers for men",
+                Price = 54.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's T-Shirt",
+                Description = "Casual t-shirt for women",
+                Price = 19.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Jacket",
+                Description = "Stylish jacket for kids",
+                Price = 39.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Shorts",
+                Description = "Comfortable shorts for men",
+                Price = 24.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Sandals",
+                Description = "Fashionable sandals for women",
+                Price = 29.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Trousers",
+                Description = "Stylish trousers for kids",
+                Price = 34.99m,
+                Discount = 0.05m,
+                Rate = 0
+            }
+
+
+        };
+
+
+        #endregion
 
         #region Customers
 
@@ -1159,371 +1532,380 @@ public class E_CommerceContext : IdentityDbContext
        });
         #endregion
 
-        #region Products
 
 
-        modelBuilder.Entity<Product>().HasData(
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's T-Shirt",
-                Description = "Comfortable cotton t-shirt for men",
-                Price = 15.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Dress",
-                Description = "Elegant dress for women",
-                Price = 49.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Shoes",
-                Description = "Colorful shoes for kids",
-                Price = 29.99m,
-                Discount = 0.15m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Hoodie",
-                Description = "Warm hoodie for men",
-                Price = 39.99m,
-                Discount = 0.05m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's T-Shirt",
-                Description = "Comfortable cotton t-shirt for men",
-                Price = 15.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Dress",
-                Description = "Elegant dress for women",
-                Price = 49.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Shoes",
-                Description = "Colorful shoes for kids",
-                Price = 29.99m,
-                Discount = 0.15m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Jeans",
-                Description = "Classic denim jeans for men",
-                Price = 39.99m,
-                Discount = 0.05m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Blouse",
-                Description = "Stylish blouse for women",
-                Price = 24.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Backpack",
-                Description = "Spacious backpack for kids",
-                Price = 19.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Shorts",
-                Description = "Casual shorts for men",
-                Price = 17.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Sandals",
-                Description = "Comfortable sandals for women",
-                Price = 34.99m,
-                Discount = 0.2m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' T-Shirt",
-                Description = "Adorable t-shirt for kids",
-                Price = 12.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Sneakers",
-                Description = "Stylish sneakers for men",
-                Price = 59.99m,
-                Discount = 0.15m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Skirt",
-                Description = "Fashionable skirt for women",
-                Price = 27.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Jacket",
-                Description = "Warm jacket for kids",
-                Price = 39.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Polo Shirt",
-                Description = "Classic polo shirt for men",
-                Price = 22.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Jeans",
-                Description = "Stylish denim jeans for women",
-                Price = 44.99m,
-                Discount = 0.05m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Dress",
-                Description = "Cute dress for kids",
-                Price = 32.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Jacket",
-                Description = "Warm jacket for men",
-                Price = 59.99m,
-                Discount = 0.2m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Sneakers",
-                Description = "Sporty sneakers for women",
-                Price = 49.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Trousers",
-                Description = "Casual trousers for kids",
-                Price = 21.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Shirt",
-                Description = "Formal shirt for men",
-                Price = 34.99m,
-                Discount = 0.15m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Jacket",
-                Description = "Stylish jacket for women",
-                Price = 54.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Hoodie",
-                Description = "Cozy hoodie for kids",
-                Price = 29.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Sweater",
-                Description = "Warm sweater for men",
-                Price = 39.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Blazer",
-                Description = "Elegant blazer for women",
-                Price = 59.99m,
-                Discount = 0.2m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Shorts",
-                Description = "Casual shorts for kids",
-                Price = 15.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Pants",
-                Description = "Classic pants for men",
-                Price = 49.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Sweater",
-                Description = "Cozy sweater for women",
-                Price = 39.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Shirt",
-                Description = "Adorable shirt for kids",
-                Price = 17.99m,
-                Discount = 0.15m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Hoodie",
-                Description = "Comfortable hoodie for men",
-                Price = 29.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Pants",
-                Description = "Stylish pants for women",
-                Price = 44.99m,
-                Discount = 0.05m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Sweater",
-                Description = "Warm sweater for kids",
-                Price = 34.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Sneakers",
-                Description = "Sporty sneakers for men",
-                Price = 54.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's T-Shirt",
-                Description = "Casual t-shirt for women",
-                Price = 19.99m,
-                Discount = 0.2m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Jacket",
-                Description = "Stylish jacket for kids",
-                Price = 39.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Men's Shorts",
-                Description = "Comfortable shorts for men",
-                Price = 24.99m,
-                Discount = 0,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Women's Sandals",
-                Description = "Fashionable sandals for women",
-                Price = 29.99m,
-                Discount = 0.1m,
-                Rate = 0
-            },
-            new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = "Kids' Trousers",
-                Description = "Stylish trousers for kids",
-                Price = 34.99m,
-                Discount = 0.05m,
-                Rate = 0
-            });
+
+
+        #region Test prod
+
+        modelBuilder.Entity<Product>().HasData(Productss);
+
         #endregion
+        //#region Products
+
+
+        //modelBuilder.Entity<Product>().HasData(
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's T-Shirt",
+        //        Description = "Comfortable cotton t-shirt for men",
+        //        Price = 15.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Dress",
+        //        Description = "Elegant dress for women",
+        //        Price = 49.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Shoes",
+        //        Description = "Colorful shoes for kids",
+        //        Price = 29.99m,
+        //        Discount = 0.15m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Hoodie",
+        //        Description = "Warm hoodie for men",
+        //        Price = 39.99m,
+        //        Discount = 0.05m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's T-Shirt",
+        //        Description = "Comfortable cotton t-shirt for men",
+        //        Price = 15.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Dress",
+        //        Description = "Elegant dress for women",
+        //        Price = 49.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Shoes",
+        //        Description = "Colorful shoes for kids",
+        //        Price = 29.99m,
+        //        Discount = 0.15m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Jeans",
+        //        Description = "Classic denim jeans for men",
+        //        Price = 39.99m,
+        //        Discount = 0.05m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Blouse",
+        //        Description = "Stylish blouse for women",
+        //        Price = 24.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Backpack",
+        //        Description = "Spacious backpack for kids",
+        //        Price = 19.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Shorts",
+        //        Description = "Casual shorts for men",
+        //        Price = 17.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Sandals",
+        //        Description = "Comfortable sandals for women",
+        //        Price = 34.99m,
+        //        Discount = 0.2m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' T-Shirt",
+        //        Description = "Adorable t-shirt for kids",
+        //        Price = 12.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Sneakers",
+        //        Description = "Stylish sneakers for men",
+        //        Price = 59.99m,
+        //        Discount = 0.15m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Skirt",
+        //        Description = "Fashionable skirt for women",
+        //        Price = 27.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Jacket",
+        //        Description = "Warm jacket for kids",
+        //        Price = 39.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Polo Shirt",
+        //        Description = "Classic polo shirt for men",
+        //        Price = 22.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Jeans",
+        //        Description = "Stylish denim jeans for women",
+        //        Price = 44.99m,
+        //        Discount = 0.05m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Dress",
+        //        Description = "Cute dress for kids",
+        //        Price = 32.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Jacket",
+        //        Description = "Warm jacket for men",
+        //        Price = 59.99m,
+        //        Discount = 0.2m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Sneakers",
+        //        Description = "Sporty sneakers for women",
+        //        Price = 49.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Trousers",
+        //        Description = "Casual trousers for kids",
+        //        Price = 21.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Shirt",
+        //        Description = "Formal shirt for men",
+        //        Price = 34.99m,
+        //        Discount = 0.15m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Jacket",
+        //        Description = "Stylish jacket for women",
+        //        Price = 54.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Hoodie",
+        //        Description = "Cozy hoodie for kids",
+        //        Price = 29.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Sweater",
+        //        Description = "Warm sweater for men",
+        //        Price = 39.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Blazer",
+        //        Description = "Elegant blazer for women",
+        //        Price = 59.99m,
+        //        Discount = 0.2m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Shorts",
+        //        Description = "Casual shorts for kids",
+        //        Price = 15.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Pants",
+        //        Description = "Classic pants for men",
+        //        Price = 49.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Sweater",
+        //        Description = "Cozy sweater for women",
+        //        Price = 39.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Shirt",
+        //        Description = "Adorable shirt for kids",
+        //        Price = 17.99m,
+        //        Discount = 0.15m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Hoodie",
+        //        Description = "Comfortable hoodie for men",
+        //        Price = 29.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Pants",
+        //        Description = "Stylish pants for women",
+        //        Price = 44.99m,
+        //        Discount = 0.05m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Sweater",
+        //        Description = "Warm sweater for kids",
+        //        Price = 34.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Sneakers",
+        //        Description = "Sporty sneakers for men",
+        //        Price = 54.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's T-Shirt",
+        //        Description = "Casual t-shirt for women",
+        //        Price = 19.99m,
+        //        Discount = 0.2m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Jacket",
+        //        Description = "Stylish jacket for kids",
+        //        Price = 39.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Men's Shorts",
+        //        Description = "Comfortable shorts for men",
+        //        Price = 24.99m,
+        //        Discount = 0,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Women's Sandals",
+        //        Description = "Fashionable sandals for women",
+        //        Price = 29.99m,
+        //        Discount = 0.1m,
+        //        Rate = 0
+        //    },
+        //    new Product
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Kids' Trousers",
+        //        Description = "Stylish trousers for kids",
+        //        Price = 34.99m,
+        //        Discount = 0.05m,
+        //        Rate = 0
+        //    });
+        //#endregion
 
         #region Carts
 
@@ -1557,6 +1939,27 @@ public class E_CommerceContext : IdentityDbContext
         #endregion
 
 
+
+        #region Product Images
+        var ProductImgs = new List<Product_IMG>
+        {
+            new Product_IMG{ProductID=Productss[0].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[1].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[2].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[3].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[4].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[5].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[6].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[7].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[8].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[9].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+            new Product_IMG{ProductID=Productss[10].Id, ImageURL="https://townteam.com/cdn/shop/files/SSH23SAER19684TM1-Multicolor-3_600x.jpg?v=1684071642"},
+
+        };
+
+
+        #endregion
+        modelBuilder.Entity<Product_IMG>().HasData(ProductImgs);
 
     }
 
