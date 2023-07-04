@@ -219,6 +219,44 @@ public class CategoriesManager : ICategoriesManager
 
 
     }
+    #endregion
+
+
+    #region Products by name
+
+
+
+    public List<ProductReadDto>? GetProductsByName(string ProductName)
+    {
+
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+        }).ToList();
+
+        return productsDto;
+
+
+    }
+
+    #endregion
+
+
+
+    #region get products by category
+
 
 
     public List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId)
@@ -250,34 +288,6 @@ public class CategoriesManager : ICategoriesManager
     }
 
 
-    public List<ProductReadDto>? GetProductsByName(string ProductName)
-    {
-
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
-
-        if (productsFromDb == null)
-        {
-            return null;
-        }
-
-        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description,
-            Price = p.Price,
-            Discount = p.Discount,
-            Rate = p.Rate,
-        }).ToList();
-
-        return productsDto;
-
-
-    }
-
-
-
     #endregion
-
 
 }

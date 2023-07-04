@@ -144,5 +144,15 @@ public class CategoryController : ControllerBase
     #endregion
 
 
+    #region get products for category
 
+    [HttpGet("PrdouctsForCategory/{id}")]
+    public ActionResult<List<ProductDetailsReadDto>> ProductsForCategory(Guid id)
+    {
+        List<ProductDetailsReadDto> products = _categoryManager.GetProductsByCategoryIds(id);
+        return products;
+    }
+
+
+    #endregion
 }
