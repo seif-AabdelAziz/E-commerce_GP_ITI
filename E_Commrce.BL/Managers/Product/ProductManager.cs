@@ -147,6 +147,7 @@ public class ProductManager : IProductManager
 
         return new ProductDetailsReadDto
         {
+            Id = productId,
             Name = productFromDB.Name,
             Description = productFromDB.Description,
             Rate = productFromDB.Rate,
