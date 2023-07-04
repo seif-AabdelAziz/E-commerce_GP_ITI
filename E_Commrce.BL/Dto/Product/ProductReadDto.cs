@@ -10,4 +10,5 @@ public class ProductReadDto
     public decimal Price { get; set; }
     public decimal Discount { get; set; } = 0;
     public decimal Rate { get; set; } = 0;
+
 }

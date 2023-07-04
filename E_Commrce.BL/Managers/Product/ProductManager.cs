@@ -1,4 +1,5 @@
-﻿using E_Commerce.DAL;
+﻿using Azure;
+using E_Commerce.DAL;
 
 namespace E_Commerce.BL;
 
@@ -11,7 +12,31 @@ public class ProductManager : IProductManager
         unitOfWork = _unitOfWork;
     }
 
+    public ProductPaginationDto AllProductsPagination(int page, int countPerPage)
+    {
+        var items = unitOfWork.ProductsRepo.GetAllProductsPagination(page, countPerPage).Select(p => new ProductDetailsReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+            ProductImages=p.ProductImages.Select(c=>new ProductImageDto
+            {
+                ImageURL=c.ImageURL
 
+            }).ToList(),
+        }).ToList();
+        var totalCount = unitOfWork.ProductsRepo.GetCount();
+        return new ProductPaginationDto
+        {
+
+            totalCount = totalCount,
+            items = items
+
+        };
+    }
 
     public List<ProductReadDto> AllProducts()
     {
@@ -276,6 +301,7 @@ public class ProductManager : IProductManager
 
         return unitOfWork.SaveChange() > 0;
     }
+
 
 
 }

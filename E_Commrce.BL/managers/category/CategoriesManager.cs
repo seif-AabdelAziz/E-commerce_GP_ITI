@@ -38,7 +38,7 @@ public class CategoriesManager : ICategoriesManager
     #endregion
 
     #region Get Products For One selected Category
-    private List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
+    public List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
     {
         List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
 
@@ -223,6 +223,67 @@ public class CategoriesManager : ICategoriesManager
 
 
     #endregion
+
+    public List<ProductReadDto>? GetProductsByName(string ProductName)
+    {
+
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+        }).ToList();
+
+        return productsDto;
+
+
+    }
+
+    #region get products by category
+
+
+
+    public List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId)
+    {
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductDetailsReadDto> productsDto = productsFromDb.Select(p => new ProductDetailsReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+            ProductImages=p.ProductImages.Select(c=>new ProductImageDto
+            {
+
+                ImageURL = c.ImageURL
+
+            }).ToList()
+        }).ToList();
+
+        return productsDto;
+    }
+
+
+    #endregion
+
 
 
 }

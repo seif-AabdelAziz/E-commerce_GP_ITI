@@ -1,6 +1,7 @@
 ﻿using E_Commerce.BL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.Metrics;
 
 namespace E_Commerce.API.Controllers
 {
@@ -20,6 +21,13 @@ namespace E_Commerce.API.Controllers
         {
             List<ProductReadDto> products = productManager.AllProducts();
             return products;
+        }
+
+        [HttpGet("Pagination/{page}/{countPerPage}")]
+        public ActionResult<ProductPaginationDto> AllProductsPagination(int page, int countPerPage)
+        {
+
+            return productManager.AllProductsPagination(page, countPerPage);
         }
 
         [HttpPost]

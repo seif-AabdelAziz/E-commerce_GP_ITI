@@ -64,15 +64,20 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     public List<Product> GetProductsByCategoryId(Guid categoryId)
     {
         Category? category = _context.Set<Category>()
-            .Include(c => c.Products)
+            .Include(c => c.Products).ThenInclude(c=>c.ProductImages)
             .FirstOrDefault(c => c.Id == categoryId);
 
-        if (category != null)
-        {
-            return category.Products.ToList();
-        }
 
-        return new List<Product>(); 
+
+        return category.Products.ToList(); 
     }
 
+    public List<Product>? GetProductsByName(string productName)
+    {
+        List<Product>? products = _context.Set<Product>().Where(c => c.Name==productName).ToList();
+
+
+        return products;
+
+    }
 }

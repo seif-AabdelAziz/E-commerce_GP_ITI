@@ -9,5 +9,6 @@ public interface ICategoriesRepo : IGenericRepo<Category>
     List<Category>? GetAllCategoriesWithAllPrdoucts();
     Category? GetCategoryById(string categorytId);
     List<Product>? GetProductsByCategoryId(Guid categoryId);
+    List<Product>? GetProductsByName(string productName);
 
 }
