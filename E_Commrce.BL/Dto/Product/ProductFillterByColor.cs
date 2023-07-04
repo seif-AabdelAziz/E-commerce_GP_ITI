@@ -10,7 +10,7 @@ namespace E_Commerce.BL
     public class ProductFillterByColor
     {
         public Guid Id { get; set; }
-        public Color Color { get; set; }
+        public string? Color { get; set; }
 
     }
 }

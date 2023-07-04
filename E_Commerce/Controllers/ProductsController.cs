@@ -136,8 +136,8 @@ namespace E_Commerce.API.Controllers
 
 
         [HttpGet]
-        [Route("FillterByColor/{id}")]
-        public ActionResult<ProductAfterFillterByColor> FillterByColor(ProductFillterByColor productDto)
+        [Route("FillterByColor")]
+        public ActionResult<ProductAfterFillterByColor> FillterByColor([FromQuery] ProductFillterByColor productDto)
         {
             ProductAfterFillterByColor? request = productManager.ProductFillterByColor(productDto);
             if (request==null)

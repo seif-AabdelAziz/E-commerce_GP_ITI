@@ -91,8 +91,8 @@ public class ProductManager : IProductManager
         newProduct.Product_Color_Size_Quantity = productAdd.ProductInfo.Select(pi => new ProductColorSizeQuantity
         {
             ProductID = newProduct.Id,
-            Color = pi.Color,
-            Size = pi.Size,
+            Color = (Color)Enum.Parse(typeof(Color), pi.Color) ,
+            Size = (Size)Enum.Parse(typeof(Size), pi.Size),
             Quantity = pi.Quantity,
         }).ToList();
 
@@ -160,8 +160,8 @@ public class ProductManager : IProductManager
 
             ProductInfo = productFromDB.Product_Color_Size_Quantity.Select(inf => new ProductInfoDto
             {
-                Color = inf.Color,
-                Size = inf.Size,
+                Color = inf.Color.ToString(),
+                Size = inf.Size.ToString(),
                 Quantity = inf.Quantity,
             }).ToList()
         };
@@ -225,8 +225,8 @@ public class ProductManager : IProductManager
             }).ToList(),
             ProductInfo = productFromDB.Product_Color_Size_Quantity.Select(pi => new ProductInfoDto
             {
-                Size = pi.Size,
-                Color = pi.Color,
+                Size = pi.Size.ToString(),
+                Color = pi.Color.ToString(),
                 Quantity = pi.Quantity,
             }).ToList()
         };
@@ -283,8 +283,8 @@ public class ProductManager : IProductManager
         productFromDB.Product_Color_Size_Quantity = productUpdate.ProductInfo.Select(pi => new ProductColorSizeQuantity
         {
             Quantity = pi.Quantity,
-            Size = pi.Size,
-            Color = pi.Color,
+            Color=(Color)Enum.Parse(typeof(Color), pi.Color),
+            Size = (Size)Enum.Parse(typeof(Size), pi.Size)
         }).ToList();
 
         //Update Info
@@ -318,14 +318,14 @@ public class ProductManager : IProductManager
             {
                 ImageURL = i.ImageURL
             }).ToList(),
-            ProductInfo = product.Product_Color_Size_Quantity.Where(p => p.Color == productDto.Color).Select(p => new ProductInfoDto
+            ProductInfo = product.Product_Color_Size_Quantity.Where(p => p.Color == (Color)Enum.Parse(typeof(Color), productDto.Color)).Select(p => new ProductInfoDto
             {
-                Color = p.Color,
-                Size = p.Size,
+                Color = p.Color.ToString(),
+                Size = p.Size.ToString(),
                 Quantity = p.Quantity
 
             }).ToList()
-
+            
 
         };
 
