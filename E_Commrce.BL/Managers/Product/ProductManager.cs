@@ -331,4 +331,25 @@ public class ProductManager : IProductManager
 
         return filtered;    
     }
+
+
+
+    public List<ProductWithImagesDto> ProductsWithImages()
+    {
+
+        var products = unitOfWork.ProductsRepo.GetProductsWithImages();
+        List<ProductWithImagesDto> productImages = products.Select(p => new ProductWithImagesDto
+        {
+            Id = p.Id,
+            Rate = p.Rate,
+            ProductImages = p.ProductImages.Select(i => i.ImageURL).ToList(),
+            Price = p.Price,
+            Discount = p.Discount,
+            Description = p.Description,
+            Name = p.Name,
+            Review = unitOfWork.ProductsRepo.GetProductReviews(p.Id)!.Reviews!.Count
+        }).ToList();
+
+        return productImages;
+    }
 }

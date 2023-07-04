@@ -15,6 +15,20 @@ namespace E_Commerce.API.Controllers
             productManager = _productManager;
         }
 
+        [HttpGet("Pagination/{page}/{countPerPage}")]
+        public ActionResult<ProductPaginationDto> AllProductsPagination(int page, int countPerPage)
+        {
+
+            return productManager.AllProductsPagination(page, countPerPage);
+        }
+        [HttpGet]
+        [Route("ProductWithImages")]
+        public ActionResult<List<ProductWithImagesDto>> AllProductsWithImages()
+        {
+            List<ProductWithImagesDto> products = productManager.ProductsWithImages();
+            return products;
+        }
+
         [HttpGet]
         public ActionResult<List<ProductReadDto>> AllProducts()
         {

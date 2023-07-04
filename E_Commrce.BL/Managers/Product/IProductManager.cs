@@ -12,4 +12,8 @@ public interface IProductManager
     bool Update(ProductUpdateDto productUpdate);
 
     ProductAfterFillterByColor ProductFillterByColor(ProductFillterByColor productDto);
+
+
+    ProductPaginationDto AllProductsPagination(int page, int countPerPage);
+    List<ProductWithImagesDto> ProductsWithImages();
 }

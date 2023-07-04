@@ -10,6 +10,14 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
     {
         _context = context;
     }
+    public List<Product> GetAllProductsPagination(int page, int countPerPage)
+    {
+
+        return _context.Set<Product>().Include(a => a.ProductImages).OrderBy(c => c.Price)
+            .Skip((page - 1) * countPerPage)
+            .Take(countPerPage).ToList();
+    }
+
 
 
     public Product? GetProductDetails(Guid id)
@@ -41,5 +49,19 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
             .Include(p => p.Product_Color_Size_Quantity)
             .Include(p => p.Categories)
             .FirstOrDefault(p => p.Id == id);
+    }
+    public int GetCount()
+    {
+        return _context.Set<Product>().Count();
+    }
+
+
+
+    public List<Product> GetProductsWithImages()
+    {
+        return _context.Set<Product>()
+            .Include(p => p.ProductImages)
+            .Include(p => p.Product_Color_Size_Quantity)
+            .Take(8).ToList();
     }
 }
