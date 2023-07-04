@@ -56,4 +56,12 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
     {
         return _context.Set<Product>().Count();
     }
+    public List<Product> GetProductsWithImages()
+    {
+        return _context.Set<Product>()
+            .Include(p=>p.ProductImages)
+            .Include(p => p.Product_Color_Size_Quantity)
+            .Take(8).ToList();
+    }
+
 }

@@ -1,4 +1,5 @@
 ﻿using E_Commerce.DAL;
+using System;
 
 namespace E_Commerce.BL;
 
@@ -222,6 +223,7 @@ public class CategoriesManager : ICategoriesManager
 
 
 
+
     #endregion
 
     public List<ProductReadDto>? GetProductsByName(string ProductName)
@@ -285,5 +287,28 @@ public class CategoriesManager : ICategoriesManager
     #endregion
 
 
+    public List<CategoryReadDto> GetAllCategoriesUnique()
+    {
+        List<Category>? categoriesFromDb = _unitOfWork.CategoriesRepo.GetAllCategoriesWithAllPrdoucts();
+        if (categoriesFromDb == null)
+        {
+            return null!;
+        }
+
+        List<CategoryReadDto> categoriesDto = categoriesFromDb.Select(c => new CategoryReadDto
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Description = c.Description,
+            ParentCategoryId = c.ParentCategoryId,
+            Image = c.Image,
+            ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
+            products = GetProductsByCategoryId(c.Id) ?? null!,
+        }).ToList();
+
+        
+        
+        return categoriesDto.GroupBy(c => c.Name).Select(group => group.First()).ToList();
+    }
 
 }

@@ -176,5 +176,13 @@ public class CategoryController : ControllerBase
         return products;
     }
     #endregion
+    [HttpGet("SubCategoriesUniqe")]
+    public ActionResult<List<CategoryReadDto>> GetAllSubCategoriesUnique()
+    {
+        List<CategoryReadDto> categories = _categoryManager.GetAllCategoriesUnique();
+        return categories;
+    }
+
+
 
 }

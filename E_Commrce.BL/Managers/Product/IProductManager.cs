@@ -6,6 +6,7 @@ public interface IProductManager
 {
     List<ProductReadDto> AllProducts();
    ProductPaginationDto AllProductsPagination(int page, int countPerPage);
+    List<ProductWithImagesDto> ProductsWithImages();
     bool Add(ProductAddDto productAdd);
     bool Delete(Guid productId);
     ProductDetailsReadDto? ProductDetails(Guid productId);
