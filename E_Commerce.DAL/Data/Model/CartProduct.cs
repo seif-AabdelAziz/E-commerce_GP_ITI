@@ -15,9 +15,7 @@ namespace E_Commerce.DAL
 
         public int ProductCount { get; set; }
 
-        public Size Size { get; set; }
 
-        public Color Color { get; set; }
 
 
     }

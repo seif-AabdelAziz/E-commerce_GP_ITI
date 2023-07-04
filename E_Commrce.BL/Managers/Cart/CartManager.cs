@@ -13,11 +13,15 @@ namespace E_Commerce.BL
         public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
-            var cartProducts = cart.Products.ToList();
-            cartProducts.Add(new CartProduct{
-                ProductId= addToCartDto.ProductId,
-                CartId= cart.CartId,
-            });
+            if (cart != null) { 
+            
+                var cartProducts = cart.Products.ToList();
+                cartProducts.Add(new CartProduct{
+                    ProductId= addToCartDto.ProductId,
+                    CartId= cart.CartId,
+                });
+            }
+            
             if (cart == null)
             {
                 cart = new Cart
