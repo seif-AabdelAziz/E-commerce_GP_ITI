@@ -1,4 +1,5 @@
 ﻿using E_Commerce.DAL;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace E_Commerce.BL;
 
@@ -301,26 +302,32 @@ public class ProductManager : IProductManager
         return unitOfWork.SaveChange() > 0;
     }
 
-
-    public List<ProductWithImagesDto> ProductsWithImages()
+    public ProductAfterFillterByColor ProductFillterByColor(ProductFillterByColor productDto)
     {
-
-        var products = unitOfWork.ProductsRepo.GetProductsWithImages();
-        List<ProductWithImagesDto> productImages = products.Select(p => new ProductWithImagesDto
+        Product? product = unitOfWork.ProductsRepo.GetProductDetails(productDto.Id);
+        var filtered = new ProductAfterFillterByColor
         {
-            Id = p.Id,
-            Rate = p.Rate,
-            ProductImages = p.ProductImages.Select(i => i.ImageURL).ToList(),
-            Price = p.Price,
-            Discount = p.Discount,
-            Description = p.Description,
-            Name = p.Name,
-            Review = unitOfWork.ProductsRepo.GetProductReviews(p.Id)!.Reviews!.Count
-        }).ToList();
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            Discount = product.Discount,
+            Rate = product.Rate,
+            ProductImages = product.ProductImages.Select(i => new ProductImageDto
+            {
+                ImageURL = i.ImageURL
+            }).ToList(),
+            ProductInfo = product.Product_Color_Size_Quantity.Where(p => p.Color == productDto.Color).Select(p => new ProductInfoDto
+            {
+                Color = p.Color,
+                Size = p.Size,
+                Quantity = p.Quantity
 
-        return productImages;
+            }).ToList()
+
+
+        };
+
+        return filtered;    
     }
-
-
-
 }

@@ -27,11 +27,11 @@ namespace E_Commerce.DAL
         //}
         public Cart? GetCartProductByCustomerId(Guid CustomerId)
         {
-            return _context.Carts
-                .Include(c => c.Products)
-                    .ThenInclude(cp => cp.Product)
-                        .ThenInclude(p=>p.Product_Color_Size_Quantity)
-                .FirstOrDefault(c => c.CustomerId == CustomerId);
+            return _context.Set<Cart>().
+                Include(p=>p.Products)
+                .ThenInclude(p=>p.Product)
+                .ThenInclude(p=>p.Product_Color_Size_Quantity)
+                    .FirstOrDefault(c => c.CustomerId == CustomerId);
         }
 
     }
