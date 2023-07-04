@@ -1,6 +1,5 @@
 ﻿using E_Commerce.BL;
 using Microsoft.AspNetCore.Mvc;
-using System.Xml.Linq;
 
 namespace E_Commerce.API.Controllers;
 
@@ -144,37 +143,14 @@ public class CategoryController : ControllerBase
 
     #endregion
 
-    #region get products for category
 
-    [HttpGet("PrdouctsForCategory/{id}")]
-    public ActionResult<List<ProductReadDto>> ProductsForCategory(Guid id)
+    [HttpGet("SubCategoriesUniqe")]
+    public ActionResult<List<CategoryReadDto>> GetAllSubCategoriesUnique()
     {
-        List<ProductReadDto> products = _categoryManager.GetProductsByCategoryId(id);
-        return products;
+        List<CategoryReadDto> categories = _categoryManager.GetAllCategoriesUnique();
+        return categories;
     }
 
 
-    #endregion
-
-    #region get products by Name
-    [HttpGet("PrdouctsByName/{name}")]
-    public ActionResult<List<ProductReadDto>> ProductsByName(string name)
-    {
-        List<ProductReadDto> products = _categoryManager.GetProductsByName(name);
-        return products;
-    }
-
-
-    #endregion
-
-
-    #region get products by category
-    [HttpGet("PrdouctsByCategoryId/{id}")]
-    public ActionResult<List<ProductDetailsReadDto>> ProductsBycategory(Guid id)
-    {
-        List<ProductDetailsReadDto> products = _categoryManager.GetProductsByCategoryIds(id);
-        return products;
-    }
-    #endregion
 
 }

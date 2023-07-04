@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.DAL;
 
@@ -44,16 +43,12 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
             .FirstOrDefault(p => p.Id == id);
     }
 
-    public List<Product> GetAllProductsPagination(int page, int countPerPage)
+    public List<Product> GetProductsWithImages()
     {
-
-        return _context.Set<Product>().Include(a=>a.ProductImages).OrderBy(c => c.Price)
-            .Skip((page - 1) * countPerPage)
-            .Take(countPerPage).ToList();
+        return _context.Set<Product>()
+            .Include(p=>p.ProductImages)
+            .Include(p => p.Product_Color_Size_Quantity)
+            .Take(8).ToList();
     }
 
-    public int GetCount()
-    {
-        return _context.Set<Product>().Count();
-    }
 }

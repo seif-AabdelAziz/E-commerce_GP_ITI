@@ -13,11 +13,16 @@ namespace E_Commerce.BL
         public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
-            var cartProducts = cart.Products.ToList();
-            cartProducts.Add(new CartProduct{
-                ProductId= addToCartDto.ProductId,
-                CartId= cart.CartId,
-            });
+            if(cart != null)
+            {
+                var cartProducts = cart.Products.ToList();
+                cartProducts.Add(new CartProduct
+                {
+                    ProductId = addToCartDto.ProductId,
+                    CartId = cart.CartId,
+                });
+            }
+            
             if (cart == null)
             {
                 cart = new Cart
@@ -25,7 +30,13 @@ namespace E_Commerce.BL
                     CartId = Guid.NewGuid(),
                     CustomerId = addToCartDto.CustomerId,
                     Products = new List<CartProduct>()
+                   
                 };
+                cart.Products.Add(new CartProduct
+                {
+                    ProductId = addToCartDto.ProductId,
+                    CartId = cart.CartId,
+                });
 
                 _unitOfWork.CartRepo.Add(cart);
             }
@@ -89,6 +100,75 @@ namespace E_Commerce.BL
             return true;
         }
 
+        //public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
+        //{
+        //    Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
+
+        //    if (cart == null)
+        //    {
+        //        return new GetCartProductByCustomerIdDto
+        //        {
+        //            CartId = Guid.Empty,
+        //            CustomerId = customerId,
+        //            Products = new List<ProductDto>()
+        //        };
+        //    }
+
+        //    List<ProductDto> products = new List<ProductDto>();
+        //    foreach (var cp in cart.Products) { 
+
+        //        foreach (var info in cp.Product.Product_Color_Size_Quantity)
+        //        {
+
+        //            products.Add(new ProductDto
+        //            {
+        //                ProductId = cp.ProductId,
+        //                Name = cp.Product.Name,
+        //                Description = cp.Product.Description,
+        //                Price = cp.Product.Price,
+        //                Image = cp.Product.ProductImages.FirstOrDefault()?.ImageURL,
+        //                Quantity = cp.ProductCount,
+        //                Color = info.Color,
+        //                Size = info.Size,
+        //                QuantityInStock = quantityInStock,
+        //            });
+        //        }
+        //    }
+
+        //    GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
+        //    {
+        //        CartId = cart.CartId,
+        //        CustomerId = cart.CustomerId,
+        //        Products = products,
+
+
+
+        //        //Products = cart.Products.Select(cp => new 
+        //        //{  
+        //        //    ProductId = cp.ProductId,
+        //        //    Name = cp.Product.Name,
+        //        //    Description = cp.Product.Description,
+        //        //    Price = cp.Product.Price,
+        //        //    Image = cp.Product.ProductImages.FirstOrDefault()?.ImageURL,
+        //        //    Quantity = cp.ProductCount,
+        //        //    Color = cp.Product.Product_Color_Size_Quantity.FirstOrDefault()?.Color ?? 0,
+        //        //    Size = cp.Product.Product_Color_Size_Quantity.FirstOrDefault()?.Size ?? 0,
+        //        //})
+        //        //.Select(cp => new ProductDto
+        //        //{
+        //        //    ProductId = cp.ProductId,
+        //        //    Name = cp.Product.Name,
+        //        //    Description = cp.Product.Description,
+        //        //    Price = cp.Product.Price,
+        //        //    Image = cp.Product.ProductImages.FirstOrDefault()?.ImageURL,
+        //        //    Quantity = cp.ProductCount,
+
+        //        //}).ToList()
+        //    };
+
+        //    return cartDto;
+        //}
+
         public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
         {
             Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
@@ -102,17 +182,34 @@ namespace E_Commerce.BL
                     Products = new List<ProductDto>()
                 };
             }
+
+            List<ProductDto> products = new List<ProductDto>();
+            foreach (var cp in cart.Products)
+            {
+                foreach (var info in cp.Product.Product_Color_Size_Quantity)
+                {
+                    int quantityInStock = info.Quantity;
+                    int userEnteredQuantity = cp.ProductCount; 
+                    products.Add(new ProductDto
+                    {
+                        ProductId = cp.ProductId,
+                        Name = cp.Product.Name,
+                        Description = cp.Product.Description,
+                        Price = cp.Product.Price,
+                        Image = cp.Product.ProductImages.FirstOrDefault()?.ImageURL,
+                        Quantity = userEnteredQuantity,
+                        Color = info.Color.ToString(),
+                        Size = info.Size.ToString(),
+                        QuantityInStock = quantityInStock,
+                    });
+                }
+            }
+
             GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
             {
                 CartId = cart.CartId,
                 CustomerId = cart.CustomerId,
-                Products = cart.Products.Select(cp => new ProductDto
-                {
-                    ProductId = cp.ProductId,
-                    Name = cp.Product.Name,
-                    Description = cp.Product.Description,
-                    Price = cp.Product.Price
-                }).ToList()
+                Products = products
             };
 
             return cartDto;
@@ -125,6 +222,15 @@ namespace E_Commerce.BL
 
             if (cart != null) 
             {
+                //from dto (edit)
+                var color = updateToCartDto.Color;
+                var size = updateToCartDto.Size;
+                var productInfo =  cart.Product.Product_Color_Size_Quantity.First(c => c.ProductID == updateToCartDto.ProductId &&
+                c.Color == color && c.Size == size);
+                if (productInfo == null || productInfo.Quantity < updateToCartDto.Quantity)
+                {
+                    return false;
+                }
                 cart.ProductCount = updateToCartDto.Quantity;
                 _unitOfWork.SaveChange();
                 return true;

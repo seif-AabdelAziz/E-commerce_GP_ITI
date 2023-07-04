@@ -1,7 +1,6 @@
 ﻿using E_Commerce.BL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics.Metrics;
 
 namespace E_Commerce.API.Controllers
 {
@@ -23,11 +22,12 @@ namespace E_Commerce.API.Controllers
             return products;
         }
 
-        [HttpGet("Pagination/{page}/{countPerPage}")]
-        public ActionResult<ProductPaginationDto> AllProductsPagination(int page, int countPerPage)
+        [HttpGet]
+        [Route("ProductWithImages")]
+        public ActionResult<List<ProductWithImagesDto>> AllProductsWithImages()
         {
-
-            return productManager.AllProductsPagination(page, countPerPage);
+            List<ProductWithImagesDto> products = productManager.ProductsWithImages();
+            return products;
         }
 
         [HttpPost]
