@@ -29,7 +29,8 @@ namespace E_Commerce.DAL
         {
             return _context.Carts
                 .Include(c => c.Products)
-                .ThenInclude(cp => cp.Product)
+                    .ThenInclude(cp => cp.Product)
+                        .ThenInclude(p=>p.Product_Color_Size_Quantity)
                 .FirstOrDefault(c => c.CustomerId == CustomerId);
         }
 
