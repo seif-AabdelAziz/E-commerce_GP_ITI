@@ -16,7 +16,7 @@ namespace E_Commerce.BL
             if (cart != null) { 
             
                 var cartProducts = cart.Products.ToList();
-                cartProducts.Add(new CartProduct{
+                 cartProducts.Add(new CartProduct{
                     ProductId= addToCartDto.ProductId,
                     CartId= cart.CartId,
                 });
@@ -30,7 +30,11 @@ namespace E_Commerce.BL
                     CustomerId = addToCartDto.CustomerId,
                     Products = new List<CartProduct>()
                 };
-
+                cart.Products.Add(new CartProduct
+                {
+                    ProductId = addToCartDto.ProductId,
+                    CartId = cart.CartId,
+                });
                 _unitOfWork.CartRepo.Add(cart);
             }
 
