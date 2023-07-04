@@ -1,4 +1,5 @@
 ﻿
+using Azure.Core.Pipeline;
 using E_Commerce.DAL;
 
 namespace E_Commerce.BL
@@ -18,9 +19,11 @@ namespace E_Commerce.BL
         public decimal Price { get; set; }
         public string? Image { get; set; }
         public int Quantity { get; set; }
-        //public string Color { get; set; }
-        //public string Size { get; set; }
-        public Color Color { get; set; }
-        public Size Size { get; set; }
+
+        public string Color { get; set; }
+        public string Size { get; set; }
+
+        public int QuantityInStock { get; set; }
+
     }
 }
