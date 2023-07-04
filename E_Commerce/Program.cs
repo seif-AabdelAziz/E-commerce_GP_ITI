@@ -59,6 +59,7 @@ builder.Services.AddScoped<ICustomerReviewManager, CustomerReviewManager>();
 builder.Services.AddScoped<IWishListManager, WishListManager>();
 
 builder.Services.AddScoped<IOrderManager, OrderManager>();
+builder.Services.AddScoped<IProductManager, ProductManager>();
 
 builder.Services.AddScoped<IUsersManagers, UsersManager>();
 builder.Services.AddScoped<ICartManager, CartManager>();
