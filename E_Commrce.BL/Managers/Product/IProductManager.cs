@@ -3,6 +3,7 @@
 public interface IProductManager
 {
     List<ProductReadDto> AllProducts();
+    List<ProductWithImagesDto> ProductsWithImages();
     bool Add(ProductAddDto productAdd);
     bool Delete(Guid productId);
     ProductDetailsReadDto? ProductDetails(Guid productId);
