@@ -9,7 +9,6 @@ public interface ICategoriesManager
     CategoryUpdateDto? CategoryToUpdate(Guid CategoryId);
     bool DeleteCategory(Guid CategoryId);
     List<CategoryReadDto> GetAllCategories();
-    List<CategoryReadDto> GetAllCategoriesUnique();
     CategoryReadDto? GetCategoryById(Guid CategoryId);
 
     List<SubCategoryReadDto>? GetSubCategories(Guid parentCategoryId);

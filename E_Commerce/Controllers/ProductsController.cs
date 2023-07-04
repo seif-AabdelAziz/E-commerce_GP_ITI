@@ -22,14 +22,6 @@ namespace E_Commerce.API.Controllers
             return products;
         }
 
-        [HttpGet]
-        [Route("ProductWithImages")]
-        public ActionResult<List<ProductWithImagesDto>> AllProductsWithImages()
-        {
-            List<ProductWithImagesDto> products = productManager.ProductsWithImages();
-            return products;
-        }
-
         [HttpPost]
         [Route("Add")]
         public ActionResult AddProduct(ProductAddDto product)

@@ -42,13 +42,4 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
             .Include(p => p.Categories)
             .FirstOrDefault(p => p.Id == id);
     }
-
-    public List<Product> GetProductsWithImages()
-    {
-        return _context.Set<Product>()
-            .Include(p=>p.ProductImages)
-            .Include(p => p.Product_Color_Size_Quantity)
-            .Take(8).ToList();
-    }
-
 }
