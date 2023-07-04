@@ -117,5 +117,21 @@ namespace E_Commerce.API.Controllers
             }
             return Ok("Product Updated Successfully");
         }
+        /*/////*/
+
+
+
+        [HttpGet]
+        [Route("FillterByColor/{id}")]
+        public ActionResult<ProductAfterFillterByColor> FillterByColor(ProductFillterByColor productDto)
+        {
+            ProductAfterFillterByColor? request = productManager.ProductFillterByColor(productDto);
+            if (request==null)
+            {
+                return BadRequest();
+            }
+            return request;
+        }
+
     }
 }

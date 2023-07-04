@@ -1,4 +1,5 @@
 ﻿using E_Commerce.DAL;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace E_Commerce.BL;
 
@@ -277,5 +278,32 @@ public class ProductManager : IProductManager
         return unitOfWork.SaveChange() > 0;
     }
 
+    public ProductAfterFillterByColor ProductFillterByColor(ProductFillterByColor productDto)
+    {
+        Product? product = unitOfWork.ProductsRepo.GetProductDetails(productDto.Id);
+        var filtered = new ProductAfterFillterByColor
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            Discount = product.Discount,
+            Rate = product.Rate,
+            ProductImages = product.ProductImages.Select(i => new ProductImageDto
+            {
+                ImageURL = i.ImageURL
+            }).ToList(),
+            ProductInfo = product.Product_Color_Size_Quantity.Where(p => p.Color == productDto.Color).Select(p => new ProductInfoDto
+            {
+                Color = p.Color,
+                Size = p.Size,
+                Quantity = p.Quantity
 
+            }).ToList()
+
+
+        };
+
+        return filtered;    
+    }
 }

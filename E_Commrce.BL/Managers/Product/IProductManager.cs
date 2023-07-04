@@ -10,4 +10,6 @@ public interface IProductManager
     List<ProductCategories>? ProductCategories(Guid productId);
     ProductUpdateDto? ProductToUpdate(Guid productId);
     bool Update(ProductUpdateDto productUpdate);
+
+    ProductAfterFillterByColor ProductFillterByColor(ProductFillterByColor productDto);
 }
