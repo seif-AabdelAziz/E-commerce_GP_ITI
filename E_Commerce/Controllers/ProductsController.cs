@@ -1,7 +1,6 @@
 ﻿using E_Commerce.BL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics.Metrics;
 
 namespace E_Commerce.API.Controllers
 {
@@ -20,20 +19,6 @@ namespace E_Commerce.API.Controllers
         public ActionResult<List<ProductReadDto>> AllProducts()
         {
             List<ProductReadDto> products = productManager.AllProducts();
-            return products;
-        }
-
-        [HttpGet("Pagination/{page}/{countPerPage}")]
-        public ActionResult<ProductPaginationDto> AllProductsPagination(int page, int countPerPage)
-        {
-
-            return productManager.AllProductsPagination(page, countPerPage);
-        }
-        [HttpGet]
-        [Route("ProductWithImages")]
-        public ActionResult<List<ProductWithImagesDto>> AllProductsWithImages()
-        {
-            List<ProductWithImagesDto> products = productManager.ProductsWithImages();
             return products;
         }
 
@@ -132,5 +117,21 @@ namespace E_Commerce.API.Controllers
             }
             return Ok("Product Updated Successfully");
         }
+        /*/////*/
+
+
+
+        [HttpGet]
+        [Route("FillterByColor/{id}")]
+        public ActionResult<ProductAfterFillterByColor> FillterByColor(ProductFillterByColor productDto)
+        {
+            ProductAfterFillterByColor? request = productManager.ProductFillterByColor(productDto);
+            if (request==null)
+            {
+                return BadRequest();
+            }
+            return request;
+        }
+
     }
 }

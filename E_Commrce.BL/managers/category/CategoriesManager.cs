@@ -1,5 +1,4 @@
 ﻿using E_Commerce.DAL;
-using System;
 
 namespace E_Commerce.BL;
 
@@ -39,7 +38,7 @@ public class CategoriesManager : ICategoriesManager
     #endregion
 
     #region Get Products For One selected Category
-    public List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
+    private List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
     {
         List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
 
@@ -223,92 +222,7 @@ public class CategoriesManager : ICategoriesManager
 
 
 
-
     #endregion
 
-    public List<ProductReadDto>? GetProductsByName(string ProductName)
-    {
-
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
-
-        if (productsFromDb == null)
-        {
-            return null;
-        }
-
-        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description,
-            Price = p.Price,
-            Discount = p.Discount,
-            Rate = p.Rate,
-        }).ToList();
-
-        return productsDto;
-
-
-    }
-
-    #region get products by category
-
-
-
-    public List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId)
-    {
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
-
-        if (productsFromDb == null)
-        {
-            return null;
-        }
-
-        List<ProductDetailsReadDto> productsDto = productsFromDb.Select(p => new ProductDetailsReadDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description,
-            Price = p.Price,
-            Discount = p.Discount,
-            Rate = p.Rate,
-            ProductImages=p.ProductImages.Select(c=>new ProductImageDto
-            {
-
-                ImageURL = c.ImageURL
-
-            }).ToList()
-        }).ToList();
-
-        return productsDto;
-    }
-
-
-    #endregion
-
-
-    public List<CategoryReadDto> GetAllCategoriesUnique()
-    {
-        List<Category>? categoriesFromDb = _unitOfWork.CategoriesRepo.GetAllCategoriesWithAllPrdoucts();
-        if (categoriesFromDb == null)
-        {
-            return null!;
-        }
-
-        List<CategoryReadDto> categoriesDto = categoriesFromDb.Select(c => new CategoryReadDto
-        {
-            Id = c.Id,
-            Name = c.Name,
-            Description = c.Description,
-            ParentCategoryId = c.ParentCategoryId,
-            Image = c.Image,
-            ParentCategoryName = c.ParentCategoryId != null ? _unitOfWork.CategoriesRepo.GetById(Guid.Parse(c.ParentCategoryId.ToString())).Name : null,
-            products = GetProductsByCategoryId(c.Id) ?? null!,
-        }).ToList();
-
-        
-        
-        return categoriesDto.GroupBy(c => c.Name).Select(group => group.First()).ToList();
-    }
 
 }
