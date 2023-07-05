@@ -24,7 +24,7 @@ namespace E_Commerce.API.Controllers
             try
             {
     
-                _cartmanager.AddToCart(addToCartDto, addToCartDto.CustomerId);
+                _cartmanager.AddToCart(addToCartDto);
 
                 return Ok();
             }
@@ -38,7 +38,7 @@ namespace E_Commerce.API.Controllers
         [HttpGet]
         [Route("{customerId}")]
         public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId(Guid customerId)
-            {
+        {
             GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
             if (cartDto.Products.Count == 0)
             {

@@ -10,7 +10,7 @@ namespace E_Commerce.BL
             _unitOfWork = unitOfWork;
         }
 
-        public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
+        public void AddToCart(AddToCartDto addToCartDto)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
             //if (cart != null) { 
@@ -215,13 +215,7 @@ namespace E_Commerce.BL
                         strImge = _unitOfWork.ProductsRepo.GetProductDetails(cp.ProductId).ProductImages[0].ImageURL;
                     }
 
-                    if (cp.Product.Product_Color_Size_Quantity
-                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity < cp.ProductCount||cp.ProductCount==0)
-                    {
-                        qty = 0;
-                    }
-                    else
-                    {
+                    
                         products.Add(new ProductDto
                         {
                             ProductId = cp.ProductId,
@@ -231,11 +225,11 @@ namespace E_Commerce.BL
                             Image = strImge,
                             QuantityInStock = cp.Product.Product_Color_Size_Quantity
                             .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity,
-                            Quantity = qty,
+                            Quantity = cp.ProductCount,
                             Color = cp.Color.ToString(),
                             Size = cp.Size.ToString()
                         });
-                    }
+                    
                     //int quantityInStock = info.Quantity;
                     //int userEnteredQuantity = cp.ProductCount;
                     
