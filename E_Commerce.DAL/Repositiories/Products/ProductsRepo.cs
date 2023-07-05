@@ -67,5 +67,13 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
             .Take(8).ToList();
     }
 
-    
+    public List<Product> GetProductsByCategoryUnique()
+    {
+        return _context.Set<Product>()
+            .GroupBy(p=>p.Name)
+            .Where(g=>g.Count()==1)
+            .Select(g=>g.First())
+            .Take(8)
+            .ToList();
+    }
 }

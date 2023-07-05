@@ -1,4 +1,5 @@
 ﻿using E_Commerce.BL;
+using E_Commerce.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -158,6 +159,13 @@ namespace E_Commerce.API.Controllers
             }
 
             return productDetails;
+        }
+
+        [HttpGet]
+        [Route("UniqueProducts")]
+        public ActionResult<List<ProductWithImagesDto>> GetProductsUnique()
+        {
+            return productManager.GetProductsUnique();
         }
 
     }

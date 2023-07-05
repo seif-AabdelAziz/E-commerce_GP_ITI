@@ -18,4 +18,5 @@ public interface IProductManager
     List<ProductWithImagesDto> ProductsWithImages();
 
     ProductDetailsDistinctDto? ProductDetailsDistinct(Guid productId);
+    List<ProductWithImagesDto> GetProductsUnique();
 }

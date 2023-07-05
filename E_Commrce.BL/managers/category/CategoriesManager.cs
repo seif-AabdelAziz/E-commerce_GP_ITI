@@ -343,5 +343,23 @@ public class CategoriesManager : ICategoriesManager
 
 
     #endregion
+    public List<CategoryReadDto> GetCategoriesUnique()
+    {
+        var cat = _unitOfWork.CategoriesRepo.GetCategoriesUnique();
+        List<CategoryReadDto> catDto = new List<CategoryReadDto> ();
+
+        foreach(var c in cat) 
+        {
+            catDto.Add(new CategoryReadDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Image = c.Image,
+            });
+        }
+
+        return catDto;
+    }
 
 }

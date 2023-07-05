@@ -207,9 +207,7 @@ namespace E_Commerce.BL
                 {
                     if (_unitOfWork.ProductsRepo.GetProductDetails(cp.ProductId).ProductImages.Count==0)
                     {
-
                         strImge = "null";
-
                     }
                     else
                     {
@@ -223,13 +221,14 @@ namespace E_Commerce.BL
                         Name = cp.Product.Name,
                         Description = cp.Product.Description,
                         Price = cp.Product.Price,
-                        Image=strImge,
+                        Image = strImge,
                         Quantity = cp.ProductCount,
                         Color = cp.Color.ToString(),
                         Size = cp.Size.ToString(),
-                        //QuantityInStock = quantityInStock,
+                        QuantityInStock = cp.Product.Product_Color_Size_Quantity
+                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity
                     }) ;
-                    total += cp.Product.Price;
+                    total += cp.Product.Price*cp.ProductCount;
                     
                 }
                     GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
