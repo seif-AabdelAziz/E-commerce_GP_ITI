@@ -186,6 +186,23 @@ public class CategoriesManager : ICategoriesManager
                 Name = c.Name,
                 Description = c.Description,
                 Image = c.Image,
+                products = c.Products.Select(p => new ProductDetailsReadDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Discount = p.Discount,
+                    Rate = p.Rate,
+                    ProductImages = p.ProductImages.Select(c => new ProductImageDto
+                    {
+
+                        ImageURL = c.ImageURL
+
+                    }).ToList()
+
+                }).ToList()
+
 
 
             }).ToList();

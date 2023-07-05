@@ -34,7 +34,7 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
 
     public List<Category>? GetSubCategories(Guid parentCategoryId)
     {
-        return _context.Set<Category>()
+        return _context.Set<Category>().Include(c => c.Products).ThenInclude(c => c.ProductImages)
             .Where(i => i.ParentCategoryId == parentCategoryId)
             .ToList();
 
