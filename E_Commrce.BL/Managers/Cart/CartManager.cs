@@ -1,4 +1,6 @@
 ﻿using E_Commerce.DAL;
+using System.Data;
+
 namespace E_Commerce.BL
 {
     public class CartManager : ICartManager
@@ -73,6 +75,14 @@ namespace E_Commerce.BL
 
         }
 
+        public bool ClearCartProducts(Guid CustomerId)
+        {
+            var cart =  _unitOfWork.CartRepo.GetCartProductByCustomerId(CustomerId);
+            if (cart is null) return false;
+            cart.Products.Clear();
+            _unitOfWork.SaveChange();
+            return true;
+        }
 
         public bool DeleteCart(Guid cartId)
         {
@@ -282,7 +292,7 @@ namespace E_Commerce.BL
             }
             return false;
         }
-
+        
     }
 
 }

@@ -10,5 +10,7 @@ namespace E_Commerce.BL
         bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto);
         bool DeleteCart(Guid cartId);
 
+        bool ClearCartProducts(Guid CustomerId);
+
     }
 }
