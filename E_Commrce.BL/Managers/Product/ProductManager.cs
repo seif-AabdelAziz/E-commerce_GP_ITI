@@ -91,7 +91,7 @@ public class ProductManager : IProductManager
         newProduct.Product_Color_Size_Quantity = productAdd.ProductInfo.Select(pi => new ProductColorSizeQuantity
         {
             ProductID = newProduct.Id,
-            Color = (Color)Enum.Parse(typeof(Color), pi.Color) ,
+            Color = (Color)Enum.Parse(typeof(Color), pi.Color),
             Size = (Size)Enum.Parse(typeof(Size), pi.Size),
             Quantity = pi.Quantity,
         }).ToList();
@@ -283,7 +283,7 @@ public class ProductManager : IProductManager
         productFromDB.Product_Color_Size_Quantity = productUpdate.ProductInfo.Select(pi => new ProductColorSizeQuantity
         {
             Quantity = pi.Quantity,
-            Color=(Color)Enum.Parse(typeof(Color), pi.Color),
+            Color = (Color)Enum.Parse(typeof(Color), pi.Color),
             Size = (Size)Enum.Parse(typeof(Size), pi.Size)
         }).ToList();
 
@@ -325,11 +325,11 @@ public class ProductManager : IProductManager
                 Quantity = p.Quantity
 
             }).ToList()
-            
+
 
         };
 
-        return filtered;    
+        return filtered;
     }
 
 
@@ -351,5 +351,41 @@ public class ProductManager : IProductManager
         }).ToList();
 
         return productImages;
+    }
+
+    public ProductDetailsDistinctDto? ProductDetailsDistinct(Guid productId)
+    {
+        Product? productFromDB = unitOfWork.ProductsRepo.GetProductDetails(productId);
+        if (productFromDB == null)
+        {
+            return null;
+        }
+
+        return new ProductDetailsDistinctDto
+        {
+            Id = productId,
+            Name = productFromDB.Name,
+            Description = productFromDB.Description,
+            Rate = productFromDB.Rate,
+            Price = productFromDB.Price,
+            Discount = productFromDB.Discount,
+            ProductImages = productFromDB.ProductImages.Select(img => new ProductImageDto
+            {
+                ImageURL = img.ImageURL,
+            }).ToList(),
+
+
+            ProductInfo = productFromDB.Product_Color_Size_Quantity
+            .Select(i => new ProductInfoColorDistinctDto
+            {
+                Color = i.Color.ToString(),
+                SizeQuantities = productFromDB.Product_Color_Size_Quantity.Where(c => c.Color == i.Color).Select(p => new ProductSizeQuantityDto
+                {
+                    Quantity = p.Quantity,
+                    Size = p.Size.ToString(),
+                }).ToList(),
+
+            }).Distinct(new ProductInfoColorDistinctDtoEqualityComparer()).ToList(),
+        };
     }
 }

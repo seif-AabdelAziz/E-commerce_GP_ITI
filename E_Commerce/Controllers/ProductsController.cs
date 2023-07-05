@@ -147,5 +147,18 @@ namespace E_Commerce.API.Controllers
             return request;
         }
 
+        [HttpGet]
+        [Route("ColorDistinct/{id}")]
+        public ActionResult<ProductDetailsDistinctDto> DetailsDistinct(Guid id)
+        {
+            ProductDetailsDistinctDto? productDetails = productManager.ProductDetailsDistinct(id);
+            if (productDetails is null)
+            {
+                return BadRequest();
+            }
+
+            return productDetails;
+        }
+
     }
 }
