@@ -216,29 +216,29 @@ namespace E_Commerce.BL
                     }
 
                     if (cp.Product.Product_Color_Size_Quantity
-                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity < cp.ProductCount)
+                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity < cp.ProductCount||cp.ProductCount==0)
                     {
                         qty = 0;
                     }
                     else
                     {
-                        qty = cp.ProductCount;
+                        products.Add(new ProductDto
+                        {
+                            ProductId = cp.ProductId,
+                            Name = cp.Product.Name,
+                            Description = cp.Product.Description,
+                            Price = cp.Product.Price,
+                            Image = strImge,
+                            QuantityInStock = cp.Product.Product_Color_Size_Quantity
+                            .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity,
+                            Quantity = qty,
+                            Color = cp.Color.ToString(),
+                            Size = cp.Size.ToString()
+                        });
                     }
                     //int quantityInStock = info.Quantity;
                     //int userEnteredQuantity = cp.ProductCount;
-                    products.Add(new ProductDto
-                    {
-                        ProductId = cp.ProductId,
-                        Name = cp.Product.Name,
-                        Description = cp.Product.Description,
-                        Price = cp.Product.Price,
-                        Image = strImge,
-                        QuantityInStock = cp.Product.Product_Color_Size_Quantity
-                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity,
-                        Quantity = qty,
-                        Color = cp.Color.ToString(),
-                        Size = cp.Size.ToString()
-                    }) ;
+                    
                     total += cp.Product.Price*cp.ProductCount;
                     
                 }
