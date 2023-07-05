@@ -11,6 +11,8 @@ public class SubCategoryReadDto
     [Required(ErrorMessage = "Description is required")]
     public string Description { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
+    public List<ProductDetailsReadDto>? products { get; set; }
+
 
 
 

@@ -34,7 +34,7 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
 
     public List<Category>? GetSubCategories(Guid parentCategoryId)
     {
-        return _context.Set<Category>()
+        return _context.Set<Category>().Include(c => c.Products).ThenInclude(c => c.ProductImages)
             .Where(i => i.ParentCategoryId == parentCategoryId)
             .ToList();
 
@@ -80,4 +80,22 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
         return products;
 
     }
+
+    public List<Product> GetProductsByParentCategory(Guid parentCategoryId)
+    {
+        var subcategories = _context.Set<Category>()
+            .Include(c => c.Products)
+                .ThenInclude(p => p.ProductImages)
+            .Where(c => c.ParentCategoryId == parentCategoryId)
+            .ToList();
+        var products = new List<Product>();
+
+        foreach (var category in subcategories)
+        {
+            products.AddRange(category.Products);
+        }
+
+        return products;
+    }
+
 }

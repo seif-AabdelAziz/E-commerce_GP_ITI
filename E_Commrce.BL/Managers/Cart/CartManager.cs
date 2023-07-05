@@ -13,14 +13,16 @@ namespace E_Commerce.BL
         public void AddToCart(AddToCartDto addToCartDto, Guid customerId)
         {
             Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
-            if (cart != null) { 
+            //if (cart != null) { 
             
-                var cartProducts = cart.Products.ToList();
-                cartProducts.Add(new CartProduct{
-                    ProductId= addToCartDto.ProductId,
-                    CartId= cart.CartId,
-                });
-            }
+            //    var cartProducts = cart.Products.ToList();
+            //     cartProducts.Add(new CartProduct{
+            //        ProductId= addToCartDto.ProductId,
+            //        CartId= cart.CartId,
+            //        Color=(Color) Enum.Parse<Color>(addToCartDto.Color),
+            //        Size= (Size)Enum.Parse<Size>(addToCartDto.Size)
+            //     });
+            //}
             
             if (cart == null)
             {
@@ -28,28 +30,48 @@ namespace E_Commerce.BL
                 {
                     CartId = Guid.NewGuid(),
                     CustomerId = addToCartDto.CustomerId,
-                    Products = new List<CartProduct>()
+                    Products = null
                 };
 
-                _unitOfWork.CartRepo.Add(cart);
-            }
-
-            CartProduct? existingProduct = cart.Products.FirstOrDefault(p => p.ProductId == addToCartDto.ProductId);
-            if (existingProduct == null)
-            {
-                CartProduct newProduct = new CartProduct
+                cart.Products.Add(new CartProduct
                 {
+                    CartId = cart.CartId,
                     ProductId = addToCartDto.ProductId,
-                    ProductCount = addToCartDto.ProductCount
-                };
-
-                cart.Products.Add(newProduct);
+                    ProductCount = addToCartDto.ProductCount,
+                    Color = (Color)Enum.Parse<Color>(addToCartDto.Color),
+                    Size = (Size)Enum.Parse<Size>(addToCartDto.Size)
+                });
+                
+                _unitOfWork.CartRepo.Add(cart);
             }
             else
             {
-                existingProduct.ProductCount += addToCartDto.ProductCount;
+                 var check = cart.Products.Where(c =>
+                 
+                     c.Color== (Color)Enum.Parse<Color>(addToCartDto.Color)&&
+                     c.Size == (Size)Enum.Parse<Size>(addToCartDto.Size)
+                  ).FirstOrDefault();
+
+                if (cart.Products==null||check==null)
+                {
+                   var cartproduct = new CartProduct
+                    {
+                        ProductId = addToCartDto.ProductId,
+                        CartId = cart.CartId,
+                        ProductCount = addToCartDto.ProductCount,
+                        Color = (Color)Enum.Parse<Color>(addToCartDto.Color),
+                        Size = (Size)Enum.Parse<Size>(addToCartDto.Size)
+                    };
+
+                    cart.Products.Add(cartproduct);
+                }
+                else
+                {
+                    check.ProductCount += addToCartDto.ProductCount;
+                }
             }
-            _unitOfWork.SaveChange();
+                _unitOfWork.SaveChange();
+
         }
 
 
@@ -165,6 +187,8 @@ namespace E_Commerce.BL
         public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
         {
             Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
+            decimal total = 0;
+            string strImge = "";
 
             if (cart == null)
             {
@@ -175,37 +199,52 @@ namespace E_Commerce.BL
                     Products = new List<ProductDto>()
                 };
             }
-
-            List<ProductDto> products = new List<ProductDto>();
-            foreach (var cp in cart.Products)
+            else
             {
-                foreach (var info in cp.Product.Product_Color_Size_Quantity)
+
+                List<ProductDto> products = new List<ProductDto>();
+                foreach (var cp in cart.Products)
                 {
-                    int quantityInStock = info.Quantity;
-                    int userEnteredQuantity = cp.ProductCount; 
+                    if (_unitOfWork.ProductsRepo.GetProductDetails(cp.ProductId).ProductImages.Count==0)
+                    {
+
+                        strImge = "null";
+
+                    }
+                    else
+                    {
+                        strImge = _unitOfWork.ProductsRepo.GetProductDetails(cp.ProductId).ProductImages[0].ImageURL;
+                    }
+                    //int quantityInStock = info.Quantity;
+                    //int userEnteredQuantity = cp.ProductCount;
                     products.Add(new ProductDto
                     {
                         ProductId = cp.ProductId,
                         Name = cp.Product.Name,
                         Description = cp.Product.Description,
                         Price = cp.Product.Price,
-                        Image = cp.Product.ProductImages.FirstOrDefault()?.ImageURL,
-                        Quantity = userEnteredQuantity,
-                        Color = info.Color.ToString(),
-                        Size = info.Size.ToString(),
-                        QuantityInStock = quantityInStock,
-                    });
+                        Image=strImge,
+                        Quantity = cp.ProductCount,
+                        Color = cp.Color.ToString(),
+                        Size = cp.Size.ToString(),
+                        //QuantityInStock = quantityInStock,
+                    }) ;
+                    total += cp.Product.Price;
+                    
                 }
-            }
-
-            GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
-            {
-                CartId = cart.CartId,
-                CustomerId = cart.CustomerId,
-                Products = products
-            };
+                    GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
+                    {
+                        CartId = cart.CartId,
+                        CustomerId = cart.CustomerId,
+                        Products = products,
+                        TotalCost = total
+                    };
 
             return cartDto;
+            }
+
+            
+
         }
 
 

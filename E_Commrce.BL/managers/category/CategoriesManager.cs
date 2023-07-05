@@ -186,6 +186,23 @@ public class CategoriesManager : ICategoriesManager
                 Name = c.Name,
                 Description = c.Description,
                 Image = c.Image,
+                products = c.Products.Select(p => new ProductDetailsReadDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Discount = p.Discount,
+                    Rate = p.Rate,
+                    ProductImages = p.ProductImages.Select(c => new ProductImageDto
+                    {
+
+                        ImageURL = c.ImageURL
+
+                    }).ToList()
+
+                }).ToList()
+
 
 
             }).ToList();
@@ -219,6 +236,44 @@ public class CategoriesManager : ICategoriesManager
 
 
     }
+    #endregion
+
+
+    #region Products by name
+
+
+
+    public List<ProductReadDto>? GetProductsByName(string ProductName)
+    {
+
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+        }).ToList();
+
+        return productsDto;
+
+
+    }
+
+    #endregion
+
+
+
+    #region get products by category
+
 
 
     public List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId)
@@ -250,17 +305,24 @@ public class CategoriesManager : ICategoriesManager
     }
 
 
-    public List<ProductReadDto>? GetProductsByName(string ProductName)
-    {
+    #endregion
 
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByName(ProductName);
+
+    #region get products by parent category id
+
+    public List<ProductDetailsReadDto>? GetProductsByParentCategoryIds(Guid categoryId) {
+
+
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByParentCategory(categoryId);
+
+
 
         if (productsFromDb == null)
         {
             return null;
         }
 
-        List<ProductReadDto> productsDto = productsFromDb.Select(p => new ProductReadDto
+        List<ProductDetailsReadDto> productsDto = productsFromDb.Select(p => new ProductDetailsReadDto
         {
             Id = p.Id,
             Name = p.Name,
@@ -268,16 +330,18 @@ public class CategoriesManager : ICategoriesManager
             Price = p.Price,
             Discount = p.Discount,
             Rate = p.Rate,
+            ProductImages = p.ProductImages.Select(c => new ProductImageDto
+            {
+
+                ImageURL = c.ImageURL
+
+            }).ToList()
         }).ToList();
 
         return productsDto;
-
-
     }
 
 
-
     #endregion
-
 
 }

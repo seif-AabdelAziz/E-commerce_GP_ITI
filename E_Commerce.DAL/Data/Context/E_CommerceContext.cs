@@ -400,7 +400,71 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0,
                 Rate = 0
             },
+        new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's T-Shirt",
+                Description = "Comfortable cotton t-shirt for men",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+        new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's T-Shirt",
+                Description = "Comfortable cotton t-shirt for men",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+        new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's T-Shirt",
+                Description = "Comfortable cotton t-shirt for men",
+                Price = 15.99m,
+                Discount = 0,
+                Rate = 0
+            },
+
             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+                new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+                  new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Dress",
+                Description = "Elegant dress for women",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+                    new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Women's Dress",
@@ -418,7 +482,79 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0.15m,
                 Rate = 0
             },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+                new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+                  new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+                    new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Warm hoodie for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Warm hoodie for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+                new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Warm hoodie for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+                  new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Warm hoodie for men",
+                Price = 39.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+                    new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Men's Hoodie",
@@ -454,6 +590,33 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0.15m,
                 Rate = 0
             },
+             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+               new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Shoes",
+                Description = "Colorful shoes for kids",
+                Price = 29.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
             new Product
             {
                 Id = Guid.NewGuid(),
@@ -473,6 +636,15 @@ public class E_CommerceContext : IdentityDbContext
                 Rate = 0
             },
             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Backpack",
+                Description = "Spacious backpack for kids",
+                Price = 19.99m,
+                Discount = 0,
+                Rate = 0
+            },
+              new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Kids' Backpack",
@@ -526,6 +698,33 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0,
                 Rate = 0
             },
+             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Skirt",
+                Description = "Fashionable skirt for women",
+                Price = 27.99m,
+                Discount = 0,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Skirt",
+                Description = "Fashionable skirt for women",
+                Price = 27.99m,
+                Discount = 0,
+                Rate = 0
+            },
+               new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Skirt",
+                Description = "Fashionable skirt for women",
+                Price = 27.99m,
+                Discount = 0,
+                Rate = 0
+            },
             new Product
             {
                 Id = Guid.NewGuid(),
@@ -571,6 +770,33 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0.2m,
                 Rate = 0
             },
+             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Jacket",
+                Description = "Warm jacket for men",
+                Price = 59.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Jacket",
+                Description = "Warm jacket for men",
+                Price = 59.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
+               new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Jacket",
+                Description = "Warm jacket for men",
+                Price = 59.99m,
+                Discount = 0.2m,
+                Rate = 0
+            },
             new Product
             {
                 Id = Guid.NewGuid(),
@@ -601,6 +827,33 @@ public class E_CommerceContext : IdentityDbContext
             new Product
             {
                 Id = Guid.NewGuid(),
+                Name = "Men's Shirt",
+                Description = "Formal shirt for men",
+                Price = 34.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Shirt",
+                Description = "Formal shirt for men",
+                Price = 34.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Shirt",
+                Description = "Formal shirt for men",
+                Price = 34.99m,
+                Discount = 0.15m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
                 Name = "Women's Jacket",
                 Description = "Stylish jacket for women",
                 Price = 54.99m,
@@ -608,6 +861,33 @@ public class E_CommerceContext : IdentityDbContext
                 Rate = 0
             },
             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Hoodie",
+                Description = "Cozy hoodie for kids",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Hoodie",
+                Description = "Cozy hoodie for kids",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Hoodie",
+                Description = "Cozy hoodie for kids",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+               new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Kids' Hoodie",
@@ -652,6 +932,33 @@ public class E_CommerceContext : IdentityDbContext
                 Discount = 0.1m,
                 Rate = 0
             },
+             new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Pants",
+                Description = "Classic pants for men",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+              new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Pants",
+                Description = "Classic pants for men",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+               new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Pants",
+                Description = "Classic pants for men",
+                Price = 49.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
             new Product
             {
                 Id = Guid.NewGuid(),
@@ -682,10 +989,73 @@ public class E_CommerceContext : IdentityDbContext
             new Product
             {
                 Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Comfortable hoodie for men",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Comfortable hoodie for men",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Men's Hoodie",
+                Description = "Comfortable hoodie for men",
+                Price = 29.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
                 Name = "Women's Pants",
                 Description = "Stylish pants for women",
                 Price = 44.99m,
                 Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Pants",
+                Description = "Stylish pants for women",
+                Price = 44.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Pants",
+                Description = "Stylish pants for women",
+                Price = 44.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Women's Pants",
+                Description = "Stylish pants for women",
+                Price = 44.99m,
+                Discount = 0.05m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Sweater",
+                Description = "Warm sweater for kids",
+                Price = 34.99m,
+                Discount = 0,
                 Rate = 0
             },
             new Product
@@ -709,12 +1079,41 @@ public class E_CommerceContext : IdentityDbContext
             new Product
             {
                 Id = Guid.NewGuid(),
+                Name = "Men's Sneakers",
+                Description = "Sporty sneakers for men",
+                Price = 54.99m,
+                Discount = 0.1m,
+                Rate = 0
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
                 Name = "Women's T-Shirt",
                 Description = "Casual t-shirt for women",
                 Price = 19.99m,
                 Discount = 0.2m,
                 Rate = 0
             },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Jacket",
+                Description = "Stylish jacket for kids",
+                Price = 39.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Jacket",
+                Description = "Stylish jacket for kids",
+                Price = 39.99m,
+                Discount = 0,
+                Rate = 0
+            },
+            
             new Product
             {
                 Id = Guid.NewGuid(),
@@ -746,6 +1145,36 @@ public class E_CommerceContext : IdentityDbContext
             {
                 Id = Guid.NewGuid(),
                 Name = "Kids' Trousers",
+                Description = "Stylish trousers for kids",
+                Price = 34.99m,
+                Discount = 0.05m,
+                Rate = 0
+            }
+            ,
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Trousers2",
+                Description = "Stylish trousers for kids",
+                Price = 34.99m,
+                Discount = 0.05m,
+                Rate = 0
+            }
+            ,
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Trousers3",
+                Description = "Stylish trousers for kids",
+                Price = 34.99m,
+                Discount = 0.05m,
+                Rate = 0
+            }
+            ,
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "Kids' Trousers4",
                 Description = "Stylish trousers for kids",
                 Price = 34.99m,
                 Discount = 0.05m,
