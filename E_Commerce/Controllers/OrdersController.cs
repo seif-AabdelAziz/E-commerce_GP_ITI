@@ -30,7 +30,7 @@ namespace E_Commerce.API.Controllers
         {
             bool req =_orderManager.AddOrder(order);
             if(!req) return BadRequest(req);
-            return Ok("Added Sucessfully");
+            return Ok();
         }
         [HttpPut]
         [Route("{id}")]

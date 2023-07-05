@@ -57,6 +57,12 @@ namespace E_Commerce.API.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("Clear/{customerId}")]
+        public IActionResult ClearCartProducts(Guid customerId)
+        {
+            return _cartmanager.ClearCartProducts(customerId)? Ok():BadRequest();
+        }
 
         [HttpDelete]
         [Route("{cartId}")]

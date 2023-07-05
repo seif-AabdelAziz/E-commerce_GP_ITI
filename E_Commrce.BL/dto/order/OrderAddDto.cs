@@ -10,14 +10,13 @@ namespace E_Commerce.BL;
 
 public class OrderAddDto
 {
-    public Guid Id { get; set; }
-    public DateTime OrderData { get; set; }
-    public PaymentStatus PaymentStatus { get; set; }
-    public PaymentMethod PaymentMethod { get; set; }
-    public OrderStatus OrderStatus { get; set; }
+    public DateTime OrderData { get; set; } = DateTime.Now;
+    public string PaymentStatus { get; set; } = null!;
+    public string PaymentMethod { get; set; } = null!;
+    public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
     [Range(0, 1)]
-    public double Discount { get; set; }
-    public DateTime ArrivalDate { get; set; }
+    public double Discount { get; set; } = 0;
+    public DateTime ArrivalDate { get; set; } = DateTime.Now.AddDays(5);
     public string? Street { get; set; }
     public string? City { get; set; }
     public Countries Country { get; set; }

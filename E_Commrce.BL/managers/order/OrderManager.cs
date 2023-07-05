@@ -53,8 +53,8 @@ public class OrderManager : IOrderManager
         {
             Id = Guid.NewGuid(),
             OrderData = orderAdd.OrderData,
-            PaymentStatus = orderAdd.PaymentStatus,
-            PaymentMethod = orderAdd.PaymentMethod,
+            PaymentStatus = (PaymentStatus)Enum.Parse(typeof(PaymentStatus), orderAdd.PaymentStatus) ,
+            PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), orderAdd.PaymentMethod),
             OrderStatus = orderAdd.OrderStatus,
             Discount = orderAdd.Discount,
             ArrivalDate = orderAdd.ArrivalDate,
