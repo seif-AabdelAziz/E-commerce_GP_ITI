@@ -26,22 +26,21 @@ namespace E_Commerce.BL
             
             if (cart == null)
             {
-                cart = new Cart
-                {
-                    CartId = Guid.NewGuid(),
-                    CustomerId = addToCartDto.CustomerId,
-                    Products = null
-                };
+                cart = new Cart();
 
-                cart.Products.Add(new CartProduct
-                {
-                    CartId = cart.CartId,
-                    ProductId = addToCartDto.ProductId,
-                    ProductCount = addToCartDto.ProductCount,
-                    Color = (Color)Enum.Parse<Color>(addToCartDto.Color),
-                    Size = (Size)Enum.Parse<Size>(addToCartDto.Size)
-                });
-                
+                cart.CartId = Guid.NewGuid();
+                cart.CustomerId = addToCartDto.CustomerId;
+                cart.Products = new List<CartProduct>
+                    {
+                        new CartProduct
+                        {
+                            CartId = cart.CartId,
+                            ProductId = addToCartDto.ProductId,
+                            ProductCount = addToCartDto.ProductCount,
+                            Color = (Color)Enum.Parse<Color>(addToCartDto.Color),
+                            Size = (Size)Enum.Parse<Size>(addToCartDto.Size)
+                        }
+                    };
                 _unitOfWork.CartRepo.Add(cart);
             }
             else
@@ -92,13 +91,23 @@ namespace E_Commerce.BL
         public bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto)
         {
             Cart? cart = _unitOfWork.CartRepo.GetById(deleteCardProductDto.CartId);
+            CartProduct cart2 = _unitOfWork.CartProductRepo.GetById(deleteCardProductDto.ProductId, deleteCardProductDto.CartId);
 
-            if (cart == null || cart.Products == null)
+            if (cart == null || cart2 == null)
             {
 
                 return false;
             }
-            CartProduct cartProduct = new CartProduct
+            else
+            {
+                _unitOfWork.CartProductRepo.Delete(_unitOfWork.CartProductRepo.GetAll()
+                    .FirstOrDefault(c => c.ProductId == deleteCardProductDto.ProductId
+                    && c.CartId == deleteCardProductDto.CartId
+                    && c.Color == (Color)Enum.Parse<Color>(deleteCardProductDto.Color)
+                    && c.Size == (Size)Enum.Parse<Size>(deleteCardProductDto.Size)));
+                _unitOfWork.SaveChange();
+            }
+            /*CartProduct cartProduct = new CartProduct
             {
                 ProductId = deleteCardProductDto.ProductId,
                 CartId = deleteCardProductDto.CartId
@@ -110,7 +119,7 @@ namespace E_Commerce.BL
 
             }
             _unitOfWork.CartProductRepo.Delete(cartProduct);
-            _unitOfWork.SaveChange();
+            _unitOfWork.SaveChange();*/
 
             return true;
         }
@@ -195,7 +204,7 @@ namespace E_Commerce.BL
             {
                 return new GetCartProductByCustomerIdDto
                 {
-                    CartId = Guid.Empty,
+                    CartId = Guid.NewGuid(),
                     CustomerId = customerId,
                     Products = new List<ProductDto>()
                 };
