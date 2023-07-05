@@ -18,6 +18,7 @@ public interface ICategoriesManager
     List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId);
     List<ProductReadDto>? GetProductsByName(string ProductName);
 
+    public List<ProductDetailsReadDto>? GetProductsByParentCategoryIds(Guid categoryId);
 
 
 
@@ -26,4 +27,6 @@ public interface ICategoriesManager
 
 
 
-}
+
+
+    }

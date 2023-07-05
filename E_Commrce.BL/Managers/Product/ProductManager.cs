@@ -1,5 +1,8 @@
-﻿using E_Commerce.DAL;
+﻿using Azure;
+using E_Commerce.DAL;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Collections.Generic;
 
 namespace E_Commerce.BL;
 
@@ -14,32 +17,59 @@ public class ProductManager : IProductManager
 
     public ProductPaginationDto AllProductsPagination(int page, int countPerPage)
     {
-        var items = unitOfWork.ProductsRepo.GetAllProductsPagination(page, countPerPage).Select(p => new ProductDetailsReadDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description,
-            Price = p.Price,
-            Discount = p.Discount,
-            Rate = p.Rate,
-            ProductImages = p.ProductImages.Select(c => new ProductImageDto
-            {
-                ImageURL = c.ImageURL
+        var products = unitOfWork.ProductsRepo.GetAllProductsPagination(page, countPerPage);
 
-            }).ToList(),
-        }).ToList();
-        var totalCount = unitOfWork.ProductsRepo.GetCount();
+        var subcategories = products.SelectMany(p => p.Categories).Distinct().ToList();
+
+        var items = new List<ProductCategoryPagination>();
+
+        foreach (var subcategory in subcategories)
+        {
+            var subcategoryProducts = products.Where(p => p.Categories.Contains(subcategory));
+
+            var productCount = subcategoryProducts.Count();
+
+ 
+
+            var subcategoryDto = new ProductCategoryPagination
+            {
+                CategoryName = subcategory.Name,
+                Count = productCount,
+                Products = subcategoryProducts.Select(p => new ProductDetailsReadDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Discount = p.Discount,
+                    Rate = p.Rate,
+                    ProductImages = p.ProductImages.Select(c => new ProductImageDto
+                    {
+                        ImageURL = c.ImageURL
+                    }).ToList(),
+                }).ToList()
+            };
+
+            items.Add(subcategoryDto);
+        }
+
+        var totalCount = items.Sum(item => item.Count);
         return new ProductPaginationDto
         {
-
             totalCount = totalCount,
             items = items
-
         };
     }
 
+
+
+
+
+
+
+
     public List<ProductReadDto> AllProducts()
-    {
+{
         List<Product> productsFromDB = unitOfWork.ProductsRepo.GetAll();
         return productsFromDB.Select(p => new ProductReadDto
         {

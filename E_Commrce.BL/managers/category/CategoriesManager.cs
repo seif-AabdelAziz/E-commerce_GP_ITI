@@ -290,4 +290,41 @@ public class CategoriesManager : ICategoriesManager
 
     #endregion
 
+
+    #region get products by parent category id
+
+    public List<ProductDetailsReadDto>? GetProductsByParentCategoryIds(Guid categoryId) {
+
+
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByParentCategory(categoryId);
+
+
+
+        if (productsFromDb == null)
+        {
+            return null;
+        }
+
+        List<ProductDetailsReadDto> productsDto = productsFromDb.Select(p => new ProductDetailsReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            Discount = p.Discount,
+            Rate = p.Rate,
+            ProductImages = p.ProductImages.Select(c => new ProductImageDto
+            {
+
+                ImageURL = c.ImageURL
+
+            }).ToList()
+        }).ToList();
+
+        return productsDto;
+    }
+
+
+    #endregion
+
 }
