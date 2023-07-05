@@ -11,4 +11,7 @@ public interface ICategoriesRepo : IGenericRepo<Category>
     List<Product>? GetProductsByCategoryId(Guid categoryId);
     List<Product>? GetProductsByName(string productName);
 
+     List<Product> GetProductsByParentCategory(Guid parentCategoryId);
+
+
 }

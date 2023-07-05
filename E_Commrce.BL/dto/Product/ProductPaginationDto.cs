@@ -9,6 +9,6 @@ namespace E_Commerce.BL;
 public class ProductPaginationDto
 {
 
-    public List<ProductDetailsReadDto> items { get; set; }= new List<ProductDetailsReadDto>();
+    public List<ProductCategoryPagination> items { get; set; }= new List<ProductCategoryPagination>();
     public int totalCount { get; set; }
 }
