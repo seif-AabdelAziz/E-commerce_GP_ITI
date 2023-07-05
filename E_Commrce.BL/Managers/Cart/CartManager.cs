@@ -189,6 +189,7 @@ namespace E_Commerce.BL
             Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
             decimal total = 0;
             string strImge = "";
+            int qty = 0;
 
             if (cart == null)
             {
@@ -213,6 +214,16 @@ namespace E_Commerce.BL
                     {
                         strImge = _unitOfWork.ProductsRepo.GetProductDetails(cp.ProductId).ProductImages[0].ImageURL;
                     }
+
+                    if (cp.Product.Product_Color_Size_Quantity
+                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity < cp.ProductCount)
+                    {
+                        qty = 0;
+                    }
+                    else
+                    {
+                        qty = cp.ProductCount;
+                    }
                     //int quantityInStock = info.Quantity;
                     //int userEnteredQuantity = cp.ProductCount;
                     products.Add(new ProductDto
@@ -222,11 +233,11 @@ namespace E_Commerce.BL
                         Description = cp.Product.Description,
                         Price = cp.Product.Price,
                         Image = strImge,
-                        Quantity = cp.ProductCount,
-                        Color = cp.Color.ToString(),
-                        Size = cp.Size.ToString(),
                         QuantityInStock = cp.Product.Product_Color_Size_Quantity
-                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity
+                        .FirstOrDefault(p => p.Color == cp.Color && p.Size == cp.Size).Quantity,
+                        Quantity = qty,
+                        Color = cp.Color.ToString(),
+                        Size = cp.Size.ToString()
                     }) ;
                     total += cp.Product.Price*cp.ProductCount;
                     
