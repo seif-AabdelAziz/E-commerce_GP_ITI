@@ -5,7 +5,7 @@ namespace E_Commerce.BL
     {
         GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId);
 
-        void AddToCart(AddToCartDto addToCartDto);
+        void AddToCart(AddToCartDto addToCartDto,string customerId);
         bool UpdateCartProduct(UpdateToCartDto updateToCartDto);
         bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto);
         bool DeleteCart(Guid cartId);

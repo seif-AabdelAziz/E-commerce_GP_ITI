@@ -7,7 +7,6 @@ namespace E_Commerce.BL
     public class GetCartProductByCustomerIdDto
     {
         public Guid CartId { get; set; }
-        public Guid CustomerId { get; set; }
         public List<ProductDto> Products { get; set; }
         public decimal TotalCost { get; set; }
     }

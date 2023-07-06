@@ -66,6 +66,7 @@ builder.Services.AddScoped<IUsersManagers, UsersManager>();
 builder.Services.AddScoped<ICartManager, CartManager>();
 builder.Services.AddScoped<IProductManager, ProductManager>();
 builder.Services.AddScoped<ISecurityManager, SecurityManager>();
+builder.Services.AddScoped<IFilterManger,FilterManger>();
 #endregion
 
 

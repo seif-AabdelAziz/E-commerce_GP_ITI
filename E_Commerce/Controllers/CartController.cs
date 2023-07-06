@@ -1,6 +1,8 @@
 ﻿using E_Commerce.BL;
 using E_Commerce.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.Controllers
@@ -10,21 +12,27 @@ namespace E_Commerce.API.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartManager _cartmanager;
+        private readonly UserManager<Customer> _customer;
 
-        public CartController(ICartManager cartmanager)
+        public CartController(ICartManager cartmanager,UserManager<Customer> customer)
         {
             _cartmanager = cartmanager;
+            _customer = customer;
         }
 
 
         [HttpPost]
-        [Route("{customerId}")]
-        public ActionResult AddProductToCart( AddToCartDto addToCartDto, Guid customerId)
+        [Route("AddCart")]
+        [Authorize]
+        public ActionResult AddProductToCart( AddToCartDto addToCartDto)
         {
+           var customerID= _customer.GetUserAsync(User).Result.Id;
+
+
             try
             {
     
-                _cartmanager.AddToCart(addToCartDto);
+                _cartmanager.AddToCart(addToCartDto,customerID);
 
                 return Ok();
             }
@@ -36,9 +44,15 @@ namespace E_Commerce.API.Controllers
 
 
         [HttpGet]
-        [Route("{customerId}")]
-        public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId(Guid customerId)
+        [Route("CartProducts")]
+        [Authorize]
+        public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId()
         {
+            Guid customerId =new Guid( _customer.GetUserAsync(User).Result.Id);
+            if (customerId == Guid.Empty)
+            {
+                return BadRequest();
+            }
             GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
             if(cartDto == null)
             {

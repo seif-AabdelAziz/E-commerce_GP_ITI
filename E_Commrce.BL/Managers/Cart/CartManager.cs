@@ -11,27 +11,16 @@ namespace E_Commerce.BL
         {
             _unitOfWork = unitOfWork;
         }
-
-        public void AddToCart(AddToCartDto addToCartDto)
+        #region AddToCart
+        public void AddToCart(AddToCartDto addToCartDto,string CustomerId)
         {
-            Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(addToCartDto.CustomerId);
-            //if (cart != null) { 
-            
-            //    var cartProducts = cart.Products.ToList();
-            //     cartProducts.Add(new CartProduct{
-            //        ProductId= addToCartDto.ProductId,
-            //        CartId= cart.CartId,
-            //        Color=(Color) Enum.Parse<Color>(addToCartDto.Color),
-            //        Size= (Size)Enum.Parse<Size>(addToCartDto.Size)
-            //     });
-            //}
-            
+            Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(new Guid(CustomerId));
             if (cart == null)
             {
                 cart = new Cart();
 
                 cart.CartId = Guid.NewGuid();
-                cart.CustomerId = addToCartDto.CustomerId;
+                cart.CustomerId = new Guid(CustomerId);
                 cart.Products = new List<CartProduct>
                     {
                         new CartProduct
@@ -47,13 +36,13 @@ namespace E_Commerce.BL
             }
             else
             {
-                 var check = cart.Products.Where(c =>
+                 var productCheck = cart.Products.Where(c =>
                  
                      c.Color== (Color)Enum.Parse<Color>(addToCartDto.Color)&&
                      c.Size == (Size)Enum.Parse<Size>(addToCartDto.Size)
                   ).FirstOrDefault();
 
-                if (cart.Products==null||check==null)
+                if (cart.Products==null|| productCheck == null)
                 {
                    var cartproduct = new CartProduct
                     {
@@ -68,17 +57,28 @@ namespace E_Commerce.BL
                 }
                 else
                 {
-                    check.ProductCount += addToCartDto.ProductCount;
+                    int dbnumber = _unitOfWork.ProductsRepo.GetProductDetails(addToCartDto.ProductId).Product_Color_Size_Quantity
+                                                                                        .FirstOrDefault(p => p.Color == (Color)Enum.Parse<Color>(addToCartDto.Color) &&
+                                                                                         p.Size == (Size)Enum.Parse<Size>(addToCartDto.Size)).Quantity;
+                    int newNumber = productCheck.ProductCount += addToCartDto.ProductCount;
+                    if (newNumber <= dbnumber) 
+                     
+                        productCheck.ProductCount += addToCartDto.ProductCount;
+                    else
+                        productCheck.ProductCount = dbnumber;
                 }
             }
                 _unitOfWork.SaveChange();
 
         }
+        #endregion
+
 
         public bool ClearCartProducts(Guid CustomerId)
         {
             var cart =  _unitOfWork.CartRepo.GetCartProductByCustomerId(CustomerId);
-            if (cart is null) return false;
+            if (cart is null) 
+                return false;
             cart.Products.Clear();
             _unitOfWork.SaveChange();
             return true;
@@ -124,6 +124,7 @@ namespace E_Commerce.BL
 
         #endregion
 
+
         #region GetAllCarrtProducts
         public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
         {
@@ -137,7 +138,6 @@ namespace E_Commerce.BL
                 return new GetCartProductByCustomerIdDto
                 {
                     CartId = Guid.NewGuid(),
-                    CustomerId = customerId,
                     Products = new List<ProductDto>()
                 };
             }
@@ -181,7 +181,6 @@ namespace E_Commerce.BL
                     GetCartProductByCustomerIdDto cartDto = new GetCartProductByCustomerIdDto
                     {
                         CartId = cart.CartId,
-                        CustomerId = cart.CustomerId,
                         Products = products,
                         TotalCost = total
                     };
@@ -195,25 +194,25 @@ namespace E_Commerce.BL
         #endregion
 
         #region UpdateCartProduct
-        public bool UpdateCartProduct(UpdateToCartDto updateToCartDto)
+        public bool UpdateCartProduct(Guid customerId)
         {
-            CartProduct? cart = _unitOfWork.CartProductRepo.GetById(updateToCartDto.ProductId, updateToCartDto.CartId);
+            //CartProduct? cart = _unitOfWork.CartProductRepo.GetById(updateToCartDto.ProductId, updateToCartDto.CartId);
 
-            if (cart != null) 
-            {
-                //from dto (edit)
-                var color = updateToCartDto.Color;
-                var size = updateToCartDto.Size;
-                var productInfo =  cart.Product.Product_Color_Size_Quantity.First(c => c.ProductID == updateToCartDto.ProductId &&
-                c.Color == color && c.Size == size);
-                if (productInfo == null || productInfo.Quantity < updateToCartDto.Quantity)
-                {
-                    return false;
-                }
-                cart.ProductCount = updateToCartDto.Quantity;
-                _unitOfWork.SaveChange();
-                return true;
-            }
+            //if (cart != null) 
+            //{
+            //    //from dto (edit)
+            //    var color = updateToCartDto.Color;
+            //    var size = updateToCartDto.Size;
+            //    var productInfo =  cart.Product.Product_Color_Size_Quantity.First(c => c.ProductID == updateToCartDto.ProductId &&
+            //    c.Color == color && c.Size == size);
+            //    if (productInfo == null || productInfo.Quantity < updateToCartDto.Quantity)
+            //    {
+            //        return false;
+            //    }
+            //    cart.ProductCount = updateToCartDto.Quantity;
+            //    _unitOfWork.SaveChange();
+            //    return true;
+            //}
             return false;
         }
         #endregion 
