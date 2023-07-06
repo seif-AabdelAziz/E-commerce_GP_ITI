@@ -98,4 +98,11 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
         return products;
     }
 
+    public List<Category> GetCategoriesUnique()
+    {
+        return _context.Set<Category>()
+            .GroupBy(c => c.Name)
+            .Select(g => g.First())
+            .ToList();
+    }
 }

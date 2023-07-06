@@ -10,6 +10,8 @@ public interface IProductsRepo : IGenericRepo<Product>
     Product? GetProductCategories(Guid id);
     Product? GetProductToUpdate(Guid id);
     List<Product> GetProductsWithImages();
+    List<Product> GetProductsByCategoryUnique();
+
 
 
 }

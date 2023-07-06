@@ -6,6 +6,5 @@ namespace E_Commerce.DAL
         CartProduct? GetById(Guid productId,Guid cartId);
         CartProduct? GetCartProductByCustomerId(Guid CustomerId);
 
-
     }
 }

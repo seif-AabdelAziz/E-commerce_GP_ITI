@@ -19,12 +19,12 @@ namespace E_Commerce.API.Controllers
 
         [HttpPost]
         [Route("{customerId}")]
-        public ActionResult AddProductToCart(AddToCartDto addToCartDto)
+        public ActionResult AddProductToCart( AddToCartDto addToCartDto, Guid customerId)
         {
             try
             {
     
-                _cartmanager.AddToCart(addToCartDto, addToCartDto.CustomerId);
+                _cartmanager.AddToCart(addToCartDto);
 
                 return Ok();
             }
@@ -38,11 +38,11 @@ namespace E_Commerce.API.Controllers
         [HttpGet]
         [Route("{customerId}")]
         public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId(Guid customerId)
-            {
+        {
             GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
-            if (cartDto.Products.Count == 0)
+            if(cartDto == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             return cartDto;
@@ -50,13 +50,19 @@ namespace E_Commerce.API.Controllers
 
 
         [HttpDelete]
-        [Route("{cartId}/{productId}")]
+        [Route("DeletePrdouctFromCart")]
         public IActionResult DeleteCartProduct(DeleteCardProductDto deleteCardProduct)
         {
             _cartmanager.DeleteCartProduct(deleteCardProduct);
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("Clear/{customerId}")]
+        public IActionResult ClearCartProducts(Guid customerId)
+        {
+            return _cartmanager.ClearCartProducts(customerId)? Ok():BadRequest();
+        }
 
         [HttpDelete]
         [Route("{cartId}")]

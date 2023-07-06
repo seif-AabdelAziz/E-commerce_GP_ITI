@@ -20,6 +20,7 @@ public interface ICategoriesManager
 
     public List<ProductDetailsReadDto>? GetProductsByParentCategoryIds(Guid categoryId);
 
+    List<CategoryReadDto> GetCategoriesUnique();
 
 
 
@@ -28,5 +29,4 @@ public interface ICategoriesManager
 
 
 
-
-    }
+}

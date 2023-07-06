@@ -16,4 +16,7 @@ public interface IProductManager
 
     ProductPaginationDto AllProductsPagination(int page, int countPerPage);
     List<ProductWithImagesDto> ProductsWithImages();
+
+    ProductDetailsDistinctDto? ProductDetailsDistinct(Guid productId);
+    List<ProductWithImagesDto> GetProductsUnique();
 }

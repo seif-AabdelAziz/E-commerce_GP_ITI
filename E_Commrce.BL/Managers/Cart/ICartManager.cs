@@ -5,10 +5,12 @@ namespace E_Commerce.BL
     {
         GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId);
 
-        void AddToCart(AddToCartDto addToCartDto , Guid customerId);
+        void AddToCart(AddToCartDto addToCartDto);
         bool UpdateCartProduct(UpdateToCartDto updateToCartDto);
         bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto);
         bool DeleteCart(Guid cartId);
+
+        bool ClearCartProducts(Guid CustomerId);
 
     }
 }

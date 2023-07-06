@@ -1,4 +1,5 @@
 ﻿using E_Commerce.BL;
+using E_Commerce.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -145,6 +146,26 @@ namespace E_Commerce.API.Controllers
                 return BadRequest();
             }
             return request;
+        }
+
+        [HttpGet]
+        [Route("ColorDistinct/{id}")]
+        public ActionResult<ProductDetailsDistinctDto> DetailsDistinct(Guid id)
+        {
+            ProductDetailsDistinctDto? productDetails = productManager.ProductDetailsDistinct(id);
+            if (productDetails is null)
+            {
+                return BadRequest();
+            }
+
+            return productDetails;
+        }
+
+        [HttpGet]
+        [Route("UniqueProducts")]
+        public ActionResult<List<ProductWithImagesDto>> GetProductsUnique()
+        {
+            return productManager.GetProductsUnique();
         }
 
     }
