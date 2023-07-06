@@ -2,8 +2,9 @@ using E_Commerce.BL;
 using E_Commerce.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
-
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +86,21 @@ builder.Services.AddIdentity<Customer, IdentityRole>(options =>
 
 #endregion
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Def";
+    options.DefaultChallengeScheme = "Def";
+}).AddJwtBearer("Def", options =>
+{
+    var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("SecretKey")));
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+       IssuerSigningKey = key
+    };
+});
+
 
 var app = builder.Build();
 
@@ -98,6 +114,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("CORSpolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
