@@ -23,12 +23,10 @@ namespace E_Commerce.API.Controllers
 
         [HttpPost]
         [Route("AddCart")]
-        [Authorize]
+        [Authorize(Policy = "ForCustomer")]
         public ActionResult AddProductToCart( AddToCartDto addToCartDto)
         {
            var customerID= _customer.GetUserAsync(User).Result.Id;
-
-
             try
             {
     
@@ -45,71 +43,89 @@ namespace E_Commerce.API.Controllers
 
         [HttpGet]
         [Route("CartProducts")]
-        [Authorize]
+        [Authorize(Policy = "ForCustomer")]
         public ActionResult<GetCartProductByCustomerIdDto> GetCartProductsByCustomerId()
         {
-            Guid customerId =new Guid( _customer.GetUserAsync(User).Result.Id);
-            if (customerId == Guid.Empty)
+            try{
+                Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+                GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
+                return cartDto;
+            }
+            catch
             {
                 return BadRequest();
             }
-            GetCartProductByCustomerIdDto cartDto = _cartmanager.GetCartProductsByCustomerId(customerId);
-            if(cartDto == null)
-            {
-                return BadRequest();
-            }
-
-            return cartDto;
         }
 
 
         [HttpDelete]
         [Route("DeletePrdouctFromCart")]
+        [Authorize(Policy = "ForCustomer")]
         public IActionResult DeleteCartProduct(DeleteCardProductDto deleteCardProduct)
         {
             _cartmanager.DeleteCartProduct(deleteCardProduct);
             return Ok();
         }
 
-        [HttpDelete]
-        [Route("Clear/{customerId}")]
-        public IActionResult ClearCartProducts(Guid customerId)
-        {
-            return _cartmanager.ClearCartProducts(customerId)? Ok():BadRequest();
-        }
 
         [HttpDelete]
-        [Route("{cartId}")]
-        public ActionResult DeleteCart(Guid cartId)
+        [Authorize(Policy = "ForCustomer")]
+        public ActionResult DeleteCart()
         {
-            bool isDeleted = _cartmanager.DeleteCart(cartId);
-            if (isDeleted)
+            try
             {
+                Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+                bool isDeleted = _cartmanager.DeleteCart(customerId);
                 return Ok();
             }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-
-        [HttpPut]
-        [Authorize]
-        public ActionResult UpdateCart()
-        {
-            Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
-            if (customerId == Guid.Empty)
+            catch
             {
                 return BadRequest();
             }
-             var Updated =  _cartmanager.UpdateCartProduct(customerId);
-            
-            if (Updated)
+           
+        }
+
+
+        [HttpPatch]
+        [Route("Increase")]
+        [Authorize(Policy = "ForCustomer")]
+        public ActionResult UpdateCart(AddToCartDto cartProduct)
+        {
+            try
             {
-                return NoContent();
+                Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+                var Updated =  _cartmanager.UpdateCartProduct(customerId, cartProduct);
+                if (!Updated)
+                    return BadRequest();
+                return Ok();
             }
-            return NotFound();
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+
+
+        [HttpPatch]
+        [Route("Decrease")]
+        [Authorize(Policy = "ForCustomer")]
+        public ActionResult UpdateCartDec(AddToCartDto cartProduct)
+        {
+            try
+            {
+                Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+                var Updated = _cartmanager.UpdateCartProductDecr(customerId, cartProduct);
+                if (Updated)
+                    return Ok();
+                return BadRequest();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+            
+
 
         }
 

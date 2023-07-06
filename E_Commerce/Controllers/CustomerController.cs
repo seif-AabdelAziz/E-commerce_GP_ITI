@@ -1,4 +1,6 @@
 ﻿using E_Commerce.BL;
+using E_Commerce.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +12,16 @@ namespace E_Commerce.API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerManager _customerManger;
-        
-        public CustomerController(ICustomerManager customerManger)
+        private readonly UserManager<Customer> _customer;
+
+        public CustomerController(ICustomerManager customerManger, UserManager<Customer> customer)
         {
             _customerManger = customerManger;
+            _customer = customer;
         }
 
         [HttpGet]
+
         public ActionResult<List<CustomerListDataDto>> GetAllCustomer()
         {
             List<CustomerListDataDto> customers = _customerManger.GetAllCustomers();
@@ -24,9 +29,10 @@ namespace E_Commerce.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public ActionResult<CustomerListDataDto> GetCustomerBy(Guid id)
+        [Route("GetByOne")]
+        public ActionResult<CustomerListDataDto> GetCustomerBy()
         {
+            Guid id =new Guid(_customer.GetUserAsync(User).Result.Id);
             CustomerListDataDto? customer = _customerManger.GetCustomerById(id);
             if (customer == null)
             {

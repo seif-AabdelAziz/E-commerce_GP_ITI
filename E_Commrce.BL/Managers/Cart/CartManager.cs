@@ -74,58 +74,18 @@ namespace E_Commerce.BL
         #endregion
 
 
-        public bool ClearCartProducts(Guid CustomerId)
-        {
-            var cart =  _unitOfWork.CartRepo.GetCartProductByCustomerId(CustomerId);
-            if (cart is null) 
-                return false;
-            cart.Products.Clear();
-            _unitOfWork.SaveChange();
-            return true;
-        }
+        //public bool ClearCartProducts(Guid CustomerId)
+        //{
+        //    var cart =  _unitOfWork.CartRepo.GetCartProductByCustomerId(CustomerId);
+        //    if (cart is null) 
+        //        return false;
+        //    cart.Products.Clear();
+        //    _unitOfWork.SaveChange();
+        //    return true;
+        //}
+        
 
-        public bool DeleteCart(Guid cartId)
-        {
-            Cart cart = _unitOfWork.CartRepo.GetById(cartId);
-            _unitOfWork.CartRepo.Delete(cart);
-            if (cart == null)
-            {
-                return false;
-            }
-
-            _unitOfWork.CartRepo.Delete(cart);
-            return _unitOfWork.SaveChange() > 0;
-
-        }
-
-        #region DeleteCartProduct
-        public bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto)
-        {
-            Cart? cart = _unitOfWork.CartRepo.GetById(deleteCardProductDto.CartId);
-            CartProduct cart2 = _unitOfWork.CartProductRepo.GetById(deleteCardProductDto.ProductId, deleteCardProductDto.CartId);
-
-            if (cart == null || cart2 == null)
-            {
-
-                return false;
-            }
-            else
-            {
-                _unitOfWork.CartProductRepo.Delete(_unitOfWork.CartProductRepo.GetAll()
-                    .FirstOrDefault(c => c.ProductId == deleteCardProductDto.ProductId
-                    && c.CartId == deleteCardProductDto.CartId
-                    && c.Color == (Color)Enum.Parse<Color>(deleteCardProductDto.Color)
-                    && c.Size == (Size)Enum.Parse<Size>(deleteCardProductDto.Size)));
-                _unitOfWork.SaveChange();
-            }
-            
-            return true;
-        }
-
-        #endregion
-
-
-        #region GetAllCarrtProducts
+        #region GetAllCartProducts
         public GetCartProductByCustomerIdDto GetCartProductsByCustomerId(Guid customerId)
         {
             Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
@@ -193,29 +153,103 @@ namespace E_Commerce.BL
         }
         #endregion
 
-        #region UpdateCartProduct
-        public bool UpdateCartProduct(Guid customerId)
+        #region UpdateCartProduct Increase Count
+        public bool UpdateCartProduct(Guid customerId, AddToCartDto cartproduct)
         {
-            //CartProduct? cart = _unitOfWork.CartProductRepo.GetById(updateToCartDto.ProductId, updateToCartDto.CartId);
+            Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
 
-            //if (cart != null) 
-            //{
-            //    //from dto (edit)
-            //    var color = updateToCartDto.Color;
-            //    var size = updateToCartDto.Size;
-            //    var productInfo =  cart.Product.Product_Color_Size_Quantity.First(c => c.ProductID == updateToCartDto.ProductId &&
-            //    c.Color == color && c.Size == size);
-            //    if (productInfo == null || productInfo.Quantity < updateToCartDto.Quantity)
-            //    {
-            //        return false;
-            //    }
-            //    cart.ProductCount = updateToCartDto.Quantity;
-            //    _unitOfWork.SaveChange();
-            //    return true;
-            //}
+            if (cart != null && cart.Products.FirstOrDefault(p=>p.ProductId == cartproduct.ProductId 
+                && cartproduct.Color==p.Color.ToString()&&cartproduct.Size==p.Size.ToString())!=null)
+            {
+                
+                int count = cart.Products.FirstOrDefault(p => p.ProductId == cartproduct.ProductId
+                            && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()).ProductCount + 1;
+
+                if (count <= _unitOfWork.ProductsRepo.GetProductDetails(cartproduct.ProductId)
+                    .Product_Color_Size_Quantity.FirstOrDefault(p => p.ProductID == cartproduct.ProductId
+                            && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()).Quantity)
+                {
+                    cart.Products.FirstOrDefault(p => p.ProductId == cartproduct.ProductId
+                            && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()).ProductCount += 1;
+                    _unitOfWork.SaveChange();
+
+                }
+                return true;
+                
+            }
             return false;
         }
         #endregion 
+
+        #region UpdateCartProduct Decrease Count
+        public bool UpdateCartProductDecr(Guid customerId, AddToCartDto cartproduct)
+        {
+            Cart? cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
+
+            if (cart != null && cart.Products.FirstOrDefault(p => p.ProductId == cartproduct.ProductId
+                && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()) != null)
+            {
+
+                int count = cart.Products.FirstOrDefault(p => p.ProductId == cartproduct.ProductId
+                            && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()).ProductCount - 1;
+
+                if (count > 0 )
+                {
+                    cart.Products.FirstOrDefault(p => p.ProductId == cartproduct.ProductId
+                            && cartproduct.Color == p.Color.ToString() && cartproduct.Size == p.Size.ToString()).ProductCount -= 1;
+                    _unitOfWork.SaveChange();
+
+                }
+                return true;
+
+            }
+            return false;
+        }
+        #endregion
+
+        #region Delete Cart Products
+        public bool DeleteCart(Guid customerId)
+        {
+            Cart cart = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId);
+            _unitOfWork.CartRepo.Delete(cart);
+            if (cart == null)
+            {
+                return false;
+            }
+
+            _unitOfWork.CartRepo.Delete(cart);
+            return _unitOfWork.SaveChange() > 0;
+
+        }
+        #endregion
+
+        #region DeleteCartProduct
+        public bool DeleteCartProduct(DeleteCardProductDto deleteCardProductDto)
+        {
+            Cart? cart = _unitOfWork.CartRepo.GetById(deleteCardProductDto.CartId);
+            CartProduct cart2 = _unitOfWork.CartProductRepo.GetById(deleteCardProductDto.ProductId, deleteCardProductDto.CartId);
+
+            if (cart == null || cart2 == null)
+            {
+
+                return false;
+            }
+            else
+            {
+                _unitOfWork.CartProductRepo.Delete(_unitOfWork.CartProductRepo.GetAll()
+                    .FirstOrDefault(c => c.ProductId == deleteCardProductDto.ProductId
+                    && c.CartId == deleteCardProductDto.CartId
+                    && c.Color == (Color)Enum.Parse<Color>(deleteCardProductDto.Color)
+                    && c.Size == (Size)Enum.Parse<Size>(deleteCardProductDto.Size)));
+                _unitOfWork.SaveChange();
+            }
+
+            return true;
+        }
+
+        
+
+        #endregion
 
     }
 

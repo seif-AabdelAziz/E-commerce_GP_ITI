@@ -21,4 +21,5 @@ public class Order
     public string CustomerId { get; set; } = null!;
     public Customer Customer { get; set; } = null!;
     public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+    public decimal TotalPrice { get; set; }
 }
