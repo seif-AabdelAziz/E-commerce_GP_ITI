@@ -53,7 +53,7 @@ public class WishListManager : IWishListManager
                 ProductName = p.Name,
                 Price = p.Price,
                 Discount = p.Discount,
-             //   ImageUrl = p.ProductImages.FirstOrDefault(img => img.ProductID == p.Id).ImageURL
+                ImageUrl = p.ProductImages.FirstOrDefault(img => img.ProductID == p.Id).ImageURL
              //   --> null refrence exception in ProductImg Due to No inserted images
             }).ToList()
         };
