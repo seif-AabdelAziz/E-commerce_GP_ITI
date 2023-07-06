@@ -28,7 +28,6 @@ public class ProductManager : IProductManager
             var subcategoryProducts = products.Where(p => p.Categories.Contains(subcategory));
 
             var productCount = subcategoryProducts.Count();
-
  
 
             var subcategoryDto = new ProductCategoryPagination

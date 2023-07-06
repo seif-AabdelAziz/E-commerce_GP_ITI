@@ -150,7 +150,8 @@ namespace E_Commerce.BL
             customeroldData.MidName = customerUpdate.MidName;
             customeroldData.Street = customerUpdate.Street;
             customeroldData.City = customerUpdate.City;
-            customeroldData.Country = customerUpdate.Country;
+            customeroldData.Country = (Countries)Enum.Parse(typeof(Countries), customerUpdate.Country);
+
             customeroldData.PhoneNumber = customerUpdate.PhoneNumber;
 
             _unitOfWork.SaveChange();

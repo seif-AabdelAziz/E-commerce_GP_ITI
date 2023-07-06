@@ -25,9 +25,9 @@ namespace E_Commerce.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<CustomerListDataDto> GetCustomerBy(Guid Id)
+        public ActionResult<CustomerListDataDto> GetCustomerBy(Guid id)
         {
-            CustomerListDataDto? customer = _customerManger.GetCustomerById(Id);
+            CustomerListDataDto? customer = _customerManger.GetCustomerById(id);
             if (customer == null)
             {
                 return NotFound();
@@ -55,15 +55,21 @@ namespace E_Commerce.API.Controllers
             return StatusCode(StatusCodes.Status304NotModified, "Reset Faild");
         }
 
-        [HttpPatch]
-        public ActionResult UpdateCustomerData(CustomerUpdateDto updateCustomer)
+        [HttpPatch("{id}")]
+        public ActionResult UpdateCustomerData(Guid id,CustomerUpdateDto updateCustomer)
         {
+
+
+            if (id != updateCustomer.Id) {
+
+                return BadRequest();
+            }
             var check = _customerManger.UpdateCustomerData(updateCustomer);
             if (check)
             {
-                return StatusCode(StatusCodes.Status201Created, "Updated Successfully");
+                return Ok();
             }
-            return StatusCode(StatusCodes.Status304NotModified, "Updated Faild");
+            return BadRequest();
         }
 
 
