@@ -95,9 +95,15 @@ namespace E_Commerce.API.Controllers
 
 
         [HttpPut]
-        public ActionResult UpdateCart(UpdateToCartDto updateToCartDto )
+        [Authorize]
+        public ActionResult UpdateCart()
         {
-             var Updated =  _cartmanager.UpdateCartProduct(updateToCartDto);
+            Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+            if (customerId == Guid.Empty)
+            {
+                return BadRequest();
+            }
+             var Updated =  _cartmanager.UpdateCartProduct(customerId);
             
             if (Updated)
             {
