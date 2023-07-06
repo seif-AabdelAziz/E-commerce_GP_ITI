@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -87,6 +88,8 @@ builder.Services.AddIdentity<Customer, IdentityRole>(options =>
 
 #endregion
 
+#region Authentication
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = "Def";
@@ -101,6 +104,25 @@ builder.Services.AddAuthentication(options =>
        IssuerSigningKey = key
     };
 });
+#endregion
+
+#region Authorization
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ForAdmin", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "Admin");
+    });
+
+    options.AddPolicy("ForCustomer", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "Customer");
+    });
+});
+
+#endregion
+
 
 
 var app = builder.Build();

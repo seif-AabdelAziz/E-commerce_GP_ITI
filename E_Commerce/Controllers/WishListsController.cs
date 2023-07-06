@@ -21,7 +21,7 @@ public class WishListsController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Policy = "ForCustomer")]
     public ActionResult<WishListDisplayDto> GetWishList()
     {
         string customerId = usersManager.GetUserAsync(User).Result.Id;
