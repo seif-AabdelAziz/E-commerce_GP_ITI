@@ -1,5 +1,8 @@
 ﻿using E_Commerce.BL;
+using E_Commerce.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.Controllers;
@@ -9,16 +12,20 @@ namespace E_Commerce.API.Controllers;
 public class WishListsController : ControllerBase
 {
     private readonly IWishListManager wishListManager;
+    private readonly UserManager<Customer> usersManager;
 
-    public WishListsController(IWishListManager wishListManager)
+    public WishListsController(IWishListManager wishListManager,UserManager<Customer> _usersManager)
     {
         this.wishListManager = wishListManager;
+        usersManager = _usersManager;
     }
 
     [HttpGet]
-    public ActionResult<WishListDisplayDto> GetWishList([FromQuery] Guid customerId)
+    [Authorize]
+    public ActionResult<WishListDisplayDto> GetWishList()
     {
-        return wishListManager.GetWishList(customerId);
+        var customerId = usersManager.GetUserAsync(User).Result.Id;
+        return wishListManager.GetWishList(new Guid(customerId));
     }
 
     [HttpPatch]
