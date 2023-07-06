@@ -49,6 +49,7 @@ public class WishListManager : IWishListManager
             CustomerName = $"{wishlist.Customer.FirstName} {wishlist.Customer.LastName}",
             Products = wishlist.Products.Select(p => new WishListProductsDto
             {
+                ProductId=p.Id,
                 ProductName = p.Name,
                 Price = p.Price,
                 Discount = p.Discount,

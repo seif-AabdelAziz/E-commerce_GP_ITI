@@ -24,7 +24,7 @@ public class WishListsController : ControllerBase
     [Authorize]
     public ActionResult<WishListDisplayDto> GetWishList()
     {
-        var customerId = usersManager.GetUserAsync(User).Result.Id;
+        string customerId = usersManager.GetUserAsync(User).Result.Id;
         return wishListManager.GetWishList(new Guid(customerId));
     }
 
