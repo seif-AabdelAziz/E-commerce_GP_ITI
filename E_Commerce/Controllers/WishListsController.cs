@@ -30,16 +30,22 @@ public class WishListsController : ControllerBase
 
     [HttpPatch]
     [Route("add")]
+    [Authorize(Policy = "ForCustomer")]
     public ActionResult AddToWishList(WishListIDsDto iDsDto)
     {
-        return wishListManager.AddToWishList(iDsDto) ? Ok("Added") : BadRequest();
+        string id = usersManager.GetUserAsync(User).Result.Id;
+
+        return wishListManager.AddToWishList(iDsDto, new Guid(id)) ? Ok("Added") : BadRequest();
     }
 
     [HttpPatch]
     [Route("delete")]
+    [Authorize(Policy = "ForCustomer")]
     public ActionResult DeleteFromWishList(WishListIDsDto iDsDto)
     {
-        return wishListManager.DeleteFromWishList(iDsDto) ? Ok("Deleted") : BadRequest();
+        string id = usersManager.GetUserAsync(User).Result.Id;
+
+        return wishListManager.DeleteFromWishList(iDsDto, new Guid(id)) ? Ok("Deleted") : BadRequest();
     }
 
 }

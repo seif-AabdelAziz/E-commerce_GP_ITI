@@ -12,13 +12,13 @@ public class WishListManager : IWishListManager
         this.unitOfWork = unitOfWork;
     }
 
-    public bool AddToWishList(WishListIDsDto IDsDto)
+    public bool AddToWishList(WishListIDsDto IDsDto,Guid customerId)
     {
         var product = unitOfWork.ProductsRepo.GetById(IDsDto.ProductId);
         if (product is null) 
             return false;
 
-        var wishlist = unitOfWork.WishListRepo.GetWishListProducts(IDsDto.CustomerId);
+        var wishlist = unitOfWork.WishListRepo.GetWishListProducts(customerId);
         if (wishlist!.Products.Contains(product))
             return false;
 
@@ -26,14 +26,14 @@ public class WishListManager : IWishListManager
         return unitOfWork.SaveChange() > 0;
     }
 
-    public bool DeleteFromWishList(WishListIDsDto IDsDto)
+    public bool DeleteFromWishList(WishListIDsDto IDsDto, Guid customerId)
     {
 
         var product = unitOfWork.ProductsRepo.GetById(IDsDto.ProductId);
         if (product is null)
             return false;
 
-        var wishlist = unitOfWork.WishListRepo.GetWishListProducts(IDsDto.CustomerId);
+        var wishlist = unitOfWork.WishListRepo.GetWishListProducts(customerId);
         if(! wishlist!.Products.Contains(product))
             return false;
 
