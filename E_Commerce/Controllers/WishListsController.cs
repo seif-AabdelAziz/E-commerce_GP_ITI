@@ -35,7 +35,7 @@ public class WishListsController : ControllerBase
     {
         string id = usersManager.GetUserAsync(User).Result.Id;
 
-        return wishListManager.AddToWishList(iDsDto, new Guid(id)) ? Ok("Added") : BadRequest();
+        return wishListManager.AddToWishList(iDsDto, new Guid(id)) ? Ok() : BadRequest();
     }
 
     [HttpPatch]
@@ -45,7 +45,7 @@ public class WishListsController : ControllerBase
     {
         string id = usersManager.GetUserAsync(User).Result.Id;
 
-        return wishListManager.DeleteFromWishList(iDsDto, new Guid(id)) ? Ok("Deleted") : BadRequest();
+        return wishListManager.DeleteFromWishList(iDsDto, new Guid(id)) ? Ok() : BadRequest();
     }
 
 }
