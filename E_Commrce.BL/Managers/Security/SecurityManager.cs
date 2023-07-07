@@ -85,6 +85,7 @@ public class SecurityManager : ISecurityManager
 
         //Token
         DateTime exp = DateTime.Now.AddMinutes(30);
+        
         JwtSecurityToken newToken = new JwtSecurityToken
         (
             claims: claims,
@@ -98,6 +99,7 @@ public class SecurityManager : ISecurityManager
         return new TokenDto
         {
             Token = token,
+            exp=exp,
         };
 
     }

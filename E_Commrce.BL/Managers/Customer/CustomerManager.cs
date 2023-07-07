@@ -131,9 +131,9 @@ namespace E_Commerce.BL
             return false;
         }
 
-        public bool UpdateCustomerData(CustomerUpdateDto customerUpdate)
+        public bool UpdateCustomerData(CustomerUpdateDto customerUpdate,Guid customerId)
         {
-           Customer? customeroldData = _unitOfWork.CustomerRepo.GetById(customerUpdate.Id.ToString()); 
+           Customer? customeroldData = _unitOfWork.CustomerRepo.GetById(customerId.ToString()); 
             if(customeroldData == null)
             {
                 return false;

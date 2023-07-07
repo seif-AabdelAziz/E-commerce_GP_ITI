@@ -15,7 +15,7 @@ namespace E_Commerce.BL
 
         bool UpadateCustomerPassword (CustomerUpdatePassDto customer);
 
-        bool UpdateCustomerData(CustomerUpdateDto customerUpdate);
+        bool UpdateCustomerData(CustomerUpdateDto customerUpdate,Guid customerId);
         bool DeleteCustomerById(CustomerDeleteDto customer);
     }
 }

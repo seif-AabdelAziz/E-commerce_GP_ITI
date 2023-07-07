@@ -30,9 +30,10 @@ namespace E_Commerce.API.Controllers
 
         [HttpGet]
         [Route("GetByOne")]
+        [Authorize(Policy = "ForCustomer")]
         public ActionResult<CustomerListDataDto> GetCustomerBy()
         {
-            Guid id =new Guid(_customer.GetUserAsync(User).Result.Id);
+            Guid id = new Guid(_customer.GetUserAsync(User).Result.Id);
             CustomerListDataDto? customer = _customerManger.GetCustomerById(id);
             if (customer == null)
             {
@@ -45,7 +46,7 @@ namespace E_Commerce.API.Controllers
         public ActionResult AddCustomer(CustomerAddDto newCustomer)
         {
             _customerManger.AddCustomer(newCustomer);
-            return StatusCode(StatusCodes.Status201Created,"Added Successfully") ;
+            return StatusCode(StatusCodes.Status201Created, "Added Successfully");
         }
 
 
@@ -61,16 +62,13 @@ namespace E_Commerce.API.Controllers
             return StatusCode(StatusCodes.Status304NotModified, "Reset Faild");
         }
 
-        [HttpPatch("{id}")]
-        public ActionResult UpdateCustomerData(Guid id,CustomerUpdateDto updateCustomer)
+        [HttpPatch]
+        [Authorize(Policy = "ForCustomer")]
+        public ActionResult UpdateCustomerData(CustomerUpdateDto updateCustomer)
         {
+            string id = _customer.GetUserAsync(User).Result.Id;
 
-
-            if (id != updateCustomer.Id) {
-
-                return BadRequest();
-            }
-            var check = _customerManger.UpdateCustomerData(updateCustomer);
+            var check = _customerManger.UpdateCustomerData(updateCustomer,new Guid(id));
             if (check)
             {
                 return Ok();
