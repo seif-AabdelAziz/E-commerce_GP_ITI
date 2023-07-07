@@ -84,7 +84,7 @@ public class SecurityManager : ISecurityManager
         SigningCredentials signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
         //Token
-        DateTime exp = DateTime.Now.AddMinutes(1);
+        DateTime exp = DateTime.Now.AddMinutes(60);
         
         JwtSecurityToken newToken = new JwtSecurityToken
         (
