@@ -41,13 +41,8 @@ namespace E_Commerce.API.Controllers
         [Route("Add")]
         public ActionResult AddProduct(ProductAddDto product)
         {
-            bool request = productManager.Add(product);
-
-            if (!request)
-            {
-                return BadRequest();
-            }
-            return Ok("Product Added Sucessfully");
+            
+            return productManager.Add(product)?Ok():BadRequest();
         }
 
         [HttpDelete]
@@ -130,7 +125,7 @@ namespace E_Commerce.API.Controllers
             {
                 return BadRequest();
             }
-            return Ok("Product Updated Successfully");
+            return Ok();
         }
         /*/////*/
 

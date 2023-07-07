@@ -2,5 +2,5 @@
 
 public class ProductImageDto
 {
-    public string ImageURL { get; set; } = null!;
+    public string ImageURL { get; set; } = string.Empty;
 }

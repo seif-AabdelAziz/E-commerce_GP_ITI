@@ -9,10 +9,10 @@ public class ProductAddDto
     public string Name { get; set; } = string.Empty;
     [MaxLength(500)]
     public string Description { get; set; } = string.Empty;
-    public decimal Price { get; set; }
+    public decimal Price { get; set; } = 0;
     [Range(0, 1)]
     public decimal Discount { get; set; } = 0;
-    public List<ProductImageDto> ProductImages { get; set; } = null!;
-    public List<ProductInfoDto> ProductInfo { get; set; } = null!;
-    public List<ProductAddCategoryDto> ProductCategories { get; set; } = null!;
+    public List<ProductImageDto>? ProductImages { get; set; } = null;
+    public List<ProductInfoDto> ProductInfo { get; set; } 
+    public List<ProductAddCategoryDto> ProductCategories { get; set; } = null;
 }

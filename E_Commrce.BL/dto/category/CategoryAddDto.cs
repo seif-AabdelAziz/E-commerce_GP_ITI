@@ -12,6 +12,6 @@ public class CategoryAddDto
 
     [Required(AllowEmptyStrings = true)]
     public Guid? ParentCategoryId { get; set; } = Guid.Empty;
-    public string Image { get; set; } = string.Empty;
+    public string? Image { get; set; } = string.Empty;
 
 }
