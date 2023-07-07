@@ -13,7 +13,7 @@ namespace E_Commerce.BL
         CustomerListDataDto? GetCustomerById(Guid Id);
         void AddCustomer (CustomerAddDto customer);
 
-        bool UpadateCustomerPassword (CustomerUpdatePassDto customer);
+        bool UpadateCustomerPassword (CustomerUpdatePassDto customer,string customerId);
 
         bool UpdateCustomerData(CustomerUpdateDto customerUpdate,Guid customerId);
         bool DeleteCustomerById(CustomerDeleteDto customer);
