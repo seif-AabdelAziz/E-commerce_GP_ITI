@@ -84,4 +84,9 @@ public class ProductsRepo : GenericRepo<Product>, IProductsRepo
             .Include(p=>p.Product_Color_Size_Quantity)
             .ToList();
     }
+
+    public List<ProductColorSizeQuantity> GetProductsInfo()
+    {
+        return _context.Set<ProductColorSizeQuantity>().ToList();
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace E_Commerce.DAL;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+
+namespace E_Commerce.DAL;
 
 public interface IProductsRepo : IGenericRepo<Product>
 {
@@ -12,6 +14,7 @@ public interface IProductsRepo : IGenericRepo<Product>
     Product? GetProductToUpdate(Guid id);
     List<Product> GetProductsWithImages();
     List<Product> GetProductsByCategoryUnique();
+    List<ProductColorSizeQuantity> GetProductsInfo();
 
 
 

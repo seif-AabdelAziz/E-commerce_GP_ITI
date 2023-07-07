@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E_Commerce.DAL;
 
-[PrimaryKey(nameof(ProductId), nameof(OrderId))]
+[PrimaryKey(nameof(ProductId), nameof(OrderId), nameof(Color), nameof(Size))]
 public class OrderProduct
 {
     public Guid ProductId { get; set; }

@@ -1,5 +1,8 @@
 ﻿using E_Commerce.BL;
+using E_Commerce.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.API.Controllers
@@ -9,10 +12,12 @@ namespace E_Commerce.API.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrderManager _orderManager;
+        private readonly UserManager<Customer> _customer;
 
-        public OrdersController(IOrderManager orderManager) 
+        public OrdersController(IOrderManager orderManager , UserManager<Customer> customer) 
         {
             _orderManager = orderManager;
+            _customer = customer;
         }
         [HttpGet]
         public ActionResult<List<OrderReadDto>> AllOrders() 
@@ -26,11 +31,20 @@ namespace E_Commerce.API.Controllers
             return _orderManager.GetOrderById(id);
         }
         [HttpPost]
+        [Authorize(Policy = "ForCustomer")]
         public ActionResult AddOrder(OrderAddDto order) 
         {
-            bool req =_orderManager.AddOrder(order);
-            if(!req) return BadRequest(req);
-            return Ok();
+            try
+            {
+                Guid customerId = new Guid(_customer.GetUserAsync(User).Result.Id);
+                bool checkAddOrder = _orderManager.AddOrder(order,customerId);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+            
         }
         [HttpPut]
         [Route("{id}")]

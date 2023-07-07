@@ -1,5 +1,6 @@
 ﻿using E_Commerce.DAL;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace E_Commerce.BL;
 
@@ -47,31 +48,61 @@ public class OrderManager : IOrderManager
             Country = order.Country.ToString(),
         };
     }
-    public bool AddOrder(OrderAddDto orderAdd)
+    public bool AddOrder(OrderAddDto orderAdd,Guid customerId)
     {
+        bool checkQuantity =CheckQuantityOfProductsBeforeOrder(customerId);
+        if(!checkQuantity) { return false; }
+
+
         Order order = new()
         {
             Id = Guid.NewGuid(),
             OrderData = orderAdd.OrderData,
-            PaymentStatus = (PaymentStatus)Enum.Parse(typeof(PaymentStatus), orderAdd.PaymentStatus) ,
+            PaymentStatus = (PaymentStatus)Enum.Parse(typeof(PaymentStatus), orderAdd.PaymentStatus),
             PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), orderAdd.PaymentMethod),
             OrderStatus = orderAdd.OrderStatus,
-            Discount = orderAdd.Discount,
+            Discount =(double) orderAdd.Discount,
             ArrivalDate = orderAdd.ArrivalDate,
             Street = orderAdd.Street!,
             City = orderAdd.City!,
             Country = orderAdd.Country,
-            CustomerId =orderAdd.CustomerId.ToString(),
+            CustomerId = customerId.ToString(),
+            TotalPrice = orderAdd.TotalPrice,
         };
-        order.OrderProducts = orderAdd.OrderProducts!.Select(op => new OrderProduct
+        
+        order.OrderProducts = orderAdd.OrderProducts!.Select(op => new OrderProduct() 
         {
             OrderId = order.Id,
             ProductId = op.ProductId,
             ProductCount = op.ProductCount,
-
+            Size = (Size)Enum.Parse<Size>(op.Size),
+            Color = (Color)Enum.Parse<Color>(op.Color),
+            Price = op.Price,
         }).ToList();
 
         _unitOfWork.OrderRepo.Add(order);
+        
+        /// Decrease Quantity
+        /// 
+
+        var cartProduct = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId).Products;
+       
+
+
+        var productsDetails = _unitOfWork.ProductsRepo.GetProductsInfo()
+                .Where(p => cartProduct.Select(ps => ps.ProductId).Contains(p.ProductID)).ToList();
+
+        for (int i=0;i<productsDetails.Count;i++)
+        {
+            if (cartProduct.FirstOrDefault(p=>p.ProductId == productsDetails[i].ProductID)!=null
+                && cartProduct.FirstOrDefault(p => p.Color == productsDetails[i].Color) != null
+                && cartProduct.FirstOrDefault(p => p.Size == productsDetails[i].Size) != null)
+            {
+                productsDetails[i].Quantity -= cartProduct.FirstOrDefault(p => p.ProductId == productsDetails[i].ProductID).ProductCount;
+            }
+        }
+
+       _unitOfWork.CartRepo.Delete(_unitOfWork.CartRepo.GetCartProductByCustomerId(customerId));
         return _unitOfWork.SaveChange() > 0;
     }
     public bool UpdateOrder(OrderUpdateDto orderUpdate)
@@ -87,7 +118,7 @@ public class OrderManager : IOrderManager
         order.Street = orderUpdate.Street!;
         order.City = orderUpdate.City!;
         order.Country = orderUpdate.Country;
-        
+
 
         _unitOfWork.OrderRepo.Update(order); //add
         return _unitOfWork.SaveChange() > 0;
@@ -183,6 +214,19 @@ public class OrderManager : IOrderManager
         _unitOfWork.OrderRepo.DeleteFromOrderProductsByProductId(orderProduct.OrderId);
         //order.OrderProducts.Remove(orderProduct);
 
-        return _unitOfWork.SaveChange() > 0; 
+        return _unitOfWork.SaveChange() > 0;
+    }
+
+
+    public bool CheckQuantityOfProductsBeforeOrder(Guid customerId)
+    {
+        var checkQuantity = _unitOfWork.CartRepo.GetCartProductByCustomerId(customerId).Products
+            .FirstOrDefault(ps => ps.ProductCount <= _unitOfWork.ProductsRepo.GetProductDetails(ps.ProductId).Product_Color_Size_Quantity
+            .FirstOrDefault(p => p.Color == ps.Color && p.Size == ps.Size).Quantity);
+        if(checkQuantity == null) {
+            return false;
+        }
+
+        return true;
     }
 }

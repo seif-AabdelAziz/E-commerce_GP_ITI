@@ -12,4 +12,7 @@ public class OrderProducts
 {
     public int ProductCount { get; set; }
     public Guid ProductId { get; set; }
+    public string Color { get; set; }
+    public string Size { get; set; }
+    public decimal Price { get; set; }
 }
