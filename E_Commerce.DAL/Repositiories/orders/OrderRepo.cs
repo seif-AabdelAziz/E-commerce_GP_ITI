@@ -53,5 +53,14 @@ namespace E_Commerce.DAL
                  .Where(ip => ip.ProductId == id)
                  .ExecuteDelete();
         }
+
+        public List<Order> GetOrdersByCustomerId(string customerId)
+        {
+            return _context.Set<Order>()
+        .Include(o => o.OrderProducts)
+        .ThenInclude(op => op.Product)
+        .Where(o => o.CustomerId == customerId)
+        .ToList();
+        }
     }
 }

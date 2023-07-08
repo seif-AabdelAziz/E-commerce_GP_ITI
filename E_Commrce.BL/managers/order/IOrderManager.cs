@@ -20,6 +20,8 @@ public interface IOrderManager
     bool DeleteProductFromOrder(Guid orderId, Guid productId);
 
     bool CheckQuantityOfProductsBeforeOrder(Guid customerId);
+    List<OrderTableDto> GetOrdersByCustomerId(string customerId);
+
 
     //[1] +add (products)
     //[2] +update count of prouducts in(orderProduct table)

@@ -229,4 +229,22 @@ public class OrderManager : IOrderManager
 
         return true;
     }
+
+    public List<OrderTableDto> GetOrdersByCustomerId(string customerId)
+    {
+        List<Order> orders = _unitOfWork.OrderRepo.GetOrdersByCustomerId(customerId);
+        if (orders is null)
+        {
+            return null!;
+        }
+        return orders.Select(o => new OrderTableDto
+        {
+            OrderId = o.Id,
+            PaymentStatus = o.PaymentStatus.ToString(),
+            TotalPrice = o.OrderProducts.Sum(op => op.Product.Price * op.ProductCount),
+            OrderDate = o.OrderData
+        }).ToList();
+    }
+
+
 }

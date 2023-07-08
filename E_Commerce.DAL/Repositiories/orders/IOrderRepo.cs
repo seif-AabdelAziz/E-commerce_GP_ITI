@@ -12,5 +12,8 @@ namespace E_Commerce.DAL
         void DeleteRangeOfOrderProduct(List<OrderProduct> orderProductsToDelete);
         void DeleteFromOrderProductsByProductId(Guid id);
 
+        //
+        List<Order> GetOrdersByCustomerId(string customerId);
+
     }
 }
