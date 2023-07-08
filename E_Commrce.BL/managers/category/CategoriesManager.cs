@@ -40,7 +40,7 @@ public class CategoriesManager : ICategoriesManager
     #region Get Products For One selected Category
     public List<ProductReadDto>? GetProductsByCategoryId(Guid categoryId)
     {
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
+        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId).Products;
 
         if (productsFromDb == null)
         {
@@ -194,12 +194,21 @@ public class CategoriesManager : ICategoriesManager
                     Price = p.Price,
                     Discount = p.Discount,
                     Rate = p.Rate,
+                    CategoryId=c.Id,
                     ProductImages = p.ProductImages.Select(c => new ProductImageDto
                     {
 
                         ImageURL = c.ImageURL
 
+                    }).ToList(),
+                    ProductInfo = p.Product_Color_Size_Quantity.Select(i => new ProductInfoDto
+                    {
+                        Color = i.Color.ToString(),
+                        Size = i.Size.ToString(),
+                        Quantity = i.Quantity
+
                     }).ToList()
+
 
                 }).ToList()
 
@@ -278,16 +287,17 @@ public class CategoriesManager : ICategoriesManager
 
     public List<ProductDetailsReadDto>? GetProductsByCategoryIds(Guid categoryId)
     {
-        List<Product>? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
+        Category? productsFromDb = _unitOfWork.CategoriesRepo.GetProductsByCategoryId(categoryId);
 
         if (productsFromDb == null)
         {
             return null;
         }
 
-        List<ProductDetailsReadDto> productsDto = productsFromDb.Select(p => new ProductDetailsReadDto
+        List<ProductDetailsReadDto> productsDto = productsFromDb.Products.Select(p => new ProductDetailsReadDto
         {
             Id = p.Id,
+            CategoryId = categoryId,
             Name = p.Name,
             Description = p.Description,
             Price = p.Price,
@@ -298,7 +308,15 @@ public class CategoriesManager : ICategoriesManager
 
                 ImageURL = c.ImageURL
 
+            }).ToList(),
+            ProductInfo = p.Product_Color_Size_Quantity.Select(i=>new ProductInfoDto
+            {
+                Color= i.Color.ToString(),
+                Size=i.Size.ToString(),
+                Quantity = i.Quantity
+
             }).ToList()
+            
         }).ToList();
 
         return productsDto;

@@ -8,7 +8,7 @@ public interface ICategoriesRepo : IGenericRepo<Category>
     Category? GetProductsForCategory(Guid categorytId);
     List<Category>? GetAllCategoriesWithAllPrdoucts();
     Category? GetCategoryById(string categorytId);
-    List<Product>? GetProductsByCategoryId(Guid categoryId);
+    Category? GetProductsByCategoryId(Guid categoryId);
     List<Product>? GetProductsByName(string productName);
 
      List<Product> GetProductsByParentCategory(Guid parentCategoryId);

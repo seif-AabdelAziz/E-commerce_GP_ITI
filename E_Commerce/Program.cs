@@ -1,11 +1,13 @@
 using E_Commerce.BL;
 using E_Commerce.DAL;
+using E_Commerce.API;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using MailKit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +71,7 @@ builder.Services.AddScoped<IProductManager, ProductManager>();
 builder.Services.AddScoped<ISecurityManager, SecurityManager>();
 builder.Services.AddScoped<IFilterManger,FilterManger>();
 #endregion
+
 
 
 #region Identity

@@ -35,7 +35,7 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     public List<Category>? GetSubCategories(Guid parentCategoryId)
     {
         return _context.Set<Category>().Include(c => c.Products).ThenInclude(c => c.ProductImages)
-            .Where(i => i.ParentCategoryId == parentCategoryId)
+                .Include(p=>p.Products).ThenInclude(pp=>pp.Product_Color_Size_Quantity).Where(c=>c.ParentCategoryId== parentCategoryId)
             .ToList();
 
     }
@@ -43,7 +43,8 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     public Category? GetProductsForCategory(Guid categorytId)
     {
         return _context.Set<Category>()
-         .Include(i => i.Products)
+         .Include(i => i.Products).ThenInclude(i=>i.Product_Color_Size_Quantity)
+         .Include(p=>p.Products).ThenInclude(pp=>pp.ProductImages)
          .FirstOrDefault(i => i.Id == categorytId);
     }
 
@@ -61,15 +62,15 @@ public class CategoriesRepo : GenericRepo<Category>, ICategoriesRepo
     }
 
 
-    public List<Product> GetProductsByCategoryId(Guid categoryId)
+    public Category GetProductsByCategoryId(Guid categoryId)
     {
-        Category? category = _context.Set<Category>()
+        Category? products = _context.Set<Category>()
             .Include(c => c.Products).ThenInclude(c=>c.ProductImages)
             .FirstOrDefault(c => c.Id == categoryId);
 
 
 
-        return category.Products.ToList(); 
+        return products; 
     }
 
     public List<Product>? GetProductsByName(string productName)
