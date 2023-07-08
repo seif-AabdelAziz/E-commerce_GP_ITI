@@ -4,6 +4,7 @@ namespace E_Commerce.DAL
 {
     public interface IOrderRepo :IGenericRepo<Order>
     {
+        List<Order> GetOrdersWithCustomer();
         Customer? GetCustomerByOrderId(Guid id);
         Order? GetOrderProducts(Guid id);
         Order? GetOrderProductsAndCustomer(Guid id);

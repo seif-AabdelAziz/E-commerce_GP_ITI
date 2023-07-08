@@ -11,6 +11,7 @@ public interface IOrderManager
     OrderWithProductsReadDto? OrderWithProductsRead(Guid id);
     OrderWithProductsAndCustomerReadDto? OrderWithProductsAndCustomerRead(Guid id);
     List<OrderReadDto> GetAllOrders();
+    List<OrderReadDto> GetAllOrderswithCustName();
     OrderReadDto GetOrderById(Guid id);
     bool AddOrder(OrderAddDto orderAddDto ,Guid customerId);  //[1]
     bool UpdateOrder(OrderUpdateDto orderUpdateDto);  //[2]

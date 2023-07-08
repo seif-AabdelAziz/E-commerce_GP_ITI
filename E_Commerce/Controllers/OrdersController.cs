@@ -25,6 +25,12 @@ namespace E_Commerce.API.Controllers
             return _orderManager.GetAllOrders();
         }
         [HttpGet]
+        [Route("OrdersCutomerName")]
+        public ActionResult<List<OrderReadDto>> AllOrderswithCutName()
+        {
+            return _orderManager.GetAllOrderswithCustName();
+        }
+        [HttpGet]
         [Route("{id}")]
         public ActionResult<OrderReadDto> GetOrder(Guid id) 
         {
@@ -47,7 +53,7 @@ namespace E_Commerce.API.Controllers
             
         }
         [HttpPut]
-        [Route("{id}")]
+        //[Route("{id}")]
         public ActionResult UpdateOrder(OrderUpdateDto orderUpdate) 
         {
             bool req=_orderManager.UpdateOrder(orderUpdate);
