@@ -10,7 +10,7 @@ namespace E_Commerce.BL;
 
 public class OrderReadDto
 {
-    //public Guid Id { get; set; }
+    public Guid Id { get; set; }
     public DateTime OrderData { get; set; }
     public string? PaymentStatus { get; set; }
     public string? PaymentMethod { get; set; }
@@ -21,4 +21,6 @@ public class OrderReadDto
     public string? Street { get; set; } 
     public string? City { get; set; } 
     public string? Country { get; set; }
+    public String? CustomerName { get; set; }
+
 }

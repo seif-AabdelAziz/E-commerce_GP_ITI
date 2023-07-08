@@ -4,6 +4,7 @@ using E_Commerce.API;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
@@ -16,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+//builder.Services.AddControllers().AddNewtonsoftJson();
 #endregion
 
 #region CORS
@@ -127,8 +128,14 @@ builder.Services.AddAuthorization(options =>
 #endregion
 
 
-
 var app = builder.Build();
+var staticFilesPath = Path.Combine(Environment.CurrentDirectory, "Images");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(staticFilesPath),
+    RequestPath = "/Images" //Localhost:5073/(Request Path)/Capture.PNG(Static File Name)
+
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

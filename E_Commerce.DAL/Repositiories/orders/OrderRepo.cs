@@ -30,6 +30,10 @@ namespace E_Commerce.DAL
             return _context.Set<Order>().Include(o=>o.OrderProducts).ThenInclude(o => o.Product)
                                         .FirstOrDefault(o => o.Id == id);
         }
+        public List<Order> GetOrdersWithCustomer()
+        {
+            return _context.Set<Order>().Include(o => o.Customer).ToList();
+        }
 
         public Order? GetOrderProductsAndCustomer(Guid id)
         {
@@ -52,6 +56,15 @@ namespace E_Commerce.DAL
             _context.OrderProducts
                  .Where(ip => ip.ProductId == id)
                  .ExecuteDelete();
+        }
+
+        public List<Order> GetOrdersByCustomerId(string customerId)
+        {
+            return _context.Set<Order>()
+        .Include(o => o.OrderProducts)
+        .ThenInclude(op => op.Product)
+        .Where(o => o.CustomerId == customerId)
+        .ToList();
         }
     }
 }

@@ -120,10 +120,10 @@ public class ProductManager : IProductManager
         };
 
         //Add Images
-        newProduct.ProductImages = productAdd.ProductImages.Select(pi => new Product_IMG
+        newProduct.ProductImages = productAdd.Images.Select(img => new Product_IMG
         {
             ProductID = newProduct.Id,
-            ImageURL = pi.ImageURL,
+            ImageURL = img,
         }).ToList();
 
         for (int i = 0; i < newProduct.ProductImages.Count; i++)
@@ -162,7 +162,7 @@ public class ProductManager : IProductManager
         //Add Category
         for (int i = 0; i < productAdd.ProductCategories.Count; i++)
         {
-            var cat = unitOfWork.CategoriesRepo.GetById(productAdd.ProductCategories[i].Id);
+            var cat = unitOfWork.CategoriesRepo.GetById(productAdd.ProductCategories[i]);
             if (cat == null)
             {
                 return false;

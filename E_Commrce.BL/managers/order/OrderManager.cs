@@ -19,6 +19,7 @@ public class OrderManager : IOrderManager
         if (orders is null) { return null!; }
         return orders.Select(o => new OrderReadDto
         {
+            Id = o.Id,
             OrderData = o.OrderData,
             PaymentStatus = o.PaymentStatus.ToString(),
             PaymentMethod = o.PaymentMethod.ToString(),
@@ -28,6 +29,25 @@ public class OrderManager : IOrderManager
             Street = o.Street,
             City = o.City,
             Country = o.Country.ToString(),
+        }).ToList();
+    }
+    public List<OrderReadDto> GetAllOrderswithCustName()
+    {
+        List<Order> orders = _unitOfWork.OrderRepo.GetOrdersWithCustomer();
+        if (orders is null) { return null!; }
+        return orders.Select(o => new OrderReadDto
+        {
+            Id = o.Id,
+            OrderData = o.OrderData,
+            PaymentStatus = o.PaymentStatus.ToString(),
+            PaymentMethod = o.PaymentMethod.ToString(),
+            OrderStatus = o.OrderStatus.ToString(),
+            Discount = o.Discount,
+            ArrivalDate = o.ArrivalDate,
+            Street = o.Street,
+            City = o.City,
+            Country = o.Country.ToString(),
+            CustomerName=o.Customer.FirstName +' '+ o.Customer.LastName,
         }).ToList();
     }
 
@@ -110,14 +130,14 @@ public class OrderManager : IOrderManager
         Order? order = _unitOfWork.OrderRepo.GetById(orderUpdate.Id);
         if (order is null) return false;
 
-        order.PaymentStatus = orderUpdate.PaymentStatus;
-        order.PaymentMethod = orderUpdate.PaymentMethod;
-        order.OrderStatus = orderUpdate.OrderStatus;
+        order.PaymentStatus = (PaymentStatus)Enum.Parse(typeof(PaymentStatus), orderUpdate.PaymentStatus);
+        order.PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), orderUpdate.PaymentMethod);
+        order.OrderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), orderUpdate.OrderStatus); 
         order.Discount = orderUpdate.Discount;
         order.ArrivalDate = orderUpdate.ArrivalDate;
         order.Street = orderUpdate.Street!;
         order.City = orderUpdate.City!;
-        order.Country = orderUpdate.Country;
+        order.Country = (Countries)Enum.Parse(typeof(Countries), orderUpdate.Country);
 
 
         _unitOfWork.OrderRepo.Update(order); //add
@@ -228,5 +248,21 @@ public class OrderManager : IOrderManager
         }
 
         return true;
+    }
+
+    public List<OrderTableDto> GetOrdersByCustomerId(string customerId)
+    {
+        List<Order> orders = _unitOfWork.OrderRepo.GetOrdersByCustomerId(customerId);
+        if (orders is null)
+        {
+            return null!;
+        }
+        return orders.Select(o => new OrderTableDto
+        {
+            OrderId = o.Id,
+            PaymentStatus = o.PaymentStatus.ToString(),
+            TotalPrice = o.OrderProducts.Sum(op => op.Product.Price * op.ProductCount),
+            OrderDate = o.OrderData
+        }).ToList();
     }
 }

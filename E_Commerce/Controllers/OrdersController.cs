@@ -14,7 +14,7 @@ namespace E_Commerce.API.Controllers
         private readonly IOrderManager _orderManager;
         private readonly UserManager<Customer> _customer;
 
-        public OrdersController(IOrderManager orderManager , UserManager<Customer> customer) 
+        public OrdersController(IOrderManager orderManager,UserManager<Customer> customer) 
         {
             _orderManager = orderManager;
             _customer = customer;
@@ -23,6 +23,12 @@ namespace E_Commerce.API.Controllers
         public ActionResult<List<OrderReadDto>> AllOrders() 
         {
             return _orderManager.GetAllOrders();
+        }
+        [HttpGet]
+        [Route("OrdersCutomerName")]
+        public ActionResult<List<OrderReadDto>> AllOrderswithCutName()
+        {
+            return _orderManager.GetAllOrderswithCustName();
         }
         [HttpGet]
         [Route("{id}")]
@@ -47,7 +53,7 @@ namespace E_Commerce.API.Controllers
             
         }
         [HttpPut]
-        [Route("{id}")]
+        //[Route("{id}")]
         public ActionResult UpdateOrder(OrderUpdateDto orderUpdate) 
         {
             bool req=_orderManager.UpdateOrder(orderUpdate);
@@ -80,7 +86,19 @@ namespace E_Commerce.API.Controllers
             return OrderProducts;
         }
 
-
+        [HttpGet]
+        [Authorize(Policy = "ForCustomer")]
+        [Route("ByCustomer")]
+        public ActionResult<List<OrderTableDto>> GetOrdersByCustomerId()
+        {
+            var customereId = _customer.GetUserAsync(User).Result.Id;
+            List<OrderTableDto> orders = _orderManager.GetOrdersByCustomerId(customereId);
+            if (orders is null)
+            {
+                return NotFound();
+            }
+            return orders;
+        }
 
 
     }
