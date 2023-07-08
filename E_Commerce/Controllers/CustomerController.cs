@@ -52,9 +52,12 @@ namespace E_Commerce.API.Controllers
 
         [HttpPatch]
         [Route("RestPassword")]
+        [Authorize(Policy = "ForCustomer")]
         public ActionResult UpdateCustomerPassword(CustomerUpdatePassDto newCustomer)
         {
-            var check = _customerManger.UpadateCustomerPassword(newCustomer);
+            string customerId = _customer.GetUserAsync(User).Result.Id;
+
+            var check = _customerManger.UpadateCustomerPassword(newCustomer,customerId);
             if (check)
             {
                 return StatusCode(StatusCodes.Status201Created, "Edit Successfully");

@@ -113,9 +113,9 @@ namespace E_Commerce.BL
 
 
 
-         bool ICustomerManager.UpadateCustomerPassword(CustomerUpdatePassDto customer)
+         bool ICustomerManager.UpadateCustomerPassword(CustomerUpdatePassDto customer,string customerId)
         {
-            var CurrentwithOldPass = _unitOfWork.CustomerRepo.GetById(customer.Id.ToString());
+            var CurrentwithOldPass = _unitOfWork.CustomerRepo.GetById(customerId);
 
             var check = checkHashPassWord(CurrentwithOldPass!, customer.CurrentPassword);
             IdentityResult res = IdentityResult.Failed();

@@ -41,7 +41,7 @@ public class CategoryController : ControllerBase
         {
             return BadRequest();
         }
-        return Ok("category Added Successfully");
+        return Ok();
 
     }
     #endregion
