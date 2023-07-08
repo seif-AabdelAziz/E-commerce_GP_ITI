@@ -36,13 +36,69 @@ namespace E_Commerce.API.Controllers
             List<ProductReadDto> products = productManager.AllProducts();
             return products;
         }
+        [HttpPost]
+        [Route("Images")]
+        public async Task<IActionResult> UploadImage(List<IFormFile> Images)
+        {
+            List<string> urls = new List<string>();
+            foreach (var image in Images)
+            {
+                #region Extention Checking
+                var extension = image.ContentType.Split('/')[1];
+                //var extension = Path.GetExtension(image.ContentType);
+                var extensionList = new string[]
+                {
+                "png",
+                "jpg",
+                "jpeg",
+                "svg"
+                };
+
+                bool isExtensionAllowed = extensionList.Contains(extension,
+                    StringComparer.InvariantCultureIgnoreCase);
+                if (!isExtensionAllowed)
+                {
+                    return BadRequest("Format not allowed");
+                }
+                #endregion
+
+                #region Length Checking
+
+                bool isSizeAllowed = image.Length is > 0 and < 5_000_000; //Picture Size (Minimum: >0 and Max: 5MB)
+
+                if (!isSizeAllowed)
+                {
+                    return BadRequest("Size is Larger than allowed size");
+                }
+                #endregion
+
+                #region Storing Image
+
+                var generatedPictureName = $"{Guid.NewGuid()}.{extension}";
+                var savedPicturesPath = Environment.CurrentDirectory + "\\Images\\" + generatedPictureName;
+                using (var stream = new FileStream(savedPicturesPath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                #endregion
+
+                #region URL Generating
+                var url = $"{Request.Scheme}://{Request.Host}/Images/{generatedPictureName}";
+                #endregion
+
+                urls.Add(url);
+            }
+
+
+            return Ok(urls);
+        }
+
 
         [HttpPost]
         [Route("Add")]
         public ActionResult AddProduct(ProductAddDto product)
         {
-            
-            return productManager.Add(product)?Ok():BadRequest();
+            return productManager.Add(product)? Ok():BadRequest();
         }
 
         [HttpDelete]

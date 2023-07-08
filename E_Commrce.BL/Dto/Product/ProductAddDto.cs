@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace E_Commerce.BL;
 
@@ -12,7 +13,8 @@ public class ProductAddDto
     public decimal Price { get; set; } = 0;
     [Range(0, 1)]
     public decimal Discount { get; set; } = 0;
-    public List<ProductImageDto>? ProductImages { get; set; } = null;
-    public List<ProductInfoDto> ProductInfo { get; set; } 
-    public List<ProductAddCategoryDto> ProductCategories { get; set; } = null;
+
+    public List<string> Images { get; set; } = null!;
+    public List<ProductInfoDto> ProductInfo { get; set; } = null!;
+    public List<Guid> ProductCategories { get; set; } = null!;
 }
