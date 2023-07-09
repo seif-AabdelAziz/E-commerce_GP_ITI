@@ -17,13 +17,13 @@ namespace E_Commerce.API.Controllers
     {
         private readonly ICustomerManager _customerManger;
         private readonly UserManager<Customer> _customer;
-        private readonly IMailingService mailingService;
+        //private readonly IMailingService mailingService;
 
-        public CustomerController(ICustomerManager customerManger, UserManager<Customer> customer , IMailingService _mailingService)
+        public CustomerController(ICustomerManager customerManger, UserManager<Customer> customer )
         {
             _customerManger = customerManger;
             _customer = customer;
-            mailingService = _mailingService;
+            //mailingService = _mailingService;
         }
 
         [HttpGet]
@@ -97,49 +97,49 @@ namespace E_Commerce.API.Controllers
             return StatusCode(StatusCodes.Status304NotModified, "Deleted Faild");
         }
 
-        [HttpPost]
-        [Route("forgetPassword")]
+        //[HttpPost]
+        //[Route("forgetPassword")]
 
-        public async Task<IActionResult> ForgotPassword([FromBody]  ForgetDto forget)
-        {
-            var user = await _customer.FindByEmailAsync(forget.Email);
-            if (user == null)
-            {
-                return BadRequest("Invalid email address");
-            }
+        //public async Task<IActionResult> ForgotPassword([FromBody]  ForgetDto forget)
+        //{
+        //    var user = await _customer.FindByEmailAsync(forget.Email);
+        //    if (user == null)
+        //    {
+        //        return BadRequest("Invalid email address");
+        //    }
 
-            /*var token = 012320212320012;
-            var resetPasswordLink = $"http://localhost:4200/resetpassword?token={HttpUtility.UrlEncode(token.ToString())}";
+        //    /*var token = 012320212320012;
+        //    var resetPasswordLink = $"http://localhost:4200/resetpassword?token={HttpUtility.UrlEncode(token.ToString())}";
 
-            var message = new MailMessage("abdelrahmanemad180@gmail.com", forget.Email, "Password reset request", $"Click the following link to reset your password: {resetPasswordLink}");
-            var client = new SmtpClient("smtp.gmail.com", 587);
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("yousefemad2411@gmail.com", "yousefemad2411@gmail.com", "Abdoemd125698541#farouk");
-            client.UseDefaultCredentials = false;
-            await client.SendMailAsync(message);*/
+        //    var message = new MailMessage("abdelrahmanemad180@gmail.com", forget.Email, "Password reset request", $"Click the following link to reset your password: {resetPasswordLink}");
+        //    var client = new SmtpClient("smtp.gmail.com", 587);
+        //    client.EnableSsl = true;
+        //    client.Credentials = new NetworkCredential("yousefemad2411@gmail.com", "yousefemad2411@gmail.com", "Abdoemd125698541#farouk");
+        //    client.UseDefaultCredentials = false;
+        //    await client.SendMailAsync(message);*/
 
-            await mailingService.SendEmailAsync(forget.Email,"Hi","Hallllo");
+        //    await mailingService.SendEmailAsync(forget.Email,"Hi","Hallllo");
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [HttpPost("resetpassword2")]
-        public async Task<IActionResult> ResetPassword([FromBody] CustomerUpdatePassDto customer)
-        {
-            var user = await _customer.FindByEmailAsync(customer.Email);
-            if (user == null)
-            {
-                return BadRequest("Invalid email address");
-            }
+        //[HttpPost("resetpassword2")]
+        //public async Task<IActionResult> ResetPassword([FromBody] CustomerUpdatePassDto customer)
+        //{
+        //    var user = await _customer.FindByEmailAsync(customer.Email);
+        //    if (user == null)
+        //    {
+        //        return BadRequest("Invalid email address");
+        //    }
 
-            var result = await _customer.ResetPasswordAsync(user, customer.Token, customer.NewPassword);
-            if (!result.Succeeded)
-            {
-                return BadRequest("Invalid password reset token");
-            }
+        //    var result = await _customer.ResetPasswordAsync(user, customer.Token, customer.NewPassword);
+        //    if (!result.Succeeded)
+        //    {
+        //        return BadRequest("Invalid password reset token");
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
     }
 }
