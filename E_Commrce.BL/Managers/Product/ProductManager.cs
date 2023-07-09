@@ -266,14 +266,9 @@ public class ProductManager : IProductManager
             Rate = productFromDB.Rate,
             Price = productFromDB.Price,
             Discount = productFromDB.Discount,
-            ProductCategories = productFromDB.Categories.Select(c => new ProductAddCategoryDto
-            {
-                Id = c.Id,
-            }).ToList(),
-            ProductImages = productFromDB.ProductImages.Select(c => new ProductImageDto
-            {
-                ImageURL = c.ImageURL,
-            }).ToList(),
+            ProductCategories = productFromDB.Categories.Select(c => c.Id).ToList(),
+            Images = productFromDB.ProductImages.Select(c => c.ImageURL).ToList(),
+            
             ProductInfo = productFromDB.Product_Color_Size_Quantity.Select(pi => new ProductInfoDto
             {
                 Size = pi.Size.ToString(),
@@ -298,11 +293,11 @@ public class ProductManager : IProductManager
 
         //Update Images
 
-        for (int i = 0; i < productUpdate.ProductImages.Count; i++)
+        for (int i = 0; i < productUpdate.Images.Count; i++)
         {
-            for (int j = 1; j < productUpdate.ProductImages.Count; j++)
+            for (int j = 1; j < productUpdate.Images.Count; j++)
             {
-                if (productUpdate.ProductImages[i].ImageURL == productUpdate.ProductImages[j].ImageURL
+                if (productUpdate.Images[i] == productUpdate.Images[j]
                     && i != j)
                 {
                     return false;
@@ -310,10 +305,10 @@ public class ProductManager : IProductManager
             }
         }
 
-        productFromDB.ProductImages = productUpdate.ProductImages.Select(i => new Product_IMG
+        productFromDB.ProductImages = productUpdate.Images.Select(i => new Product_IMG
         {
             ProductID = productFromDB.Id,
-            ImageURL = i.ImageURL,
+            ImageURL = i,
         }).ToList();
 
         //Update Info
@@ -343,7 +338,7 @@ public class ProductManager : IProductManager
 
         for (int i = 0; i < productUpdate.ProductCategories.Count; i++)
         {
-            var cat = unitOfWork.CategoriesRepo.GetById(productUpdate.ProductCategories[i].Id);
+            var cat = unitOfWork.CategoriesRepo.GetById(productUpdate.ProductCategories[i]);
             if (cat == null)
             {
                 return false;

@@ -110,7 +110,7 @@ namespace E_Commerce.API.Controllers
             {
                 return BadRequest();
             }
-            return Ok("Product Deleted");
+            return Ok();
         }
 
         [HttpGet]
